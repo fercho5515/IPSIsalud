@@ -18,9 +18,10 @@
     <script type="text/javascript" language="javascript">
        /*como esta*/
         /*-----------hello --------------------*/
+
         $("#proced").val("");
         $("#id_pac").val("");
-        
+        /*q mas*/
         var id_paciente="";
         var id_tarifario="";
         var proced="";
