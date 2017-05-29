@@ -1,4 +1,4 @@
-<!--hola mundo citas-->
+<!--hola mundo citas 2-->
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pac.conecta_bd"%>
