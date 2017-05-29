@@ -1,0 +1,109 @@
+ .dropdown{
+	background: transparent; /*background of menu bar (default state)*/
+	width: 100%;
+	font-size: 12px;
+	letter-spacing:2px;
+	margin:0;
+	padding:0;
+}
+
+.dropdown ul{
+	z-index:100;
+	list-style-type: none;
+	list-style-position:outside;
+	border:0;
+	margin: 0;
+	padding: 0;
+	border:0;
+}
+
+/*Top level list items*/
+.dropdown ul li{
+	position: relative;
+	display: inline;
+	float: left;
+	text-align:center;
+	margin: 0;
+	padding: 0;
+	border:0;
+}
+
+/*Top level menu link items style*/
+.dropdown ul li a{
+	display: block;
+	color: white;
+	padding: 24px 34px;
+	color: #2d2b2b;
+	text-decoration: none;
+}
+
+* html .dropdown ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
+	display: inline-block;
+}
+
+.dropdown ul li a:link, .dropdown ul li a:visited{
+	color: white;
+}
+.dropdown ul li ul li a:link, .dropdown ul li ul li a:visited{
+	color: white;
+}
+
+.dropdown ul li a.selected{ /*CSS class that's dynamically added to the currently active menu items' LI A element*/
+	background: transparent url(../images/menu_nv.png) top repeat-x; 
+	color: white;
+}
+
+.dropdown ul li a:hover{
+	background: transparent url(../images/menu_nv.png) top repeat-x;  /*background of menu items during onmouseover (hover state)*/
+	color: white;
+}
+
+.dropdown ul li ul li a.selected{
+	background: #88BD71; 
+	color: white;
+}
+
+.dropdown ul li ul li a:hover{
+	background: #88BD71; 
+}
+	
+.dropdown ul li a.active{
+	background: transparent url(../images/menu_nv.png) top repeat-x;  /*background of menu items during onmouseover (hover state)*/
+	color: white;
+}
+
+/*1st sub level menu*/
+.dropdown ul li ul{
+	position: absolute;
+	left: 0;
+	display: none; /*collapse all sub menus to begin with*/
+	visibility: hidden;
+	font-size: 11px;
+	letter-spacing:1px;
+}
+
+/*Sub level menu list items (undo style from Top level List Items)*/
+.dropdown ul li ul li{
+	display: list-item;
+	float: none;
+	text-align:left;
+}
+
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+.dropdown ul li ul li ul{
+	top: 0;
+}
+
+/* Sub level menu links style */
+.dropdown ul li ul li a{
+	width: 160px; /*width of sub menus*/
+	padding: 11px;
+	margin: 0;
+	border-top-width: 0;
+	border-bottom: 1px solid #88BD71;
+	background: #6AAA4F; /*background of menu items (default state)*/	
+	width:178px;
+}
+
+/* Holly Hack for IE \*/
+* html .dropdown{height: 1%;} /*Holly Hack for IE7 and below*/

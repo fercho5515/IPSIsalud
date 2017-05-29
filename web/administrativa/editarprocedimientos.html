@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+<title>Crear Procedimiento</title>
+
+<style type="text/css">
+	</style>
+        
+        
+<script type="text/javascript" >
+            
+                  
+    jQuery("#listeditapro").jqGrid({
+   	url:'carga_cie10.jsp?q=2',
+	datatype: "json",
+   	colNames:['Cups','Mapipos','Descripción'],
+   	colModel:[
+                {name:'id',index:'id',width:60,editable: false,required : true,editoptions:{maxlength: 63}},
+   		{name:'id_subcie10',index:'id_subcie10', width:60,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:700,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	       ],
+   	rowNum:11,
+   	rowList:[10,20,30,40,400],
+   	pager: '#pagereditapro',
+   	sortname: 's.id_subcie10',
+        viewrecords: true,
+        sortorder: "asc",
+        height: 50,
+        width:825,
+        shrinkToFit: false,//columnas tamaño dato
+        grouping:true,         
+        groupingView : {
+   		groupField : ['descripciong']
+   	},   
+        rownumbers: false,
+        editurl: 'editaCli.php',
+	caption: "Buscar procedimientos",
+	ondblClickRow: function(id){       }	
+});
+
+
+jQuery("#listeditapro").jqGrid('navGrid','#pagereditapro',{add:false,edit:false,del:false,search:false,view:false},
+                             {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
+							{closeAfterAdd: true, closeOnEscape: true,afterSubmit: function(){   } }, //opciones add
+							{}, //opciones del
+ 							{multipleSearch:true,closeAfterSearch: true, closeOnEscape: true},
+ 							{width:420} //para el view
+ 			);
+            
+jQuery('#listeditapro').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+                           
+
+
+
+</script>	
+
+</head>
+
+<body>
+<center>
+      <table id="listeditapro" ></table>
+        <div id="pagereditapro"></div>     
+</center>    
+    
+<table style="height:100%;width:80%;padding-top:5px" align="center">
+<tbody valign="top">
+
+
+
+
+<tr>
+<td>
+<fieldset><legend>Procedimiento</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label for="codigo">Codigo:</label>
+</td>
+<td style="width:84%" colspan="5">
+<label for="producto">Descripcion:</label>
+</td>
+
+<!-----2da fila---->
+
+<tr>
+<td>
+<input type="text" name="codigo" size="15" id="codigo" maxlength="30" disabled="disabled">
+</td>
+<td colspan="5">
+<input type="text" name="producto" size="85%" id="producto" maxlength="400">
+</td>
+</tr>
+
+<!-----3ra fila---->
+
+<tr>
+<td style="width:16%">
+<input type="checkbox" name="obstetrico" id="obstetrico">
+<label for="obstetrico">Obstetrico</label>
+</td>
+<td style="width:14%">
+<input type="checkbox" name="pyp" id="pyp">
+<label for="PyP">PyP</label>
+</td>
+<td style="width:16%">
+<input type="checkbox" name="quirurjico" id="quirurjico">
+<label for="quirurjico">Quirurjico</label>
+</td>
+<td style="width:22%">
+<input type="checkbox" name="consulta1" id="consulta1">
+<label for="consulta1">Consulta 1ra vez</label>
+</td>
+<td style="width:15%">
+<input type="checkbox" name="consulta" id="consulta">
+<label for="consulta">Consulta</label>
+</td>
+<td style="width:16%">
+<input type="checkbox" name="servicio" id="servicio">
+<label for="servicio">Servicio</label>
+</td>
+</tr>
+
+</table>
+
+
+
+</fieldset>
+<fieldset><legend>Edad y Sexo</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label>Sexo:</label>
+</td>
+<td >
+<input type="checkbox" name="masculino" id="masculino">
+<label>Masculino</label>
+<input type="checkbox" name="femenino" id="femenino">
+<label>Femenino</label>
+</td>
+<td rowspan="3">
+<fieldset  style="width:70%">
+<legend>Plan de Beneficios</legend>
+<input type="radio" name="plan" id="plan" value="1"><label>   POS</label><br>
+<input type="radio" name="plan" id="plan" value="2"><label>   POS_S</label><br>
+<input type="radio" name="plan" id="plan" value="3"><label>   PAB</label>
+</fieldset>
+</td>
+
+</tr>
+
+<!---2da fila---->
+
+<tr>
+<td>
+<label>Edad minima:</label>
+</td>
+<td>
+<input type="text" name="edadmin" size="2" id="edadmin" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmin2" name="edadmin2" value="1"><label>semanas</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="2"><label>meses</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="3"><label>años</label>
+</td>
+</tr>
+
+<!---3ra fila----->
+
+
+<tr>
+<td>
+<label>Edad maxima:</label>
+</td>
+<td>
+<input type="text" name="edadmax" size="2" id="edadmax" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmax2" name="edadmax2" value="1"><label>semanas</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="2"><label>meses</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="3"><label>años</label>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<br>
+
+<fieldset>
+<table style="width:100%">
+<tr>
+<td style="width:65%">
+<label>Finalidad:</label>
+</td>
+<td style="width:35%">
+<label>RIP adicional:</label>
+</td>
+</tr>
+
+<tr>
+<td>
+<select name="finalidad" id="finalidad" style="width:85%"> </select>
+</td>
+<td>
+<select name="rip_adicional" id="rip_adicional" style="width:85%"></select>
+</td>
+</tr>
+
+
+<tr>
+<td style="width:65%">
+<label>Forma de Realizacion:</label>
+</td>
+<td style="width:35%">
+<label>Tipo de Servicio:</label>
+</td>
+</tr>
+
+<tr>
+<td>
+<select name="formarealizacion" id="formarealizacion" style="width:85%"> </select>
+</td>
+<td>
+<select name="tiposervicio" id="tiposervicio" style="width:85%"></select>
+</td>
+</tr>
+
+
+
+</table>
+</fieldset>
+
+
+
+</td>
+</tr>
+
+<tr>
+<td style="text-align:center;width:70%">
+<input type="button" value="Guardar" name="aceptar" id="aceptar" maxlength="30"><br>
+</td>
+</tr>
+
+</table>
+<br>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cd053465-0bde-4e31-8dce-54fd73d474ca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="451"/>
+	<parameter name="id_consulta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="diag_p" class="java.lang.String"/>
+	<parameter name="diag_1" class="java.lang.String"/>
+	<parameter name="diag_2" class="java.lang.String"/>
+	<parameter name="diag_3" class="java.lang.String"/>
+	<parameter name="edad" class="java.lang.String"/>
+	<parameter name="id_barcod" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/servidor/Documentos/programas/codigo_prog_IPS/ISALUD/web/reportes/laboratorios/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select id_consulta from consulta_medica where id_consulta=$P{id_consulta}]]>
+	</queryString>
+	<detail>
+		<band height="752" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="682900e0-2fd8-40f1-aacd-6ad2f15b878f" x="-20" y="-19" width="614" height="395"/>
+				<subreportParameter name="id_consulta">
+					<subreportParameterExpression><![CDATA[$P{id_consulta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_p">
+					<subreportParameterExpression><![CDATA[$P{diag_p}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_1">
+					<subreportParameterExpression><![CDATA[$P{diag_1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_2">
+					<subreportParameterExpression><![CDATA[$P{diag_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_3">
+					<subreportParameterExpression><![CDATA[$P{diag_3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="edad">
+					<subreportParameterExpression><![CDATA[$P{edad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_barcod">
+					<subreportParameterExpression><![CDATA[$P{id_barcod}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["laboratorios.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement uuid="32293eb5-99d7-4ea3-a670-0d90bf756128" x="-22" y="377" width="616" height="375"/>
+				<subreportParameter name="id_consulta">
+					<subreportParameterExpression><![CDATA[$P{id_consulta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_p">
+					<subreportParameterExpression><![CDATA[$P{diag_p}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_1">
+					<subreportParameterExpression><![CDATA[$P{diag_1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_2">
+					<subreportParameterExpression><![CDATA[$P{diag_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_3">
+					<subreportParameterExpression><![CDATA[$P{diag_3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="edad">
+					<subreportParameterExpression><![CDATA[$P{edad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_barcod">
+					<subreportParameterExpression><![CDATA[$P{id_barcod}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["laboratorios_2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

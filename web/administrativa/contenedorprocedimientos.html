@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+
+<script type="text/javascript" language="javascript">
+function cambiaPestanaProcedimientos(pestana3){
+
+                           if(pestana3==1){$("#tabs-procedimientos").load("crearprocedimiento.jsp");}
+                           else if(pestana3==2){$("#tabs-procedimientos").load("editarprocedimientos.jsp");}
+                        /*   else{$("#tabs-procedimientos").load("crearciudad.html");} */
+                          }    
+
+$(function() {
+        $( "#tabs" ).tabs();
+    });
+                           
+    
+</script>     
+
+<title>Procedimientos</title>
+</head>
+<body>
+<table border="0"><tr><td>
+<div id="tabs" style="height:100%;width:100%;">
+    <ul>    
+        <li><a href="#tabs-procedimientos" onclick="cambiaPestanaProcedimientos(1)">Crear Procedimientos</a></li>
+        <li><a href="#tabs-procedimientos" onclick="cambiaPestanaProcedimientos(2)">Editar Procedimientos</a></li>
+  <!--      <li><a href="#tabs-procedimientos" onclick="cambiaPestanaProcedimientos(3)">Crear Cargo</a></li> -->
+     </ul>
+    <div id="tabs-procedimientos" style="height:100%;width:100%;overflow:auto;">
+    </div>
+</div>
+
+</td></tr></table>
+
+
+<script type="text/javascript" language="javascript">
+var hoja = document.createElement('style')
+
+  var element = document.getElementById("tabs-procedimientos");
+  element.style.width= ""+(screen.width-300)+"px";
+  element.style.height= ""+(screen.height-335)+"px";
+ cambiaPestanaProcedimientos(1);
+</script>
+
+</body>
+
+</html>

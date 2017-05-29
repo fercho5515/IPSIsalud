@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+      
+    <script type="text/javascript" language="javascript">
+    $(function(){
+		     $("#calendarionacimiento").datepicker({
+		            //inline:true
+		            showOn:'both',
+		            buttonImageOnly:true,
+		            buttonImage:'../imagenes/fotos/calendar.gif',
+		            firstDay:1,
+		            changeMonth:true,
+		            changeYear:true
+		     });	
+		     $('#calendario').datepicker($.datepicker.regional['es']);
+		     $('#calendario').datepicker("option","showAnim","slideDown");
+		     $('#calendario').datepicker("option","dateFormat","yy-mm-dd");
+		     		
+	});
+	
+	$(function(){
+		     $("#calendariovinculacion").datepicker({
+		            //inline:true
+		            showOn:'both',
+		            buttonImageOnly:true,
+		            buttonImage:'../imagenes/fotos/calendar.gif',
+		            firstDay:1,
+		            changeMonth:true,
+		            changeYear:true
+		     });	
+		     $('#calendario').datepicker($.datepicker.regional['es']);
+		     $('#calendario').datepicker("option","showAnim","slideDown");
+		     $('#calendario').datepicker("option","dateFormat","yy-mm-dd");
+		     		
+	});
+    jQuery("#listeditaemp").jqGrid({
+   	url:'carga_cie10.jsp?q=2',
+	datatype: "json",
+   	colNames:['Cedula','P nombre','S nombre','P apellido','S apellido'],
+   	colModel:[
+                {name:'id',index:'id',width:120,editable: false,required : true,editoptions:{maxlength: 63}},
+   		{name:'id_subcie10',index:'id_subcie10', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	        {name:'id_subcie10',index:'id_subcie10', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	    ],
+   	rowNum:11,
+   	rowList:[10,20,30,40,400],
+   	pager: '#pagereditaemp',
+   	sortname: 's.id_subcie10',
+        viewrecords: true,
+        sortorder: "asc",
+        height: 50,
+        width:1025,
+        shrinkToFit: false,//columnas tamaño dato
+        grouping:true,         
+        groupingView : {
+   		groupField : ['descripciong']
+   	},   
+        rownumbers: false,
+        editurl: 'editaCli.php',
+	caption: "Buscar empleado",
+	ondblClickRow: function(id){       }	
+});
+
+
+jQuery("#listeditaemp").jqGrid('navGrid','#pagereditaemp',{add:false,edit:false,del:false,search:false,view:false},
+                             {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
+							{closeAfterAdd: true, closeOnEscape: true,afterSubmit: function(){   } }, //opciones add
+							{}, //opciones del
+ 							{multipleSearch:true,closeAfterSearch: true, closeOnEscape: true},
+ 							{width:420} //para el view
+ 			);
+            
+jQuery('#listeditaemp').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+  	
+</script>
+
+<title>Sin título 1</title>
+
+</head>
+
+<body>
+<center>
+      <table id="listeditaemp" ></table>
+        <div id="pagereditaemp"></div>     
+</center>      
+<table style="width:100%;padding-top:2px" align="center" border="0">
+<tr>
+<td valign="top">
+<fieldset>
+<legend>
+Datos Personales
+</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label for="nombre1">Primer Nombre: </label>
+</td>
+<td style="width:16%">
+<label for="nombre2">Segundo Nombre: </label>
+</td>
+<td style="width:16%">
+<label for="apellido1">Primer Apellido: </label>
+</td>
+<td style="width:16%">
+<label for="apellido2">Segundo Apellido: </label>
+</td>
+<td style="width:16%">
+<label for="fechanac">Fecha de Nacimiento </label>
+</td>
+<td rowspan="6" style="width:20%">
+<input type="image" name="foto" size="25" id="foto" src="../imagenes/fotos/medico.jpg" alt="Pintura geométrica" onerror="this.src='../imagenes/fotos/medico.png'" style="width:100%;height:150px">
+
+</td>
+</tr>
+
+<!--------2da Fila------------>
+
+<tr>
+<td style="width:16%">
+<input type="text" name="nombre1" size="16" id="nombre1" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="nombre2" size="16" id="nombre2" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="apellido1" size="16" id="apellido1" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="apellido2" size="16" id="apellido2" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" id="calendarionacimiento" name="caledarionacimiento" style="width:70%">
+</td>
+</tr>
+
+<!----------3ra fila--------------->
+
+<tr>
+<td style="width:16%">
+<label for="edad">Edad: </label>
+</td>
+<td style="width:16%">
+<label for="tipoid">Tipo de Identificacion: </label>
+</td>
+<td style="width:16%">
+<label for="id">Identificacion: </label>
+</td>
+<td style="width:16%">
+<label for="sexo">Sexo: </label>
+</td>
+<td style="width:16%">
+<label for="rh">RH: </label>
+</td>
+</tr>
+
+<!-----------4ta fila-------------->
+
+<tr>
+<td style="width:16%">
+<input type="text" name="edad" size="13" id="edad" maxlength="30" disabled="disabled">
+</td>
+<td style="width:16%">
+<select name="tipoid" size="1" id="tipoid" style="width:90%"><option>Cedula de Ciudadania</option><option>Cedula de Extrangeria</option></select>
+</td>
+<td style="width:16%">
+<input type="text" name="id" size="16" id="id" maxlength="30">
+</td>
+<td style="width:16%">
+<select  name="sexo" size="1" id="sexo" style="width:90%"><option>Masculino</option><option>Femenino</option></select>
+</td>
+<td style="width:16%">
+<select id="rh" name="rh" style="width:40%;text-align:right">
+<option style="text-align:right">0 +</option>
+<option style="text-align:right">0 -</option>
+<option style="text-align:right">A +</option>
+<option style="text-align:right">A -</option>
+<option style="text-align:right">B +</option>
+<option style="text-align:right">B -</option>
+<option style="text-align:right">AB +</option>
+<option style="text-align:right">AB -</option>
+</select>
+</td>
+</tr>
+
+<!-----------5ta fila--------------->
+
+<tr>
+<td style="width:16%">
+<label for="dpto">Departamento: </label>
+</td>
+<td style="width:16%">
+<label for="ciudad">Ciudad: </label>
+</td>
+<td style="width:16%">
+<label for="barrio">Barrio: </label>
+</td>
+<td style="width:16%">
+<label for="direccion">Direccion: </label>
+</td>
+<td style="width:16%">
+<label for="fechanac">EPS Afiliado </label>
+</td>
+</tr>
+
+<!-----------6ta fila--------------->
+
+<tr>
+<td style="width:16%">
+<select name="dpto" size="1" id="dpto" style="width:90%"><option>Nariño</option><option>Velle del Cauca</option></select>
+</td>
+<td style="width:16%">
+<select name="ciudad" size="1" id="ciudad" style="width:90%"><option>San Juand de Pasto</option><option>Ipiales</option></select>
+</td>
+<td style="width:16%">
+<input type="text" name="id" size="16" id="id" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="id" size="16" id="id" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="eps" size="16" id="eps" maxlength="30">
+</td>
+</tr>
+
+<!---------------7ma fila----------->
+
+<tr>
+<td style="width:16%">
+<label for="dpto">Telefono: </label>
+</td>
+<td style="width:16%" colspan="2">
+<label for="ciudad">Email: </label>
+</td>
+<td style="width:16%">
+<label for="barrio">falta:</label>
+</td>
+<td style="width:16%">
+<label for="direccion">falta: </label>
+</td>
+<td></td>
+</tr>
+
+<!---------------8va fila----------->
+
+<tr>
+<td style="width:16%">
+<input type="text" name="telefono" size="16" id="telefono" maxlength="30">
+</td>
+<td style="width:16%" colspan="2">
+<input type="text" name="email" size="40" id="email" maxlength="100">
+</td>
+<td style="width:16%">
+<input type="text" name="falta" size="16" id="falta" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" id="falta" name="falta" style="width:70%">
+</td>
+<td>
+<input type="button" value="Subir foto" name="aceptar" size="25" id="aceptar" maxlength="30">
+</td>
+</tr>
+</table>
+</fieldset>
+
+<!--segundo fieldset-->
+
+<fieldset>
+<legend>Datos de Contratacion</legend>
+<table style="width:100%">
+
+<tr>
+<td style="width:16%">
+<label for="apellido1">Cargo: </label>
+</td>
+<td style="width:16%">
+<label for="nombre1">Tarjeta Profesional: </label>
+</td>
+<td style="width:16%">
+<label for="nombre2">Registro Profesional: </label>
+</td>
+<td style="width:16%">
+<label for="apellido2">Firma: </label>
+</td>
+<td style="width:16%">
+<label for="fechanac">Fecha de Vinculacion </label>
+</td>
+</tr>
+
+<!-----2da fila----->
+
+<tr>
+<td style="width:16%">
+<select name="cargo" size="1" id="cargo"><option>Medico General</option><option>Medico Especialista</option></select>
+</td>
+<td style="width:16%">
+<input type="text" name="nombre2" size="16" id="nombre2" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="apellido1" size="16" id="apellido1" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="button" value="Subir firma" name="aceptar" size="25" id="aceptar" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" id="calendariovinculacion" name="calendariovinculacion" style="width:60%">
+</td>
+</tr>
+
+<!------3ra fila-------->
+
+<tr>
+<td style="width:16%">
+<label for="apellido1">Numero de contrato: </label>
+</td>
+<td style="width:16%">
+<label for="nombre1">Subir contrato: </label>
+</td>
+<td style="width:16%">
+<label for="nombre2">Ruta del contrato: </label>
+</td>
+<td style="width:16%">
+<label for="apellido2"></label>
+</td>
+<td style="width:16%">
+<label for="fechanac"></label>
+</td>
+</tr>
+
+<!-----4ta fila----->
+
+<tr>
+<td style="width:16%">
+<input type="text" name="numcontrato" size="16" id="numcontrato" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="button" value="Subir contrato" name="aceptar" id="aceptar" maxlength="30">
+</td>
+<td style="width:16%">
+<input type="text" name="rutacontrato" size="16" id="rutacontrato" maxlength="30">
+</td>
+<td style="width:16%">
+</td>
+<td style="width:16%">
+</td>
+</tr>
+</table>
+</fieldset>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<input type="button" value="Guardar" name="aceptar" size="25" id="aceptar"><br>
+</td>
+</tr>
+
+
+</table>
+</body>
+
+</html>

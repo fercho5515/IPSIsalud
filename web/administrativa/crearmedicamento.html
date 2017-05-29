@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+<title>Crear Medicamento</title>
+</head>
+
+<body>
+<table style="height:100%;width:80%;padding-top:5px" align="center">
+<tbody valign="top">
+
+<tr>
+<td>
+
+<fieldset><legend>Forma Farmaceutica</legend>
+<table style="width:100%">
+<tr>
+<td style="width:25%">
+<label for="codigo">Codigo: </label>
+</td>
+<td style="width:50%" colspan="2">
+<label for="producto">Producto: </label>
+</td>
+<td style="width:25%">
+<label for="atc">Codigo ATC: </label>
+</td>
+</tr>
+
+<!-----2da fila---->
+
+<tr>
+<td>
+<input type="text" name="codigo" size="15" id="codigo" maxlength="30" disabled="disabled">
+</td>
+<td colspan="2">
+<input type="text" name="producto" size="43" id="producto" maxlength="400">
+</td>
+<td>
+<input type="text" name="atc" size="15" id="atc" maxlength="30">
+</td>
+</tr>
+
+<!-----3ra fila---->
+
+<tr>
+<td style="width:20%">
+<label for="formafarmaceutica">Forma Farmaceutica: </label>
+</td>
+<td>
+<label for="viaadministracion">Via Administracion: </label>
+</td>
+<td>
+<label for="concentracion">Concentracion: </label>
+</td>
+<td>
+<label for="unidadmedida">Unidad de Medida: </label>
+</td>
+</tr>
+
+<!-----4ta fila---->
+
+<tr>
+<td>
+<input type="text" name="formafarmaceutica" size="15" id="formafarmaceutica" maxlength="30">
+</td>
+<td>
+<input type="text" name="viaadministracion" size="15" id="viaadministracion" maxlength="30">
+</td>
+<td>
+<input type="text" name="concentracion" size="15" id="concentracion" maxlength="30">
+</td>
+<td>
+<select name="unidadmedida" size="1" id="unidadmedida"><option>miligramos</option><option>gramos</option></select>
+</td>
+</tr>
+
+<!-----5ta fila---->
+
+<tr>
+<td>
+<label for="principioactivo">Principio Activo: </label>
+</td>
+<td  rowspan="2" colspan="2">
+<fieldset  style="width:65%">
+<legend>Plan de Beneficios</legend>
+<input type="radio" name="plan" id="plan" value="1"><label>POS</label>
+<input type="radio" name="plan" id="plan" value="2"><label>POS_S</label>
+<input type="radio" name="plan" id="plan" value="3"><label>PAB</label>
+</fieldset>
+
+</td>
+<td>
+
+</td>
+</tr>
+
+<!-----6ta fila---->
+
+<tr>
+<td>
+<input type="text" name="principioactivo" size="15" id="principioactivo" maxlength="30">
+</td>
+<td>
+
+</td>
+</tr>
+
+</table>
+</fieldset>
+
+<fieldset><legend>Restricciones</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label>Sexo:</label>
+</td>
+<td>
+<input type="checkbox" name="masculino" id="masculino">
+<label>Masculino</label>
+<input type="checkbox" name="femenino" id="femenino">
+<label>Femenino</label>
+</td>
+</tr>
+<!---2da fila---->
+
+<tr>
+<td>
+<label>Edad minima:</label>
+</td>
+<td>
+<input type="text" name="edadmin" size="2" id="edadmin" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmin2" name="edadmin2" value="1"><label>semanas</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="2"><label>meses</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="3"><label>años</label>
+</td>
+</tr>
+
+<!---3ra fila----->
+
+
+<tr>
+<td>
+<label>Edad maxima:</label>
+</td>
+<td>
+<input type="text" name="edadmax" size="2" id="edadmax" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmax2" name="edadmax2" value="1"><label>semanas</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="2"><label>meses</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="3"><label>años</label>
+</td>
+</tr>
+
+
+</table>
+</fieldset>
+
+</td>
+</tr>
+
+<tr>
+<td style="text-align:right;width:80%">
+<input type="button" value="Guardar" name="aceptar" size="25" id="aceptar" maxlength="30"><br>
+</td>
+</tr>
+
+
+</table>
+
+</body>
+</html>

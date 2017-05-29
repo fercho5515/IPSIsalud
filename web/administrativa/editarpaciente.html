@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+     <script type="text/javascript" language="javascript">
+     
+     
+     $(function(){
+		     $("#calendarionacimiento").datepicker({
+		            //inline:true
+		            showOn:'both',
+		            buttonImageOnly:true,
+		            buttonImage:'../imagenes/fotos/calendar.gif',
+		            firstDay:1,
+		            changeMonth:true,
+		            changeYear:true
+		     });	
+		     $('#calendario').datepicker($.datepicker.regional['es']);
+		     $('#calendario').datepicker("option","showAnim","slideDown");
+		     $('#calendario').datepicker("option","dateFormat","yy-mm-dd");
+		     		
+	});
+
+
+    jQuery("#listeditapac").jqGrid({
+   	url:'carga_cie10.jsp?q=2',
+	datatype: "json",
+   	colNames:['Cedula','P nombre','S nombre','P apellido','S apellido'],
+   	colModel:[
+                {name:'id',index:'id',width:120,editable: false,required : true,editoptions:{maxlength: 63}},
+   		{name:'id_subcie10',index:'id_subcie10', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	        {name:'id_subcie10',index:'id_subcie10', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:215,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	    ],
+   	rowNum:11,
+   	rowList:[10,20,30,40,400],
+   	pager: '#pagereditapac',
+   	sortname: 's.id_subcie10',
+        viewrecords: true,
+        sortorder: "asc",
+        height: 50,
+        width:1025,
+        shrinkToFit: false,//columnas tamaño dato
+        grouping:true,         
+        groupingView : {
+   		groupField : ['descripciong']
+   	},   
+        rownumbers: false,
+        editurl: 'editaCli.php',
+	caption: "Buscar paciente",
+	ondblClickRow: function(id){       }	
+});
+
+
+jQuery("#listeditapac").jqGrid('navGrid','#pagereditapac',{add:false,edit:false,del:false,search:false,view:false},
+                             {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
+							{closeAfterAdd: true, closeOnEscape: true,afterSubmit: function(){   } }, //opciones add
+							{}, //opciones del
+ 							{multipleSearch:true,closeAfterSearch: true, closeOnEscape: true},
+ 							{width:420} //para el view
+ 			);
+            
+jQuery('#listeditapac').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+  
+
+     </script>
+
+
+
+
+
+</head>
+
+<body>
+<center>
+      <table id="listeditapac" ></table>
+        <div id="pagereditapac"></div>     
+</center>     
+<table style="height:100%;width:100%;padding-top:5px" align="center">
+<tbody valign="top">
+
+<tr>
+<td>
+
+<fieldset><legend>Datos del Paciente</legend>
+<table  style="width:100%">
+<tr>
+<td style="width:20%">
+<label for="nombre1">Primer Nombre </label>
+</td>
+
+<td style="width:20%">
+<label for="nombre2">Segundo Nombre </label>
+</td>
+
+<td style="width:20%">
+<label for="apellido1">Primer Apellido </label>
+</td>
+
+<td style="width:20%">
+<label for="apellido2">Segundo Apellido </label>
+</td>
+
+<td style="width:20%" rowspan="8">
+<input type="image" name="foto" size="25" id="foto" src="../imagenes/fotos/paciente.png" alt="Pintura geométrica" style="width:100%;height:150px">
+</td>
+</tr>
+
+<!--Segunda Fila-->
+
+<tr>
+<td style="width:20%">
+<input type="text" name="nombre1" size="25" id="nombre1" maxlength="30">
+</td>
+
+<td style="width:20%">
+<input type="text" name="nombre2" size="25" id="nombre2" maxlength="30">
+</td>
+
+<td style="width:20%">
+<input type="text" name="apellido1" size="25" id="apellido1" maxlength="30">
+</td>
+
+<td style="width:20%">
+<input type="text" name="apellido2" size="25" id="apellido2" maxlength="30">
+</td>
+
+</tr>
+
+<!--Tercera Fila-->
+
+<tr>
+
+<td style="width:20%">
+<label for="numidentificacion">Cedula </label>
+</td>
+
+<td style="width:20%">
+<label for="fechanacimiento">Fecha de Nacimiento </label>
+</td>
+
+<td style="width:20%">
+<label for="edad">Edad </label>
+</td>
+
+<td style="width:20%">
+<label for="estadocivil">Estado Civil </label>
+</td>
+</tr>
+
+<!--Cuarta Fila-->
+
+<tr>
+<td style="width:20%">
+<input type="text" name="numidentificacion" size="25" id="numidentificacion" maxlength="30">
+</td>
+
+<td style="width:20%">
+<input type="text" id="calendarionacimiento" name="caledarionacimiento" style="width:70%">
+</td>
+
+<td style="width:20%">
+<input type="text" name="edad" size="25" id="edad" maxlength="30" disabled="disabled">
+</td>
+
+<td style="width:20%">
+<select name="estadocivil" id="estadocivil" style="max-height:30px">
+<option>soltero</option>
+<option>casado</option>
+<option>viudo</option>
+</select>
+</td>
+</tr>
+
+<!--Quinta Fila-->
+
+<tr>
+
+<td style="width:20%">
+<label for="nivelsisben">Nivel Sisben </label>
+</td>
+
+<td style="width:20%">
+<label for="sexo">Sexo </label>
+</td>
+
+<td style="width:20%">
+<label for="rh">RH </label>
+</td>
+
+<td style="width:20%">
+<label for="orientacionsexual">Orientacion Sexual </label>
+</td>
+
+</tr>
+
+<!--Sexta Fila-->
+
+<tr>
+<td style="width:20%">
+<select name="nivelsisben" id="nivelsisben">
+<option>nivel uno</option>
+<option>nivel dos</option>
+<option>nivel tres</option>
+</select>
+</td>
+
+<td style="width:20%">
+<select name="sexo" id="sexo"> 
+<option>masculino</option>
+<option>femenino</option>
+</select>
+</td>
+
+<td style="width:20%">
+<select name="rh" id="rh">
+<option>0 +</option>
+<option>0 -</option>
+<option>A +</option>
+<option>A -</option>
+<option>B +</option>
+<option>B -</option>
+<option>AB +</option>
+<option>AB -</option>
+</select>
+</td>
+
+<td style="width:20%">
+<select name="orientacionsexual" id="orientacionsexual">
+<option>heterosexual</option>
+<option>homosexual</option>
+<option>bisexual</option>
+<option>transexual</option>
+</select>
+</td>
+</tr>
+
+<!--Septima Fila-->
+
+<tr>
+
+<td style="width:20%">
+<label for="departamento">Departamento </label>
+</td>
+
+<td style="width:20%">
+<label for="ciudad">Ciudad </label>
+</td>
+
+<td style="width:20%">
+<label for="barrio">Barrio </label>
+</td>
+
+<td style="width:20%">
+<label for="direccion">Direccion </label>
+</td>
+</tr>
+
+<!--Octava Fila-->
+
+<tr>
+<td style="width:20%">
+<select name="departamento" id="departamento">
+<option>nariño</option>
+<option>cauca</option>
+<option>valle del cauca</option>
+<option>caldas</option>
+</select>
+</td>
+
+<td style="width:20%">
+<select name="ciudad" id="ciudad">
+<option>pasto</option>
+<option>ipiales</option>
+<option>santiago cali</option>
+<option>popayan</option>
+<option>bogota</option>
+</select>
+</td>
+
+<td style="width:20%">
+<input type="text" name="barrio" size="25" id="barrio" maxlength="30">
+</td>
+
+<td style="width:20%">
+<input type="text" name="direccion" size="25" id="direccion" maxlength="30">
+</td>
+
+<td>
+
+</td>
+
+</tr>
+
+<!--Novena Fila-->
+
+<tr>
+<td>
+<label for="email">Email </label>
+</td>
+<td>
+<label for="telefono">Telefono </label>
+</td>
+<td>
+<label for="niveleducativo">Nivel educativo </label>
+</td>
+<td>
+
+</td>
+<td>
+<input type="button" value="Subir foto" name="aceptar" size="25" id="aceptar" maxlength="30">
+</td>
+
+</tr>
+
+<!--Decima Fila-->
+
+<tr>
+<td>
+<input type="text" name="email" size="25" id="email" maxlength="30">
+</td>
+<td>
+<input type="text" name="telefono" size="25" id="telefono" maxlength="30">
+</td>
+<td>
+<select name="niveleducativo" id="niveleducativo">
+<option>pre-escolar</option>
+<option>primaria</option>
+<option>secundaria</option>
+<option>tecnica</option>
+<option>tecnologica</option>
+<option>universitaria</option>
+<option>postgrado</option>
+</select>
+</td>
+<td>
+</td>
+</tr>
+
+<!--Undecima Fila-->
+
+<tr>
+<td>
+<label for="epsafiliada">EPS Afiliada</label>
+</td>
+<td>
+<label for="numerocarnet">Numero de Carné</label>
+</td>
+<td>
+
+</td>
+<td>
+
+</td>
+</tr>
+
+<!--Duodecima Fila-->
+
+<tr>
+<td>
+<select name="epsafiliada" id="epsafiliada">
+<option>Mallamas</option>
+<option>Nueva EPS</option>
+<option>Comeva</option>
+<option>SaludCop</option>
+</select>
+</td>
+<td>
+<input type="text" name="numerocarnet" size="25" id="numerocarnet" maxlength="30">
+</td>
+<td>
+	
+</td>
+<td>
+
+</td>
+</tr>
+</table>
+</fieldset>
+</td>
+</tr>
+
+
+</tbody>
+</table>
+
+
+
+</body>
+
+</html>

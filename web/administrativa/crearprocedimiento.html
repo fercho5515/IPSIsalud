@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+<title>Crear Procedimiento</title>
+
+<style type="text/css">
+/*	body{
+		font: 62.5% "Trebuchet MS", sans-serif;
+		margin: 5px;
+	}
+	#dsa{padding: 5px 5px 0px 5px;}
+	label,option,select{font-family:"Eras Medium ITC";
+	      color:#2779aa;
+          font-size:11pt;}
+	legend{font-family:"Eras Bold ITC";
+	       font-size:11pt;
+    	   color:#2779aa;}
+    fieldset{border:1px #2779aa solid;
+             -webkit-border-radius: 10px;
+             -moz-border-radius: 10px;
+             border-radius: 10px;} 
+             
+    .boton{font-family:"Eras Medium ITC";
+	      color:#2779aa;
+          font-size:11pt;
+          background:#e4f1fb;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+           border-radius: 10px;
+         }
+    .boton:hover {
+     	 background:#3baae3;
+         color: #ffffff;
+         cursor: pointer;
+		}
+	#aceptar{font-family:"Eras Medium ITC";
+   			color:#2779aa;
+          font-size:11pt; background:white;
+         
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+           border-radius: 10px;
+         }
+    #aceptar:hover {
+     	 background: #3baae3;
+ 	     border-top-color: #3baae3;
+         color: #ffffff;
+         cursor: pointer;
+		}
+	h2{
+		color:#2779aa;
+	}
+
+		}*/
+	</style>
+		
+</head>
+
+<body>
+<table style="height:100%;width:80%;padding-top:5px" align="center">
+<tbody valign="top">
+
+
+
+
+<tr>
+<td>
+<fieldset><legend>Procedimiento</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label for="codigo">Codigo:</label>
+</td>
+<td style="width:84%" colspan="5">
+<label for="producto">Descripcion:</label>
+</td>
+
+<!-----2da fila---->
+
+<tr>
+<td>
+<input type="text" name="codigo" size="15" id="codigo" maxlength="30" disabled="disabled">
+</td>
+<td colspan="5">
+<input type="text" name="producto" size="85%" id="producto" maxlength="400">
+</td>
+</tr>
+
+<!-----3ra fila---->
+
+<tr>
+<td style="width:16%">
+<input type="checkbox" name="obstetrico" id="obstetrico">
+<label for="obstetrico">Obstetrico</label>
+</td>
+<td style="width:14%">
+<input type="checkbox" name="pyp" id="pyp">
+<label for="PyP">PyP</label>
+</td>
+<td style="width:16%">
+<input type="checkbox" name="quirurjico" id="quirurjico">
+<label for="quirurjico">Quirurjico</label>
+</td>
+<td style="width:22%">
+<input type="checkbox" name="consulta1" id="consulta1">
+<label for="consulta1">Consulta 1ra vez</label>
+</td>
+<td style="width:15%">
+<input type="checkbox" name="consulta" id="consulta">
+<label for="consulta">Consulta</label>
+</td>
+<td style="width:16%">
+<input type="checkbox" name="servicio" id="servicio">
+<label for="servicio">Servicio</label>
+</td>
+</tr>
+
+</table>
+
+
+
+</fieldset>
+<fieldset><legend>Edad y Sexo</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label>Sexo:</label>
+</td>
+<td >
+<input type="checkbox" name="masculino" id="masculino">
+<label>Masculino</label>
+<input type="checkbox" name="femenino" id="femenino">
+<label>Femenino</label>
+</td>
+<td rowspan="3">
+<fieldset  style="width:70%">
+<legend>Plan de Beneficios</legend>
+<input type="radio" name="plan" id="plan" value="1"><label>   POS</label><br>
+<input type="radio" name="plan" id="plan" value="2"><label>   POS_S</label><br>
+<input type="radio" name="plan" id="plan" value="3"><label>   PAB</label>
+</fieldset>
+</td>
+
+</tr>
+
+<!---2da fila---->
+
+<tr>
+<td>
+<label>Edad minima:</label>
+</td>
+<td>
+<input type="text" name="edadmin" size="2" id="edadmin" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmin2" name="edadmin2" value="1"><label>semanas</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="2"><label>meses</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="3"><label>años</label>
+</td>
+</tr>
+
+<!---3ra fila----->
+
+
+<tr>
+<td>
+<label>Edad maxima:</label>
+</td>
+<td>
+<input type="text" name="edadmax" size="2" id="edadmax" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmax2" name="edadmax2" value="1"><label>semanas</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="2"><label>meses</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="3"><label>años</label>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<br>
+
+<fieldset>
+<table style="width:100%">
+<tr>
+<td style="width:65%">
+<label>Finalidad:</label>
+</td>
+<td style="width:35%">
+<label>RIP adicional:</label>
+</td>
+</tr>
+
+<tr>
+<td>
+<select name="finalidad" id="finalidad" style="width:85%"> </select>
+</td>
+<td>
+<select name="rip_adicional" id="rip_adicional" style="width:85%"></select>
+</td>
+</tr>
+
+
+<tr>
+<td style="width:65%">
+<label>Forma de Realizacion:</label>
+</td>
+<td style="width:35%">
+<label>Tipo de Servicio:</label>
+</td>
+</tr>
+
+<tr>
+<td>
+<select name="formarealizacion" id="formarealizacion" style="width:85%"> </select>
+</td>
+<td>
+<select name="tiposervicio" id="tiposervicio" style="width:85%"></select>
+</td>
+</tr>
+
+
+
+</table>
+</fieldset>
+
+
+
+</td>
+</tr>
+
+<tr>
+<td style="text-align:right;width:70%">
+<input type="button" value="Guardar" name="aceptar" size="25" id="aceptar" maxlength="30"><br>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

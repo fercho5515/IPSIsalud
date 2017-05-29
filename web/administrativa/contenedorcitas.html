@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+
+<script type="text/javascript" language="javascript">
+function cambiaPestanaCitas(pestana2){
+
+                           if(pestana2==1){$("#tabs-citas").load("programarcitas.html");}
+                           else if(pestana2==2){$("#tabs-citas").load("creardpto.html");}
+                           else{$("#tabs-citas").load("inventario_farmacia.html");}
+                          }    
+
+$(function() {
+        $( "#tabs" ).tabs();
+    });
+                           
+    
+</script>     
+
+<title>Distribuidores</title>
+</head>
+<body>
+<table border="0"><tr><td>
+<div id="tabs" style="height:100%;width:100%;">
+    <ul>    
+        <li><a href="#tabs-citas" onclick="cambiaPestanaCitas(1)">Agenda de Citas</a></li>
+        <li><a href="#tabs-citas" onclick="cambiaPestanaCitas(2)">Editar Medicamento</a></li>
+        <li><a href="#tabs-citas" onclick="cambiaPestanaCitas(3)">Farmacia</a></li>
+     </ul>
+    <div id="tabs-citas" style="height:100%;width:100%;overflow:auto;">
+    </div>
+</div>
+
+</td></tr></table>
+
+
+<script type="text/javascript" language="javascript">
+var hoja = document.createElement('style')
+
+  var element = document.getElementById("tabs-citas");
+  element.style.width= ""+(screen.width-300)+"px";
+  element.style.height= ""+(screen.height-325)+"px";
+  cambiaPestanaCitas(1)
+</script>
+
+</body>
+
+</html>

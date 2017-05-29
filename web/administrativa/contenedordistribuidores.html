@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+
+<script type="text/javascript" language="javascript">
+function cambiaPestanaDistribuidores(pestana2){
+
+                           if(pestana2==1){$("#tabs-distribuidores").load("creardistribuidor.jsp");}
+                           else if(pestana2==2){$("#tabs-distribuidores").load("editadistribuidor.jsp");}
+                           else if(pestana2==3){$("#tabs-distribuidores").load("crear_vendedor.jsp");}
+                           else if(pestana2==4){$("#tabs-distribuidores").load("distribuidores_vendedores.jsp");}
+                           
+                          }    
+
+$(function() {
+        $( "#tabs" ).tabs();
+    });
+                           
+    
+</script>     
+
+<title>Distribuidores</title>
+</head>
+<body>
+<table border="0"><tr><td>
+<div id="tabs" style="height:100%;width:100%;">
+    <ul>    
+        <li><a href="#tabs-distribuidores" onclick="cambiaPestanaDistribuidores(1)">Crear Distribuidor</a></li>
+        <li><a href="#tabs-distribuidores" onclick="cambiaPestanaDistribuidores(2)">Editar Distribuidor</a></li>
+        <li><a href="#tabs-distribuidores" onclick="cambiaPestanaDistribuidores(3)">Crear Vendedores</a></li>
+        <li><a href="#tabs-distribuidores" onclick="cambiaPestanaDistribuidores(4)">Distribuidores y Vendedores</a></li>
+        
+     </ul>
+    <div id="tabs-distribuidores" style="height:100%;width:100%;overflow:auto;">
+    </div>
+</div>
+
+</td></tr></table>
+
+
+<script type="text/javascript" language="javascript">
+var hoja = document.createElement('style')
+
+  var element = document.getElementById("tabs-distribuidores");
+  element.style.width= ""+(screen.width-300)+"px";
+  element.style.height= ""+(screen.height-325)+"px";
+  cambiaPestanaDistribuidores(1);
+</script>
+
+</body>
+
+</html>

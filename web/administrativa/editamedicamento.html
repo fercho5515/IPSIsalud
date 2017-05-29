@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+<title>Crear Medicamento</title>
+     
+<script type="text/javascript" language="javascript">
+      jQuery("#listeditamed").jqGrid({
+   	url:'carga_cie10.jsp?q=2',
+	datatype: "json",
+   	colNames:['Cups','Invima','Nombre','concentacion'],
+   	colModel:[
+                {name:'id',index:'id',width:130,editable: false,required : true,editoptions:{maxlength: 63}},
+   		{name:'id_subcie10',index:'id_subcie10', width:130,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   		{name:'descripcion',index:'d2', width:580,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	        {name:'id_subcie10',index:'id_subcie10', width:150,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
+   	 ],
+   	rowNum:11,
+   	rowList:[10,20,30,40,400],
+   	pager: '#pagereditamed',
+   	sortname: 's.id_subcie10',
+        viewrecords: true,
+        sortorder: "asc",
+        height: 50,
+        width:1025,
+        shrinkToFit: false,//columnas tamaño dato
+        grouping:true,         
+        groupingView : {
+   		groupField : ['descripciong']
+   	},   
+        rownumbers: false,
+        editurl: 'editaCli.php',
+	caption: "Buscar empleado",
+	ondblClickRow: function(id){       }	
+});
+
+
+jQuery("#listeditamed").jqGrid('navGrid','#pagereditamed',{add:false,edit:false,del:false,search:false,view:false},
+                             {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
+							{closeAfterAdd: true, closeOnEscape: true,afterSubmit: function(){   } }, //opciones add
+							{}, //opciones del
+ 							{multipleSearch:true,closeAfterSearch: true, closeOnEscape: true},
+ 							{width:420} //para el view
+ 			);
+            
+jQuery('#listeditamed').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+    
+</script>
+</head>
+
+<body>
+<table style="height:100%;width:80%;padding-top:5px" align="center">
+<tbody valign="top">
+
+<tr>
+<td>
+<center>
+      <table id="listeditamed" ></table>
+        <div id="pagereditamed"></div>     
+</center> 
+
+<fieldset><legend>Forma Farmaceutica</legend>
+<table style="width:100%">
+<tr>
+<td style="width:25%">
+<label for="codigo">Codigo: </label>
+</td>
+<td style="width:50%" colspan="2">
+<label for="producto">Producto: </label>
+</td>
+<td style="width:25%">
+<label for="atc">Codigo ATC: </label>
+</td>
+</tr>
+
+<!-----2da fila---->
+
+<tr>
+<td>
+<input type="text" name="codigo" size="15" id="codigo" maxlength="30" disabled="disabled">
+</td>
+<td colspan="2">
+<input type="text" name="producto" size="43" id="producto" maxlength="400">
+</td>
+<td>
+<input type="text" name="atc" size="15" id="atc" maxlength="30">
+</td>
+</tr>
+
+<!-----3ra fila---->
+
+<tr>
+<td style="width:20%">
+<label for="formafarmaceutica">Forma Farmaceutica: </label>
+</td>
+<td>
+<label for="viaadministracion">Via Administracion: </label>
+</td>
+<td>
+<label for="concentracion">Concentracion: </label>
+</td>
+<td>
+<label for="unidadmedida">Unidad de Medida: </label>
+</td>
+</tr>
+
+<!-----4ta fila---->
+
+<tr>
+<td>
+<input type="text" name="formafarmaceutica" size="15" id="formafarmaceutica" maxlength="30">
+</td>
+<td>
+<input type="text" name="viaadministracion" size="15" id="viaadministracion" maxlength="30">
+</td>
+<td>
+<input type="text" name="concentracion" size="15" id="concentracion" maxlength="30">
+</td>
+<td>
+<select name="unidadmedida" size="1" id="unidadmedida"><option>miligramos</option><option>gramos</option></select>
+</td>
+</tr>
+
+<!-----5ta fila---->
+
+<tr>
+<td>
+<label for="principioactivo">Principio Activo: </label>
+</td>
+<td  rowspan="2" colspan="2">
+<fieldset  style="width:65%">
+<legend>Plan de Beneficios</legend>
+<input type="radio" name="plan" id="plan" value="1"><label>POS</label>
+<input type="radio" name="plan" id="plan" value="2"><label>POS_S</label>
+<input type="radio" name="plan" id="plan" value="3"><label>PAB</label>
+</fieldset>
+
+</td>
+<td>
+
+</td>
+</tr>
+
+<!-----6ta fila---->
+
+<tr>
+<td>
+<input type="text" name="principioactivo" size="15" id="principioactivo" maxlength="30">
+</td>
+<td>
+
+</td>
+</tr>
+
+</table>
+</fieldset>
+
+<fieldset><legend>Restricciones</legend>
+<table style="width:100%">
+<tr>
+<td style="width:16%">
+<label>Sexo:</label>
+</td>
+<td>
+<input type="checkbox" name="masculino" id="masculino">
+<label>Masculino</label>
+<input type="checkbox" name="femenino" id="femenino">
+<label>Femenino</label>
+</td>
+</tr>
+<!---2da fila---->
+
+<tr>
+<td>
+<label>Edad minima:</label>
+</td>
+<td>
+<input type="text" name="edadmin" size="2" id="edadmin" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmin2" name="edadmin2" value="1"><label>semanas</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="2"><label>meses</label>
+<input type="radio" id="edadmin2" name="edadmin2" value="3"><label>años</label>
+</td>
+</tr>
+
+<!---3ra fila----->
+
+
+<tr>
+<td>
+<label>Edad maxima:</label>
+</td>
+<td>
+<input type="text" name="edadmax" size="2" id="edadmax" maxlength="2">
+<label>en: </label>
+<input type="radio" id="edadmax2" name="edadmax2" value="1"><label>semanas</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="2"><label>meses</label>
+<input type="radio" id="edadmax2" name="edadmax2" value="3"><label>años</label>
+</td>
+</tr>
+
+
+</table>
+</fieldset>
+
+</td>
+</tr>
+
+<tr>
+<td style="text-align:right;width:80%">
+<input type="button" value="Guardar" name="aceptar" size="25" id="aceptar" maxlength="30"><br>
+</td>
+</tr>
+
+
+</table>
+
+</body>
+</html>

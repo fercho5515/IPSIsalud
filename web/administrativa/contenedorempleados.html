@@ -1,0 +1,52 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+
+<script type="text/javascript" language="javascript">
+function cambiaPestanaDos(pestana){
+
+                           if(pestana==1){$("#tabs-empleados").load("crearempleado.html");}
+                           else if(pestana==2){$("#tabs-empleados").load("editarempleado.html");}
+                          /* else{$("#tabs-empleados").load("crearmedicamento.html");} */
+                          }    
+
+$(function() {
+        $( "#tabs" ).tabs();
+    });
+                           
+    
+</script>     
+
+
+<title>Empleados</title>
+</head>
+
+<body>
+<table border="0"><tr><td>
+<div id="tabs" style="height:100%;width:99%;">
+    <ul>    
+        <li><a href="#tabs-empleados" onclick="cambiaPestanaDos(1)">Crear Empleado</a></li>
+        <li><a href="#tabs-empleados" onclick="cambiaPestanaDos(2)">Editar Empleado</a></li>
+   <!-- <li><a href="#tabs-empleados" onclick="cambiaPestanaDos(3)">Crear Cargo</a></li> -->
+     </ul>
+    <div id="tabs-empleados" style="height:100%;overflow:auto;">
+    </div>
+</div>
+
+</td></tr></table>
+
+
+<script type="text/javascript" language="javascript">
+var hoja = document.createElement('style')
+
+  var element = document.getElementById("tabs-empleados");
+  element.style.width= ""+(screen.width-300)+"px";
+  element.style.height= ""+(screen.height-335)+"px";
+ cambiaPestanaDos(1);
+</script>
+
+</body>
+
+</html>

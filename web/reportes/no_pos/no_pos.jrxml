@@ -1,0 +1,1154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="no_pos" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71f1d45c-f707-4add-8e00-7f6d62711b49">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="783"/>
+	<parameter name="id_consulta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numero" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     day(consulta_medica.`fecha`) AS dia,
+     month(consulta_medica.`fecha`) AS mes,
+     year(consulta_medica.`fecha`) AS año,
+     soli_no_post.`diagnostico` AS soli_no_post_diagnostico,
+     soli_no_post.`resu_enf_act` AS soli_no_post_resu_enf_act,
+     soli_no_post.`nom_generico_uno` AS soli_no_post_nom_generico_uno,
+     soli_no_post.`presen_concen_uno` AS soli_no_post_presen_concen_uno,
+     soli_no_post.`dosis_fecuencia_uno` AS soli_no_post_dosis_fecuencia_uno,
+     soli_no_post.`nom_generico_dos` AS soli_no_post_nom_generico_dos,
+     soli_no_post.`presen_concen_dos` AS soli_no_post_presen_concen_dos,
+     soli_no_post.`dosis_fecuencia_dos` AS soli_no_post_dosis_fecuencia_dos,
+     soli_no_post.`uno` AS soli_no_post_uno,
+     soli_no_post.`dos` AS soli_no_post_dos,
+     soli_no_post.`tres` AS soli_no_post_tres,
+     soli_no_post.`cuatro` AS soli_no_post_cuatro,
+     soli_no_post.`cinco` AS soli_no_post_cinco,
+     soli_no_post.`seis` AS soli_no_post_seis,
+     soli_no_post.`efecto_trata` AS soli_no_post_efecto_trata,
+     soli_no_post.`efecto_secu` AS soli_no_post_efecto_secu,
+     soli_no_post.`tiempo_resp_espe` AS soli_no_post_tiempo_resp_espe,
+     soli_no_post.`especialidad` AS soli_no_post_especialidad,
+     soli_no_post.`nom_generc_uno` AS soli_no_post_nom_generc_uno,
+     soli_no_post.`posologia_uno` AS soli_no_post_posologia_uno,
+     soli_no_post.`presentacion_uno` AS soli_no_post_presentacion_uno,
+     soli_no_post.`dosis_uno` AS soli_no_post_dosis_uno,
+     soli_no_post.`cantidad_uno` AS soli_no_post_cantidad_uno,
+     soli_no_post.`tiempo_uno` AS soli_no_post_tiempo_uno,
+     soli_no_post.`reg_invima_uno` AS soli_no_post_reg_invima_uno,
+     soli_no_post.`nom_generc_dos` AS soli_no_post_nom_generc_dos,
+     soli_no_post.`posologia_dos` AS soli_no_post_posologia_dos,
+     soli_no_post.`presentacion_dos` AS soli_no_post_presentacion_dos,
+     soli_no_post.`dosis_dos` AS soli_no_post_dosis_dos,
+     soli_no_post.`cantidad_dos` AS soli_no_post_cantidad_dos,
+     soli_no_post.`tiempo_dos` AS soli_no_post_tiempo_dos,
+     soli_no_post.`reg_invima_dos` AS soli_no_post_reg_invima_dos,
+     soli_no_post.`nom_generc_tres` AS soli_no_post_nom_generc_tres,
+     soli_no_post.`posologia_tres` AS soli_no_post_posologia_tres,
+     soli_no_post.`presentacion_tres` AS soli_no_post_presentacion_tres,
+     soli_no_post.`dosis_tres` AS soli_no_post_dosis_tres,
+     soli_no_post.`cantidad_tres` AS soli_no_post_cantidad_tres,
+     soli_no_post.`tiempo_tres` AS soli_no_post_tiempo_tres,
+     soli_no_post.`reg_invima_tres` AS soli_no_post_reg_invima_tres,
+     soli_no_post.`id_med1` AS soli_no_post_id_med1,
+     soli_no_post.`id_med2` AS soli_no_post_id_med2,
+     soli_no_post.`id_med3` AS soli_no_post_id_med3,
+     soli_no_post.`estado_m1` AS soli_no_post_estado_m1,
+     soli_no_post.`estado_m2` AS soli_no_post_estado_m2,
+     soli_no_post.`estado_m3` AS soli_no_post_estado_m3,
+     personas.`s_nom` AS personas_s_nom,
+     personas.`p_ape` AS personas_p_ape,
+     personas.`s_ape` AS personas_s_ape,
+     personas_A.`id_person` AS personas_A_id_person,
+     personas_A.`p_nom` AS personas_A_p_nom,
+     personas_A.`s_nom` AS personas_A_s_nom,
+     personas_A.`p_ape` AS personas_A_p_ape,
+     personas_A.`s_ape` AS personas_A_s_ape,
+     empleados.`firma` AS empleados_firma,
+     empleados.`registro_prof` AS empleados_registro_prof,
+     personas.`p_nom` AS personas_p_nom,
+     tipo_id.`descripcion` AS tipo_id_descripcion,
+     sub_cie10.`descripcion` AS sub_cie10_descripcion
+FROM
+     `consulta_medica` consulta_medica INNER JOIN `soli_no_post` soli_no_post ON consulta_medica.`id_consulta` = soli_no_post.`cod_consulta`
+     INNER JOIN `empleados` empleados ON consulta_medica.`id_medico` = empleados.`serial_empleado`
+     INNER JOIN `personas` personas_A ON consulta_medica.`serial_historia` = personas_A.`serial`
+     INNER JOIN `tipo_id` tipo_id ON personas_A.`tipo_id` = tipo_id.`idtipo_id`
+     INNER JOIN `personas` personas ON empleados.`serial_empleado` = personas.`serial`
+     INNER JOIN `sub_cie10` sub_cie10 ON soli_no_post.`diagnostico` = sub_cie10.`id_subcie10`
+WHERE
+     consulta_medica.`id_consulta` = $P{id_consulta}]]>
+	</queryString>
+	<field name="dia" class="java.lang.Long"/>
+	<field name="mes" class="java.lang.Long"/>
+	<field name="año" class="java.lang.Long"/>
+	<field name="soli_no_post_diagnostico" class="java.lang.String"/>
+	<field name="soli_no_post_resu_enf_act" class="java.lang.String"/>
+	<field name="soli_no_post_nom_generico_uno" class="java.lang.String"/>
+	<field name="soli_no_post_presen_concen_uno" class="java.lang.String"/>
+	<field name="soli_no_post_dosis_fecuencia_uno" class="java.lang.String"/>
+	<field name="soli_no_post_nom_generico_dos" class="java.lang.String"/>
+	<field name="soli_no_post_presen_concen_dos" class="java.lang.String"/>
+	<field name="soli_no_post_dosis_fecuencia_dos" class="java.lang.String"/>
+	<field name="soli_no_post_uno" class="java.lang.Boolean"/>
+	<field name="soli_no_post_dos" class="java.lang.Boolean"/>
+	<field name="soli_no_post_tres" class="java.lang.Boolean"/>
+	<field name="soli_no_post_cuatro" class="java.lang.Boolean"/>
+	<field name="soli_no_post_cinco" class="java.lang.Boolean"/>
+	<field name="soli_no_post_seis" class="java.lang.Boolean"/>
+	<field name="soli_no_post_efecto_trata" class="java.lang.String"/>
+	<field name="soli_no_post_efecto_secu" class="java.lang.String"/>
+	<field name="soli_no_post_tiempo_resp_espe" class="java.lang.String"/>
+	<field name="soli_no_post_especialidad" class="java.lang.String"/>
+	<field name="soli_no_post_nom_generc_uno" class="java.lang.String"/>
+	<field name="soli_no_post_posologia_uno" class="java.lang.String"/>
+	<field name="soli_no_post_presentacion_uno" class="java.lang.String"/>
+	<field name="soli_no_post_dosis_uno" class="java.lang.String"/>
+	<field name="soli_no_post_cantidad_uno" class="java.lang.String"/>
+	<field name="soli_no_post_tiempo_uno" class="java.lang.String"/>
+	<field name="soli_no_post_reg_invima_uno" class="java.lang.String"/>
+	<field name="soli_no_post_nom_generc_dos" class="java.lang.String"/>
+	<field name="soli_no_post_posologia_dos" class="java.lang.String"/>
+	<field name="soli_no_post_presentacion_dos" class="java.lang.String"/>
+	<field name="soli_no_post_dosis_dos" class="java.lang.String"/>
+	<field name="soli_no_post_cantidad_dos" class="java.lang.String"/>
+	<field name="soli_no_post_tiempo_dos" class="java.lang.String"/>
+	<field name="soli_no_post_reg_invima_dos" class="java.lang.String"/>
+	<field name="soli_no_post_nom_generc_tres" class="java.lang.String"/>
+	<field name="soli_no_post_posologia_tres" class="java.lang.String"/>
+	<field name="soli_no_post_presentacion_tres" class="java.lang.String"/>
+	<field name="soli_no_post_dosis_tres" class="java.lang.String"/>
+	<field name="soli_no_post_cantidad_tres" class="java.lang.String"/>
+	<field name="soli_no_post_tiempo_tres" class="java.lang.String"/>
+	<field name="soli_no_post_reg_invima_tres" class="java.lang.String"/>
+	<field name="soli_no_post_id_med1" class="java.lang.Long"/>
+	<field name="soli_no_post_id_med2" class="java.lang.Long"/>
+	<field name="soli_no_post_id_med3" class="java.lang.Long"/>
+	<field name="soli_no_post_estado_m1" class="java.lang.Integer"/>
+	<field name="soli_no_post_estado_m2" class="java.lang.Integer"/>
+	<field name="soli_no_post_estado_m3" class="java.lang.Integer"/>
+	<field name="personas_s_nom" class="java.lang.String"/>
+	<field name="personas_p_ape" class="java.lang.String"/>
+	<field name="personas_s_ape" class="java.lang.String"/>
+	<field name="personas_A_id_person" class="java.lang.String"/>
+	<field name="personas_A_p_nom" class="java.lang.String"/>
+	<field name="personas_A_s_nom" class="java.lang.String"/>
+	<field name="personas_A_p_ape" class="java.lang.String"/>
+	<field name="personas_A_s_ape" class="java.lang.String"/>
+	<field name="empleados_firma" class="java.lang.String"/>
+	<field name="empleados_registro_prof" class="java.lang.String"/>
+	<field name="personas_p_nom" class="java.lang.String"/>
+	<field name="tipo_id_descripcion" class="java.lang.String"/>
+	<field name="sub_cie10_descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="752" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement uuid="4796238a-4959-4464-8693-128eb69a1552" mode="Transparent" x="102" y="243" width="362" height="279" backcolor="#FFFFFF"/>
+				<imageExpression><![CDATA["/img/logog.jpg"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement uuid="4b7eaf0f-2aaf-4188-a175-d4f78f01272f" x="26" y="97" width="528" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="37fb9965-7147-4d25-9653-7176164df868" x="26" y="640" width="528" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b83e331d-1ca9-4afb-9fa6-92a374f8fcf8" x="26" y="570" width="528" height="62"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3472017c-fa7e-4e0e-a69b-448201ad261f" mode="Transparent" x="26" y="483" width="528" height="84"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e1db1a6b-112e-4041-a2dc-d1467d963ffd" mode="Transparent" x="26" y="375" width="528" height="104"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c4ac1d80-426e-4e30-b7da-41708993c71e" mode="Transparent" x="26" y="278" width="528" height="86"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="63aa8b3f-3147-42bd-884f-8eba1618a6fa" mode="Transparent" x="26" y="166" width="528" height="90"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="542e888f-866c-4b3f-ba7d-34a46af34de2" x="26" y="132" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="542e888f-866c-4b3f-ba7d-34a46af34de2" x="26" y="107" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="75d696fb-c12c-45c3-a73a-6f88dd275637" x="427" y="108" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement uuid="75d696fb-c12c-45c3-a73a-6f88dd275637" x="317" y="108" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement uuid="75d696fb-c12c-45c3-a73a-6f88dd275637" x="391" y="121" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="75d696fb-c12c-45c3-a73a-6f88dd275637" x="353" y="121" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="0979b439-4827-4472-be3a-430354a2770e" x="283" y="132" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement uuid="ca36c095-82fe-45d0-92cd-7a73f5c4abac" mode="Transparent" x="26" y="192" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ca36c095-82fe-45d0-92cd-7a73f5c4abac" mode="Transparent" x="26" y="204" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ca36c095-82fe-45d0-92cd-7a73f5c4abac" mode="Transparent" x="26" y="217" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ca36c095-82fe-45d0-92cd-7a73f5c4abac" mode="Transparent" x="26" y="242" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e1cb0b57-9f94-4d37-bf3a-d7c2cd375e5b" x="292" y="278" width="1" height="86"/>
+			</line>
+			<line>
+				<reportElement uuid="e1cb0b57-9f94-4d37-bf3a-d7c2cd375e5b" x="168" y="278" width="1" height="86"/>
+			</line>
+			<line>
+				<reportElement uuid="e1cb0b57-9f94-4d37-bf3a-d7c2cd375e5b" x="436" y="278" width="1" height="86"/>
+			</line>
+			<line>
+				<reportElement uuid="6f15e014-59d2-4fb1-9e31-23482d665fd4" mode="Transparent" x="293" y="295" width="143" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="6f15e014-59d2-4fb1-9e31-23482d665fd4" mode="Transparent" x="293" y="329" width="143" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="6f15e014-59d2-4fb1-9e31-23482d665fd4" mode="Transparent" x="26" y="295" width="142" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="6f15e014-59d2-4fb1-9e31-23482d665fd4" mode="Transparent" x="27" y="329" width="142" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="b3afa41d-a966-435c-9380-2524c34a4436" mode="Transparent" x="26" y="425" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="b3afa41d-a966-435c-9380-2524c34a4436" mode="Transparent" x="26" y="452" width="528" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="485" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="485" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="499" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="499" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="513" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="513" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="527" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="527" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="541" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="541" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="520" y="555" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8d6c777b-a919-40eb-8387-58b2be01a19b" x="489" y="555" width="23" height="9" backcolor="#99CC00"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="496" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="510" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="524" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="538" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="552" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="580" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="597" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="615" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7d867731-d28b-459d-9eed-7818ab40baf4" x="26" y="663" width="528" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="6ccc2409-4a06-4604-819f-abdb013d7021" x="291" y="640" width="1" height="50"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b3c1237a-f92c-4743-8462-af5c85d15cca" x="0" y="693" width="572" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ipiales: Carrera 4a. No 7 - 48 Tel: 7732107 - 7731757        Pasto: Calle 17 No 27-25 Tel: 7239930]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="30" y="663" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Especialidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="297" y="663" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Firma y Sello]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="297" y="640" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Número de Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="31" y="640" width="119" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre del Médico Tratante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="27" y="617" width="119" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tiempo de respuesta esperado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="483" width="461" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[1. Se agotaron todas las posibilidades del manual de medicamentos del POS-S sin obtener respuesta clínica satisfactoria?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="27" y="581" width="199" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Efecto deseado del tratamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="485" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" mode="Transparent" x="521" y="485" width="23" height="9" backcolor="#99CC00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="499" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="521" y="499" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="521" y="527" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="527" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="521" y="513" width="23" height="9" backcolor="#99CC00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="513" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="521" y="555" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="555" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="521" y="541" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92a4dc2d-65ad-4974-a5e8-435ade59bd44" x="488" y="541" width="23" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="497" width="461" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[2. Se evidencia intolerancia o efectos secundarios con el uso de medicamentos POS-S?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="511" width="461" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[3. Existe riesgo inminente o para la vida y la salud del paciente si no se suministra?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="525" width="461" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[4. El medicamento se encuentra debidamente autorizado para su comercialización y expendio en el pais?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="539" width="461" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[5. Se identifica suficiente evidencia científica que apoye la decisión de utilizar el medicamento solicitado?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="28" y="553" width="461" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[6. Se trata de continuidad de medicamentos ya aprobados por el CTC a pacientes crónicos?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="27" y="329" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Presentación y concentración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="294" y="329" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Presentación y concentración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="26" y="296" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre Genérico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="294" y="296" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre Genérico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="168" y="278" width="124" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Dosis, frecuencia y]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="167" y="287" width="124" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Duración del tratamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="437" y="287" width="124" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Duración del tratamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" mode="Transparent" x="438" y="278" width="124" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Dosis, frecuencia y]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" x="26" y="258" width="528" height="21"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Medicamentos POS-S utilizados previamente para el manejo de esta patología sin obtener respuesta clínica o paraclinica satisfactoria en el término previsto de sus indicadores]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" mode="Transparent" x="28" y="193" width="166" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RESUMEN DE ENFERMEDAD ACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" mode="Transparent" x="28" y="167" width="166" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIAGNOSTICO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" x="28" y="132" width="166" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[H.C.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" x="28" y="108" width="166" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" x="320" y="108" width="97" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" x="431" y="108" width="30" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0bcccab-d681-416f-b25e-1bbbce8a95d2" x="255" y="48" width="307" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMULARIO DE SOLICITUD DE MEDICAMENTOS NO POS-S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6c2372fc-e3d5-494e-b4a1-cd35115833b0" x="261" y="67" width="292" height="29" forecolor="#FF3333"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ES NECESARIO QUE EL MÉDICO SOLICITANTE DILIGENCIE CON LETRA LEGIBLE TODOS LOS ESPACIOS EN BLANCO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="57b4f856-c0a8-4526-abbe-99575ded685c" x="95" y="34" width="118" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E.P.S. INDIGENA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9a08be4-faaf-4e47-b18f-4ca0d3996d50" x="110" y="70" width="87" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nit. 837.000.084-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9a08be4-faaf-4e47-b18f-4ca0d3996d50" x="110" y="80" width="87" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Vigilada Supersalud]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9caa0990-c51a-4db0-9fc3-e009f24f17bd" mode="Opaque" x="26" y="97" width="528" height="10" backcolor="#99CC00"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" mode="Transparent" x="26" y="97" width="527" height="11" backcolor="#99CC00"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICACION DEL PACIENTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9054cdc2-2161-47d0-b2bd-e3af76d28d88" x="26" y="278" width="142" height="17" backcolor="#99CC00"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" x="26" y="279" width="141" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Medicamento del POS-S utilizado (1)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="dad78ad9-7925-4b48-8a49-77e6b07eb158" x="293" y="278" width="143" height="18" backcolor="#99CC00"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="95350681-0d98-472a-bd8d-b0592da1082b" x="293" y="278" width="142" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Medicamento del POS-S utilizado (2)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="354a7387-1f81-4035-9a71-e6401235381c" x="26" y="375" width="528" height="24" backcolor="#99CC00"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="416" y="384" width="62" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO > 3 m]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="27" y="375" width="17" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="44" y="376" width="128" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombre Genérico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="172" y="375" width="54" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Posología]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="225" y="376" width="66" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Presentación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="292" y="376" width="54" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Dosis / Dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="348" y="376" width="67" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="415" y="372" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tiempo/Meses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="478" y="387" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Opcional)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="478" y="380" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVIMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad62e0d-302a-44a2-81e3-df8bd399a8b0" x="479" y="372" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Registro]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="478" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="415" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="347" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="291" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="225" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="172" y="375" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement uuid="7aa07500-a43e-4270-bef8-1a651ce652ec" mode="Transparent" x="43" y="375" width="1" height="104"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="d14866ab-f63f-42e7-b1a6-0e41aadd34c6" x="26" y="570" width="528" height="11" backcolor="#99CC00"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b3c1237a-f92c-4743-8462-af5c85d15cca" x="31" y="570" width="523" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDICACIONES CLARAS DEL TRATAMIENTO CON MEDICAMENTOS NO POS-S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="386dc3d2-fb05-41a0-a08d-a6eb2dcdbc3b" x="95" y="47" width="118" height="23" forecolor="#00CC00"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MALLAMAS]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement uuid="30e9eea3-ac71-48a3-afe8-1229732cf9e8" x="27" y="28" width="72" height="53"/>
+				<imageExpression><![CDATA["/img/logo.jpg"]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement uuid="025841c9-6640-47fe-9e5b-3c2ba1b58f81" x="146" y="704" width="265" height="42"/>
+				<imageExpression><![CDATA["/img/letra.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="e72c67bf-6abe-41d0-adc5-2512eaa82ecb" mode="Transparent" x="27" y="399" width="17" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e72c67bf-6abe-41d0-adc5-2512eaa82ecb" mode="Transparent" x="26" y="426" width="17" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e72c67bf-6abe-41d0-adc5-2512eaa82ecb" mode="Transparent" x="26" y="452" width="17" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="949af969-9dc3-47e1-a720-0375f9580c7d" x="29" y="118" width="288" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{personas_A_p_nom}+" "+$F{personas_A_s_nom}+" "+$F{personas_A_p_ape}+" "+$F{personas_A_s_ape}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2cd8a010-7704-4471-badd-10cd9037cd63" x="319" y="119" width="34" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2cd8a010-7704-4471-badd-10cd9037cd63" x="355" y="119" width="34" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2cd8a010-7704-4471-badd-10cd9037cd63" x="392" y="119" width="34" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{año}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6da4e327-2c76-4dbd-b419-1a958a378e3a" x="428" y="108" width="123" height="24" forecolor="#FF0033"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c1f7a245-1785-453a-adac-e1f7eb912f3f" x="287" y="133" width="166" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO / No. IDENTIFICACIÓN]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="862ad45c-ef8a-48f4-b494-bcaf5f138bd1" x="29" y="142" width="251" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{personas_A_id_person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="862ad45c-ef8a-48f4-b494-bcaf5f138bd1" x="286" y="142" width="265" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tipo_id_descripcion}+": "+$F{personas_A_id_person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="862ad45c-ef8a-48f4-b494-bcaf5f138bd1" mode="Transparent" x="30" y="177" width="523" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{soli_no_post_diagnostico}+" - "+$F{sub_cie10_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5bcd6818-e207-413d-b06c-6d87c848d8d9" mode="Transparent" x="28" y="205" width="525" height="51"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_resu_enf_act}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="ca36c095-82fe-45d0-92cd-7a73f5c4abac" mode="Transparent" x="26" y="230" width="528" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="28" y="303" width="141" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_nom_generc_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="294" y="302" width="140" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_nom_generc_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="294" y="337" width="140" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_presen_concen_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="28" y="337" width="141" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_presen_concen_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="170" y="296" width="120" height="68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dosis_fecuencia_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="438" y="295" width="115" height="68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dosis_fecuencia_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="45" y="398" width="126" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_nom_generico_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="174" y="398" width="50" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_posologia_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="227" y="399" width="63" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_presentacion_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="294" y="399" width="52" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dosis_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="349" y="399" width="65" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cantidad_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="418" y="399" width="59" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tiempo_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="479" y="399" width="73" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_reg_invima_uno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="45" y="425" width="126" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_nom_generico_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="174" y="425" width="50" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_posologia_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="227" y="426" width="63" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_presentacion_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="294" y="426" width="52" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dosis_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="349" y="426" width="65" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cantidad_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="418" y="426" width="59" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tiempo_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="479" y="426" width="73" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_reg_invima_dos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="418" y="453" width="59" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tiempo_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="294" y="453" width="52" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dosis_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="174" y="452" width="50" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_posologia_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="227" y="453" width="63" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_presentacion_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="349" y="453" width="65" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cantidad_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="479" y="453" width="73" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_reg_invima_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97c1ccb9-df6e-4c8f-869d-419387fc24c2" mode="Transparent" x="45" y="452" width="126" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_nom_generc_tres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="483" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_uno} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="483" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_uno} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="497" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dos} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="497" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_dos} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="511" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tres} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="511" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tres} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="525" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cuatro} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="525" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cuatro} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="539" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cinco} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="539" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_cinco} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="520" y="553" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_seis} ? "":"X"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36e16a05-b271-4007-a8e3-7da779df013b" x="489" y="553" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_seis} ? "X":""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39ccaff6-2905-4eec-a266-08a909992adf" x="143" y="582" width="410" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_efecto_trata}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39ccaff6-2905-4eec-a266-08a909992adf" x="143" y="615" width="410" height="17"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_tiempo_resp_espe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39ccaff6-2905-4eec-a266-08a909992adf" x="218" y="598" width="335" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soli_no_post_efecto_secu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ad8cfdab-c99c-43ee-a0d6-d3fb2486f58f" x="27" y="599" width="199" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Efectos secundarios y posibles riesgos al tratamiento]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="88751754-ba00-4bc2-9ab3-2675630ff237" x="31" y="650" width="260" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personas_p_nom}+" "+$F{personas_s_nom}+" "+$F{personas_p_ape}+" "+$F{personas_s_ape}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="88751754-ba00-4bc2-9ab3-2675630ff237" x="297" y="650" width="255" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empleados_registro_prof}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement uuid="7bcc812f-6bdf-4c2a-ba25-38549a809b44" x="346" y="665" width="104" height="24"/>
+				<imageExpression><![CDATA["../../"+$F{empleados_firma}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

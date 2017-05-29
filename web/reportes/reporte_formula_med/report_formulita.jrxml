@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_formulita" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9218f3c-55cb-4dc8-94f1-66fa4995b216">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\recuperado 24-02-2013\\programacion\\NetBeansProjects\\reporteIreport\\web\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_consulta" class="java.lang.String"/>
+	<parameter name="id_barcod" class="java.lang.String"/>
+	<parameter name="diag_p" class="java.lang.String"/>
+	<parameter name="diag_1" class="java.lang.String"/>
+	<parameter name="diag_2" class="java.lang.String"/>
+	<parameter name="diag_3" class="java.lang.String"/>
+	<parameter name="edad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     consulta_medica.`id_consulta` AS consulta_medica_id_consulta,
+     consulta_medica.`serial_historia` AS consulta_medica_serial_historia,
+     consulta_medica.`id_medico` AS consulta_medica_id_medico,
+     consulta_medica.`num_autorizacion` AS consulta_medica_num_autorizacion,
+     consulta_medica.`fecha` AS consulta_medica_fecha,
+     consulta_medica.`anamnesis` AS consulta_medica_anamnesis,
+     consulta_medica.`enf_actual` AS consulta_medica_enf_actual,
+     consulta_medica.`revision_por_sistemas` AS consulta_medica_revision_por_sistemas,
+     consulta_medica.`tension_alta` AS consulta_medica_tension_alta,
+     consulta_medica.`tension_baja` AS consulta_medica_tension_baja,
+     consulta_medica.`f_cardiaca` AS consulta_medica_f_cardiaca,
+     consulta_medica.`f_respiratoria` AS consulta_medica_f_respiratoria,
+     consulta_medica.`temperatura` AS consulta_medica_temperatura,
+     consulta_medica.`peso` AS consulta_medica_peso,
+     consulta_medica.`talla` AS consulta_medica_talla,
+     consulta_medica.`n_compa` AS consulta_medica_n_compa,
+     consulta_medica.`conducta_recomen` AS consulta_medica_conducta_recomen,
+     consulta_medica.`paraclinicos` AS consulta_medica_paraclinicos,
+     consulta_medica.`subjetivo` AS consulta_medica_subjetivo,
+     consulta_medica.`plan` AS consulta_medica_plan,
+     consulta_medica.`facturada` AS consulta_medica_facturada,
+     consulta_medica.`cod_contra` AS consulta_medica_cod_contra,
+     consulta_medica.`cod_plan` AS consulta_medica_cod_plan,
+     consulta_medica.`tipo_consulta` AS consulta_medica_tipo_consulta,
+     consulta_medica.`cod_consulta_cups` AS consulta_medica_cod_consulta_cups,
+     consulta_medica.`cod_finalidad_consulta` AS consulta_medica_cod_finalidad_consulta,
+     consulta_medica.`id_tipo_serv` AS consulta_medica_id_tipo_serv,
+     consulta_medica.`valor_consulta` AS consulta_medica_valor_consulta,
+     consulta_medica.`id_permiso_profecional` AS consulta_medica_id_permiso_profecional,
+     consulta_medica.`id_estado_consulta` AS consulta_medica_id_estado_consulta
+FROM
+     `consulta_medica` consulta_medica
+WHERE
+     consulta_medica.`id_consulta` = $P{id_consulta}]]>
+	</queryString>
+	<field name="consulta_medica_id_consulta" class="java.lang.Long"/>
+	<field name="consulta_medica_serial_historia" class="java.lang.Long"/>
+	<field name="consulta_medica_id_medico" class="java.lang.Long"/>
+	<field name="consulta_medica_num_autorizacion" class="java.lang.String"/>
+	<field name="consulta_medica_fecha" class="java.sql.Timestamp"/>
+	<field name="consulta_medica_anamnesis" class="java.lang.String"/>
+	<field name="consulta_medica_enf_actual" class="java.lang.String"/>
+	<field name="consulta_medica_revision_por_sistemas" class="java.lang.String"/>
+	<field name="consulta_medica_tension_alta" class="java.lang.Integer"/>
+	<field name="consulta_medica_tension_baja" class="java.lang.Integer"/>
+	<field name="consulta_medica_f_cardiaca" class="java.lang.Integer"/>
+	<field name="consulta_medica_f_respiratoria" class="java.lang.Integer"/>
+	<field name="consulta_medica_temperatura" class="java.math.BigDecimal"/>
+	<field name="consulta_medica_peso" class="java.math.BigDecimal"/>
+	<field name="consulta_medica_talla" class="java.math.BigDecimal"/>
+	<field name="consulta_medica_n_compa" class="java.lang.Integer"/>
+	<field name="consulta_medica_conducta_recomen" class="java.lang.String"/>
+	<field name="consulta_medica_paraclinicos" class="java.lang.String"/>
+	<field name="consulta_medica_subjetivo" class="java.lang.String"/>
+	<field name="consulta_medica_plan" class="java.lang.String"/>
+	<field name="consulta_medica_facturada" class="java.lang.Integer"/>
+	<field name="consulta_medica_cod_contra" class="java.lang.Integer"/>
+	<field name="consulta_medica_cod_plan" class="java.lang.Integer"/>
+	<field name="consulta_medica_tipo_consulta" class="java.lang.Integer"/>
+	<field name="consulta_medica_cod_consulta_cups" class="java.lang.Integer"/>
+	<field name="consulta_medica_cod_finalidad_consulta" class="java.lang.Integer"/>
+	<field name="consulta_medica_id_tipo_serv" class="java.lang.Integer"/>
+	<field name="consulta_medica_valor_consulta" class="java.math.BigDecimal"/>
+	<field name="consulta_medica_id_permiso_profecional" class="java.lang.Integer"/>
+	<field name="consulta_medica_id_estado_consulta" class="java.lang.Integer"/>
+	<detail>
+		<band height="376" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="0bdc7a61-f42a-424b-a40a-04a114d5b461" x="0" y="0" width="572" height="376"/>
+				<subreportParameter name="diag_2">
+					<subreportParameterExpression><![CDATA[$P{diag_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_3">
+					<subreportParameterExpression><![CDATA[$P{diag_3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_1">
+					<subreportParameterExpression><![CDATA[$P{diag_1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="edad">
+					<subreportParameterExpression><![CDATA[$P{edad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_barcod">
+					<subreportParameterExpression><![CDATA[$P{id_barcod}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_consulta">
+					<subreportParameterExpression><![CDATA[$P{id_consulta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_p">
+					<subreportParameterExpression><![CDATA[$P{diag_p}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["report_formu.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="376">
+			<subreport>
+				<reportElement uuid="135c37e4-7d9d-4161-8480-c5c4cd5703cc" x="0" y="0" width="572" height="376"/>
+				<subreportParameter name="id_consulta">
+					<subreportParameterExpression><![CDATA[$P{id_consulta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_barcod">
+					<subreportParameterExpression><![CDATA[$P{id_barcod}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="edad">
+					<subreportParameterExpression><![CDATA[$P{edad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_p">
+					<subreportParameterExpression><![CDATA[$P{diag_p}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_1">
+					<subreportParameterExpression><![CDATA[$P{diag_1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_2">
+					<subreportParameterExpression><![CDATA[$P{diag_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diag_3">
+					<subreportParameterExpression><![CDATA[$P{diag_3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["report_formu2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

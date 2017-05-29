@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8"/>
+
+<script type="text/javascript" language="javascript">
+function cambiaPestanaPaciente(pestana1){
+                            
+                           if(pestana1==1){$("#tabs-pacientes").load("diagnostico.jsp");}
+                           else if(pestana1==2){$("#tabs-pacientes").load("subdiagnostico.jsp");}
+                           else if(pestana1==3){$("#tabs-pacientes").load("editacie10.jsp");}
+                           else if(pestana1==4){$("#tabs-pacientes").load("editasubcie10.jsp");}
+                          }    
+
+$(function() {
+        $( "#tabs" ).tabs();
+    });
+                           
+    
+</script>     
+
+<title>Empleados</title>
+</head>
+<body>
+<table border="0"><tr><td>
+<div id="tabs" style="height:100%;width:100%;">
+    <ul>    
+        <li><a href="#tabs-pacientes" onclick="cambiaPestanaPaciente(1)">CIE10 </a></li>
+        <li><a href="#tabs-pacientes" onclick="cambiaPestanaPaciente(2)">SUBCIE10</a></li>
+        <li><a href="#tabs-pacientes" onclick="cambiaPestanaPaciente(3)">EDTAR CIE10</a></li>
+        <li><a href="#tabs-pacientes" onclick="cambiaPestanaPaciente(4)">EDTAR SUBCIE10</a></li>
+    </ul>
+    <div id="tabs-pacientes" style="height:400px;width:1012px;overflow:auto;">
+    </div>
+</div>
+
+</td></tr></table>
+
+
+<script type="text/javascript" language="javascript">
+var hoja = document.createElement('style')
+
+  var element = document.getElementById("tabs-pacientes");
+  element.style.width= ""+(screen.width-300)+"px";
+  element.style.height= ""+(screen.height-335)+"px";
+  cambiaPestanaPaciente(1);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8"/>
+
+        <script type="text/javascript" language="javascript">
+    
+    
+            function abrirforma(){
+                document.getElementById('validaforma').innerHTML = '';
+                document.getElementById("nuevaforma").value="";
+                $( "#dialogforma" ).dialog( "open" );
+        
+            }
+            function abrirvia(){
+                document.getElementById("nuevavia").value="";
+                document.getElementById('validavia').innerHTML = '';
+                $( "#dialogvia" ).dialog( "open" );
+        
+            }
+            function abrirunidad(){
+                document.getElementById('validaunidad').innerHTML = '';
+                document.getElementById("nuevaunidad").value="";
+                $( "#dialogunidad" ).dialog( "open" );
+        
+            }
+            $(function() {
+                $( "#dialogforma" ).dialog({
+                    autoOpen: false,
+                    modal: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1200
+                    }
+                });}); 
+
+            $(function() {
+                $( "#dialogvia" ).dialog({
+                    autoOpen: false,
+                    modal: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1200
+                    }
+                });});
+
+            $(function() {
+                $( "#dialogunidad" ).dialog({
+                    autoOpen: false,
+                    modal: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1200
+                    }
+                });});
+
+    
+    
+    
+            $('#formforma').submit(function() {
+                var nom = document.getElementById("nuevaforma").value;
+                if( nom == null || nom.length == 0 || /^\s+$/.test(nom) ) {
+                    document.getElementById('validaforma').innerHTML = 'Digite Forma Farmaceutica';
+                    return false;  
+                }                                            
+                //document.forms.f1.submit();                                                
+                $("#dialogforma").dialog( "close" );
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                              
+                    success: function(data) {;
+                        $('#resuforma').html(data);
+                        $("#divforma").load("loadforma.jsp"); 
+                    }                             
+                })
+                     
+                return false;
+            }); 
+                      
+            $('#formvia').submit(function() {
+                var nom = document.getElementById("nuevavia").value;               
+                if( nom == null || nom.length == 0 || /^\s+$/.test(nom) ) {
+                    document.getElementById('validavia').innerHTML = 'Digite Via de Administracion';
+                    return false;  
+                }                                            
+                //document.forms.f1.submit();                                                
+                $("#dialogvia").dialog( "close" );
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function(data) {;
+                        $('#resuvia').html(data);
+                        $("#divia").load("loadvia.jsp"); 
+                    }                             
+                })
+                     
+                return false;
+            }); 
+
+
+            $('#formunidad').submit(function() {
+                var nom = document.getElementById("nuevaunidad").value;               
+                if( nom == null || nom.length == 0 || /^\s+$/.test(nom) ) {
+                    document.getElementById('validaunidad').innerHTML = 'Digite Unidad de Medida';
+                    return false;  
+                }                                            
+                //document.forms.f1.submit();                                                
+                $("#dialogunidad").dialog( "close" );
+                // Enviamos el formulario usando AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                              
+                    success: function(data) {;
+                        $('#resunidad').html(data);
+                        $("#divunidad").load("loadunidad.jsp"); 
+                    }                             
+                })
+                     
+                return false;
+            });    
+    
+            function cambiaPestanaMedicamentos(pestana2){
+
+                if(pestana2==1){$("#tabs-medicamentos").load("crearmedicamento.jsp");}
+                else if(pestana2==2){$("#tabs-medicamentos").load("editamedicamento.jsp");}
+                else if(pestana2==3){$("#tabs-medicamentos").load("inventario_medic.jsp");}
+                else if(pestana2==4){$("#tabs-medicamentos").load("entrega.jsp");}
+                else {$("#tabs-medicamentos").load("farmacia/inventariofarmacia.jsp");}
+            }    
+
+            $(function() {
+                $( "#tabs" ).tabs();
+            });
+                           
+    
+        </script>     
+
+        <title>Medicamentos</title>
+    </head>
+    <body>
+        <table border="0">
+            <tr>
+                <td>
+                    <div id="tabs" style="height:100%;width:100%;">
+                        <ul>    
+                            <li><a href="#tabs-medicamentos" onclick="cambiaPestanaMedicamentos(1)">Crear Medicamento</a></li>
+                            <li><a href="#tabs-medicamentos" onclick="cambiaPestanaMedicamentos(2)">Editar Medicamento</a></li>
+                       <!-- <li><a href="#tabs-medicamentos" onclick="cambiaPestanaMedicamentos(3)">Farmacia</a></li>
+                            <li><a href="#tabs-medicamentos" onclick="cambiaPestanaMedicamentos(4)">Entregas</a></li>
+                            <li><a href="#tabs-medicamentos" onclick="cambiaPestanaMedicamentos(5)">inventario farmacia</a></li>  -->
+                        </ul>
+                        <div id="tabs-medicamentos" style="height:100%;width:100%;overflow:auto;">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+        <script type="text/javascript" language="javascript">
+            var hoja = document.createElement('style')
+
+            var element = document.getElementById("tabs-medicamentos");
+            element.style.width= ""+(screen.width-300)+"px";
+            element.style.height= ""+(screen.height-325)+"px";
+            cambiaPestanaMedicamentos(1);
+        </script>
+<div id="dialogforma" name="dialogforma" title="Nueva Forma Farmaceutica">
+                <div id="validaforma" name="validaforma"></div>
+                <form id="formforma" name="formforma" method="post" action="cargaforma.jsp">
+                    <label>Forma Farmaceutica</label>
+                    <input type="text" width="100%" id="nuevaforma" name="nuevaforma">
+                    <input  type="submit" value="Agregar" name="aceptar" id="aceptar">           
+                </form>
+            </div>
+
+            <div id="dialogvia" name="dialogvia" title="Nueva Via de Administracion">
+                <div id="validavia" name="validavia"></div>
+                <form id="formvia" name="formvia" method="post" action="cargavia.jsp">
+                    <label>Via de Administracion</label>
+                    <input type="text" width="100%" id="nuevavia" name="nuevavia">
+                    <input  type="submit" value="Agregar" name="aceptar" id="aceptar">           
+                </form>
+            </div>
+
+            <div id="dialogunidad" name="dialogunidad" title="Nueva Unidad de Medida">
+                <div id="validaunidad" name="validaunidad"></div>
+                <form id="formunidad" name="formunidad" method="post" action="cargaunidad.jsp">
+                    <label>Unidad de Medida</label>
+                    <input type="text" width="100%" id="nuevaunidad" name="nuevaunidad">
+                    <input  type="submit" value="Agregar" name="aceptar" id="aceptar">           
+                </form>
+            </div>
+
+
+
+    </body>
+
+</html>
