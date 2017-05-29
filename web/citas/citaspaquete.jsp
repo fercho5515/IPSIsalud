@@ -16,7 +16,7 @@
         </style>
     </head>
     <script type="text/javascript" language="javascript">
-       /*como esta*/
+     
         /*-------------------------------*/
         $("#proced").val("");
         $("#id_pac").val("");
