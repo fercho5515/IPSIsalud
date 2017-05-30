@@ -1,5 +1,5 @@
 <%-- 
-    Document   : index
+    Document   : index_eee  
     Created on : 18/02/2013, 02:43:09 PM
     Author     : EMMANUEL
 --%>
@@ -9,7 +9,7 @@
 %>
 
 <!doctype html>
-<html lang="es">
+<html lang="es"> 
 
 <head>
 <meta charset="utf-8"/>
