@@ -1,10 +1,10 @@
-<!--hola mundo citas 2-->
+<!--hola mundo citas 3-->
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pac.conecta_bd"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
