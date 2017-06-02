@@ -19,7 +19,7 @@
                 <script type='text/javascript' src='../jquery/bajados/modal/jquery.simplemodal.js'></script>
 
 <script type="text/javascript" language="javascript">
-    //***********************************************
+    //*********************<!--hola mundo citas-->**************************
     
           
         //-----------------Form Add Cita-----------------
