@@ -120,6 +120,9 @@
         ba.cierraResultado(resu); 
 %>      <center>
         <div style="width:90%"> 
+            <center>
+                <input type="image"  id="sds" src="logo.png" style="max-width:500px;width: 100%;">
+            </center>
             
             <center><h1  style="border: 1px solid;width:100%"><% out.print(titu); %></h1>
                                 

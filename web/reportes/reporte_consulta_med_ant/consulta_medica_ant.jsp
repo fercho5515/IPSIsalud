@@ -174,6 +174,9 @@
 %>      <center>
         <div style="width:90%"> 
             
+            <center>
+                <input type="image"  id="sds" src="logo.png" style="max-width:500px;width: 100%;">
+            </center>
             <center><h3><% out.print(tit); %></h3>
                                 
                 <h3 style="border: 1px solid;width:100%">DATOS PERSONALES</h3></center>
