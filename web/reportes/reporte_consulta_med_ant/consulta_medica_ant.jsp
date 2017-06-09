@@ -85,7 +85,7 @@
           // 1 visita   
           // 2 consulta
           // 3 evolucion
-            String cons_sql="select serial_historia,p.p_nom,p.s_nom,p.p_ape,p.s_nom,e.registro_prof from consulta_medica c,personas p,empleados e where c.id_medico=p.serial and e.serial_empleado=p.serial and id_consulta='"+codc+"' ";
+            String cons_sql="select serial_historia,p.p_nom,p.s_nom,p.p_ape,p.s_ape,e.registro_prof from consulta_medica c,personas p,empleados e where c.id_medico=p.serial and e.serial_empleado=p.serial and id_consulta='"+codc+"' ";
             
             //out.print(cons_sql);
             
@@ -393,9 +393,7 @@
             </td>
             </tr>
             </table>
-            <center><h3 style="border: 1px solid;width:100%">Datos Profesional</h3></center>
-           <p  style='text-align:justify'><b>Nombre:&nbsp;</b><% out.print(nombreprof); %>  &nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-left: 50px">Registro medico:&nbsp;</b><% out.print(registro_prof); %> </p> 
-    
+        
            <center><h3 style="border: 1px solid;width:100%">Datos de Consulta</h3></center>
           
           <!--  <p style='text-align:justify'><b>Signos Fisicos de Desnutricion</b></p> -->
@@ -421,7 +419,7 @@
           
             String datos2[]=new String[37];
             
-            for(int i=0;i<15;i++){
+            for(int i=0;i<37;i++){
                 datos2[i]="";
             }
             
@@ -492,14 +490,14 @@
                     else if(imc >= 40){est="Obeso tipo III";}
                      
             %>
-        <center><h3 style="border: 1px solid;width:100%">Acompañante</h3></center>
+        <h3 >Acompañante</h3>
         <p style='text-align:justify'><b>Nombre: &nbsp;</b><% out.print(datos2[32]); %></p>
         <p style='text-align:justify'><b>Telefono: &nbsp;</b><% out.print(datos2[33]); %></p>
         
-         <center><h3 style="border: 1px solid;width:100%">Antecedentes VIH</h3></center>
+         <center><h3 style="border: 1px solid;width:100%">Antecedentes</h3></center>
         <table style="width:90%">
             <tr>
-                <td><label><b>VIH Fecha diagnostico:: &nbsp;</b><% out.print(datos2[19]); %></label></td>
+                <td><label><b>Fecha diagnostico: &nbsp;</b><% out.print(datos2[19]); %></label></td>
                 <td><label><b>Estadio inicial: &nbsp;</b><% out.print(datos2[20]); %></label></td>
                 <td><label><b>Estadio Actual: &nbsp;</b><% out.print(datos2[21]); %> </label></td>
             </tr>
@@ -509,7 +507,15 @@
         </table>
         
         
+           
+        <center><h3 style="border: 1px solid;width:100%">Sintomatico</h3></center>
         
+        <table style="width:90%">
+            <tr>
+                <td><label><b>Sintomático de piel: &nbsp;</b><% if(datos2[34]!=null && datos2[34].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Sintomático respiratorio: &nbsp;</b><% if(datos2[35]!=null && datos2[35].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+            </tr>
+        </table>
         
         
         
@@ -521,11 +527,13 @@
         
         <table style="width:90%">
             <tr>
-                <td colspan="4"><p style='text-align:justify'><% out.print(datos2[2]); %></p></td>
+                <td colspan="2"><p style='text-align:justify'><% out.print(datos2[2]); %></p></td>
             </tr>
             <tr>
+                <!--
                 <td><label><b>SR: &nbsp;</b><% if(datos2[15]!=null && datos2[15].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
                 <td><label><b>SP: &nbsp;</b><% if(datos2[16]!=null && datos2[16].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                -->
                 <td><label><b>PDD: &nbsp;</b><% out.print(datos2[17]); %> </label></td>
                 <td><label><b>Resultado :&nbsp;</b><% out.print(datos2[18]); %> </label></td>
             </tr>
@@ -547,19 +555,6 @@
         
         
         
-        <center><h3 style="border: 1px solid;width:100%">Incapacidad</h3></center>
-        <p style='text-align:justify'><b><% if(datos2[29]!=null &&  datos2[29].equals("0")){out.print("NO");}else{out.print("SI");} %> &nbsp;</b><% out.print(datos2[31]); %></p>
-        
-        
-        <center><h3 style="border: 1px solid;width:100%">Sintomatico</h3></center>
-        
-        <table style="width:90%">
-            <tr>
-                <td><label><b>Sintomático de piel: &nbsp;</b><% if(datos2[34]!=null && datos2[34].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-                <td><label><b>Sintomático respiratorio: &nbsp;</b><% if(datos2[35]!=null && datos2[35].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-            </tr>
-        </table>
-            
         <center><h3 style="border: 1px solid;width:100%">Conducta</h3></center>
         <p style='text-align:justify'><% out.print(datos2[36]); %></p>
         
@@ -645,8 +640,14 @@
          catch(SQLException ex){}
          catch(Exception exe){}
          ba.cierraResultado(resud);
+        %>
         
-         
+        <center><h3 style="border: 1px solid;width:100%">Incapacidad</h3></center>
+        <p style='text-align:justify'><b><% if(datos2[29]!=null &&  datos2[29].equals("1")){out.print("SI");}else{out.print("NO");} %> &nbsp;</b><% out.print(datos2[31]); %></p>
+        
+     
+            
+         <%
          if(datos2[14].compareTo("3")==0 ){
                 out.print("<center><h3 style='border: 1px solid;width:100%'>Plan</h3></center>");  
                  out.print("<p  style='text-align:justify'>"+datos2[13]+"</p>");
@@ -807,7 +808,9 @@
          ba.cierraResultado(resuf);
          
         %>
-        
+            <center><h3 style="border: 1px solid;width:100%">Datos Profesional</h3></center>
+           <p  style='text-align:justify'><b>Nombre:&nbsp;</b><% out.print(nombreprof); %>  &nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-left: 50px">Registro medico:&nbsp;</b><% out.print(registro_prof); %> </p> 
+    
            <% ba.cerrar(); %>    
     </body>
 </html>
