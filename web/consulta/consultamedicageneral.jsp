@@ -674,6 +674,7 @@ color:#FFFFFF;
             <textarea name="revisionsistemas" rows="4" style="width:99%"><% out.print(datosc[2]); %></textarea>
         </td>
         <td style="width:30%">
+            <!--
             <label>SR</label> <select id="sr" name="sr" >
                 <option value="0" <% if(datosc[15].equals("0")){out.print("selected");} %> >No</option>
                   <option value="1" <% if(datosc[15].equals("1")){out.print("selected");} %>>Si</option>
@@ -682,11 +683,14 @@ color:#FFFFFF;
                   <option value="0" <% if(datosc[16].equals("0")){out.print("selected");} %>>No</option>
                   <option value="1" <% if(datosc[16].equals("1")){out.print("selected");} %>>Si</option>
                </select>
+               -->
+               <input type="hidden" name="sr" value="0">
+               <input type="hidden" name="sp" value="0">
         </td>
     </tr>
     <tr>    
         <td>
-            <label>PDD</label> <input type="text" name="pdd_fecha" id="pdd_fecha" value="<% out.print(datosc[17]); %>" readonly="" style="width: 75px;" > 
+            <label>PPD</label> <input type="text" name="pdd_fecha" id="pdd_fecha" value="<% out.print(datosc[17]); %>" readonly="" style="width: 75px;" > 
         </td>
     </tr>
     <tr>    
@@ -1041,9 +1045,10 @@ out.print("<textarea name='aspectogeneral' rows='3' style='width:99%'>"+datosc[1
            ResultSet ressuu2=null;
           try{  
            ressuu2=ba.consultas(sqqll);
-          
            while (ressuu2.next()&&ressuu2!=null) { 
-                         out.println("<option value='"+ressuu2.getString(1)+"'>"+ressuu2.getString(2)+"</option>");
+                         String selected="";
+                         if(ressuu2.getString(1).equals("15")){selected="selected";}
+                         out.println("<option value='"+ressuu2.getString(1)+"' "+selected+">"+ressuu2.getString(2)+"</option>");
                                                   }
               }
         catch(SQLException ex){}
