@@ -125,7 +125,7 @@
                                }
                             catch(Exception exce){}
                             
-                            strQuery = "select  m.serial from medicamentos m where (plan_beneficios=1 or m.serial in (SELECT medi1 FROM ips_isalud.autorizacion_no_pos where idpaciente_apro="+session.getAttribute("serial_pacinete")+" and fecha_inicio<=curdate() and fecha_fin>=curdate()) or m.serial in (SELECT cod_med FROM ips_isalud.medica_cont mc,ips_isalud.contratacion c,ips_isalud.afiliados_cont afc where  mc.cod_contra=c.id_contratacion and c.id_contratacion=afc.id_cont and afc.activo=1 and c.f_inicio<=curdate() and c.f_fin>=curdate() and afc.serial_paciente="+session.getAttribute("serial_pacinete")+" "+sqcontrato+" ) or m.serial in (SELECT cod_med FROM paquete_int pi,afiliados_pac_int ap,med_paq_int mp,contratacion cn where pi.id_paquete_int=ap.id_pac_int and pi.id_paquete_int=mp.cod_paq_int and cn.id_contratacion=pi.id_contratacion and cn.f_inicio<=curdate() and cn.f_fin>=curdate() "+sqcontrato2+" and serial_paciente='"+session.getAttribute("serial_pacinete")+"') ) "+where+"  group by m.producto,m.atc,m.cum,m.cum,via_adimin,forma_farmaceutica,concat(m.cantidad,' ',m.unidad_medida)  ";
+                            strQuery = "select  m.serial from medicamentos m where (plan_beneficios=1 or m.serial in (SELECT medi1 FROM ips_isalud.autorizacion_no_pos where idpaciente_apro="+session.getAttribute("serial_pacinete")+" and fecha_inicio<=curdate() and fecha_fin>=curdate()) or m.serial in (SELECT cod_med FROM ips_isalud.medica_cont mc,ips_isalud.contratacion c,ips_isalud.afiliados_cont afc where  mc.cod_contra=c.id_contratacion and c.id_contratacion=afc.id_cont and afc.activo=1 and c.f_inicio<=curdate() and c.f_fin>=curdate() and afc.serial_paciente="+session.getAttribute("serial_pacinete")+" "+sqcontrato+" ) or m.serial in (SELECT cod_med FROM paquete_int pi,afiliados_pac_int ap,med_paq_int mp,contratacion cn where pi.id_paquete_int=ap.id_pac_int and pi.id_paquete_int=mp.cod_paq_int and cn.id_contratacion=pi.id_contratacion and cn.f_inicio<=curdate() and cn.f_fin>=curdate() "+sqcontrato2+" and serial_paciente='"+session.getAttribute("serial_pacinete")+"') ) "+where+"  ";//m.producto,m.atc,m.cum,m.cum,via_adimin,forma_farmaceutica,concat(m.cantidad,' ',m.unidad_medida)
         //System.out.println("total antes ");
                              total = conexiondb.countRec("*","("+strQuery+") as tabla");
                         // System.out.println("total => "+total);
@@ -146,7 +146,7 @@
                                 start = 0;
                             }
 
-                            strQuery = "select  m.serial,m.producto,m.atc as cod_atc,m.cum as cod_dos,m.cum as cod_tres,m.via_adimin as via_ad, forma_farmaceutica as forma_f,concat(m.cantidad,' ',m.unidad_medida) as unioon  from medicamentos m where (plan_beneficios=1 or m.serial in (SELECT medi1 FROM ips_isalud.autorizacion_no_pos where idpaciente_apro="+session.getAttribute("serial_pacinete")+" and fecha_inicio<=curdate() and fecha_fin>=curdate()) or m.serial in (SELECT cod_med FROM ips_isalud.medica_cont mc,ips_isalud.contratacion c,ips_isalud.afiliados_cont afc where  mc.cod_contra=c.id_contratacion and c.id_contratacion=afc.id_cont and afc.activo=1 and c.f_inicio<=curdate() and c.f_fin>=curdate() and afc.serial_paciente="+session.getAttribute("serial_pacinete")+" "+sqcontrato+" ) or m.serial in (SELECT cod_med FROM paquete_int pi,afiliados_pac_int ap,med_paq_int mp,contratacion cn where pi.id_paquete_int=ap.id_pac_int and pi.id_paquete_int=mp.cod_paq_int and cn.id_contratacion=pi.id_contratacion and cn.f_inicio<=curdate() and cn.f_fin>=curdate() "+sqcontrato2+" and serial_paciente='"+session.getAttribute("serial_pacinete")+"') ) "+where+" group by m.producto,m.atc,m.cum,m.cum,via_adimin,forma_farmaceutica,concat(m.cantidad,' ',m.unidad_medida)  ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;//group by m.producto,cod_atc,cod_dos,cod_tres,via_ad,forma_f,unioon 
+                            strQuery = "select  m.serial,m.producto,m.descripcion_comercial,m.descripcion_atc,m.cum,m.atc as cod_atc,m.cum as cod_dos,m.cum as cod_tres,m.via_adimin as via_ad, forma_farmaceutica as forma_f,concat(m.cantidad,' ',m.unidad_medida) as unioon  from medicamentos m where (plan_beneficios=1 or m.serial in (SELECT medi1 FROM ips_isalud.autorizacion_no_pos where idpaciente_apro="+session.getAttribute("serial_pacinete")+" and fecha_inicio<=curdate() and fecha_fin>=curdate()) or m.serial in (SELECT cod_med FROM ips_isalud.medica_cont mc,ips_isalud.contratacion c,ips_isalud.afiliados_cont afc where  mc.cod_contra=c.id_contratacion and c.id_contratacion=afc.id_cont and afc.activo=1 and c.f_inicio<=curdate() and c.f_fin>=curdate() and afc.serial_paciente="+session.getAttribute("serial_pacinete")+" "+sqcontrato+" ) or m.serial in (SELECT cod_med FROM paquete_int pi,afiliados_pac_int ap,med_paq_int mp,contratacion cn where pi.id_paquete_int=ap.id_pac_int and pi.id_paquete_int=mp.cod_paq_int and cn.id_contratacion=pi.id_contratacion and cn.f_inicio<=curdate() and cn.f_fin>=curdate() "+sqcontrato2+" and serial_paciente='"+session.getAttribute("serial_pacinete")+"') ) "+where+"   ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;  // m.producto,m.atc,m.cum,m.cum,via_adimin,forma_farmaceutica,concat(m.cantidad,' ',m.unidad_medida)                          //group by m.producto,cod_atc,cod_dos,cod_tres,via_ad,forma_f,unioon 
       // System.out.println("datico |"+session.getAttribute("serial_pacinete")+"|");
                // System.out.println(strQuery);           
                             rs = conexiondb.Consulta(strQuery);
@@ -185,13 +185,13 @@
                                     json = json + "\n{";
                                     json = json + "\"id\":\""+rs.getInt("serial")+"\",";
                                     json = json + "\"cell\":["+rs.getInt("serial")+""; 
-                                    json = json + ",\""+rs.getString("cod_atc")+"\"";  
-                                    json = json + ",\""+coddos+"\"";  
-                                    json = json + ",\""+codtres+"\"";
-                                    json = json + ",\""+rs.getString("producto").replace("'","").replace("\"","")+"\"";  
-                                    json = json + ",\""+rs.getString("via_ad").replace("'","").replace("\"","")+"\"";  
-                                    json = json + ",\""+rs.getString("forma_f").replace("'","").replace("\"","")+"\"";  
-                                    json = json + ",\""+uni+"\"]";
+                                    json = json + ",\""+rs.getString("cum").replace("'","").replace("\"","").trim()+"\""; 
+                                    json = json + ",\""+rs.getString("descripcion_atc").replace("'","").replace("\"","").trim()+"\""; 
+                                    json = json + ",\""+rs.getString("descripcion_comercial").replace("'","").replace("\"","").trim()+"\"";
+                                    json = json + ",\""+rs.getString("via_ad").replace("'","").replace("\"","").trim()+"\"";  
+                                    json = json + ",\""+rs.getString("forma_f").replace("'","").replace("\"","").trim()+"\"";  
+                                    json = json + ",\""+uni+"\"";  
+                                    json = json + ",\""+rs.getString("producto").replace("'","").replace("\"","").trim()+"\"]";
                                     json = json + "}";
 
                                     rc=true;

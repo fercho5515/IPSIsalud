@@ -534,7 +534,7 @@
                 <td><label><b>SR: &nbsp;</b><% if(datos2[15]!=null && datos2[15].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
                 <td><label><b>SP: &nbsp;</b><% if(datos2[16]!=null && datos2[16].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
                 -->
-                <td><label><b>PDD: &nbsp;</b><% out.print(datos2[17]); %> </label></td>
+                <td><label><b>PPD: &nbsp;</b><% out.print(datos2[17]); %> </label></td>
                 <td><label><b>Resultado :&nbsp;</b><% out.print(datos2[18]); %> </label></td>
             </tr>
         </table>

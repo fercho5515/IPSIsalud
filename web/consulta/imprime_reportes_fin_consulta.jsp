@@ -69,7 +69,7 @@
             background: none repeat scroll 0 0 #FFFFFF;
             border: 1px solid #E5E5E5;
             height: 222px;
-            padding: 2px;//cuadrito de alrederos
+            padding: 2px;/*cuadrito de alrederos*/
             width: 220px;
             float:left;
             margin-left:10px;
@@ -140,6 +140,10 @@
             function soli_no_p(cod_r){
                         var numm= prompt("Introdusca numero para el reporte");
                         window.open("../reportes/no_pos/soli_no_pos.jsp?cod_sol="+cod_r+"&numero="+numm+"");                                  
+                                 }
+                                 
+            function histo_imp(cod_r){
+                        window.open("../reportes/reporte_consulta_med_ant/consulta_medica_ant.jsp?cod_con="+cod_r+"");                                  
                                  }
             
             $(function() { 
@@ -320,7 +324,7 @@
            
            
            
-           if(c_for>0 || c_lab>0 || c_img>0 || c_rem>0 || c_snp>0){
+         //  if(c_for>0 || c_lab>0 || c_img>0 || c_rem>0 || c_snp>0){
            %>
            <center><br><br><br><br><br><br>
                <h1>Consulta Guardada</h1>
@@ -354,17 +358,32 @@
                                             + "<img src='../imagenes/fotos/farmacia.png' alt='no pos' style='height:100px;width: auto'>"
                                + "</a></div>" 
                                + "</center>&nbsp;&nbsp;&nbsp;</td>");}
-                       %>        
+                       %>     
+                       
+                       
+                       
+                        <td>
+                            <center>
+                               <div class='element' style='height:100px;width: auto' onclick='histo_imp(<%= consu %>)'>
+                                   <a class='image4' href='#' style='position:relative;height:100px;width: auto'>
+                                        <div class='contenthover'><center><b>Consulta</b></center></div>
+                                        <img src='../imagenes/fotos/imagen5.png' alt='no pos' style='height:100px;width: auto'>
+                                   </a>
+                               </div>
+                            </center>
+                        </td>
+                       
+                       
                    </tr>
                </table>
            </center>           
            <%
-           }  
+      /*     }  
            else{
                   out.println("<script type='text/javascript' >"
                           + "location.href='../agenda_consulta.jsp'"
                           + "</script>"); 
-               }
+               }*/
         %>
         <br><br>
         <center><a href="../agenda_consulta.jsp" style="font-size:14px">Volver a la Agenda</a></center>
