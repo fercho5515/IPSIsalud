@@ -112,8 +112,8 @@
     if(control==1){
         
        try{
-             String r=new ruta().dir();
-             String nom=""+r+"/ISALUD/archivos/pacientes/"+archivo1;
+             String r=new ruta().dir(); 
+             String nom=""+r+"/archivos/pacientes/"+archivo1;
        
              BufferedReader x= new BufferedReader(new FileReader(nom));
              String linea=x.readLine();   
