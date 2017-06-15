@@ -21,7 +21,8 @@
          <link rel="shortcut icon" href="../../imagenes/fotos/favicon.ico">
          <style type="text/css">
              p {
-               font-size: 10px  
+               font-size: 10px;
+               margin: -1px 5px;
              }
              label {
                font-size: 10px  
@@ -37,7 +38,8 @@
              td {font-size: 9px}
              select{font-size: 9px}
              h3 {
-               font-size: 12px  
+               font-size: 12px;
+               margin: 2px;    
              }
          </style>
          <%
@@ -49,20 +51,88 @@
          conecta_bd ba = new conecta_bd();
          ba.ConectaDb(); 
          
-         String sqlt="select co.fecha as fecha,c.descripcion as descripcion from agenda a,procedimientos_tari p,cups c,consulta_medica co where co.id_consulta=a.id_consulta and a.id_procedimiento=p.idprocedimientos_tari and p.cod_cups=c.id_cups  and co.id_consulta = '"+codc+"' and (a.id_permiso='1' or a.id_permiso='2' or a.id_permiso='3');";
+          String sqlt="select co.fecha as fecha,c.descripcion as descripcion,DATE_FORMAT(co.fecha, '%Y-%m-%d') as fechac,a.id_paciente from agenda a,procedimientos_tari p,cups c,consulta_medica co where co.id_consulta=a.id_consulta and a.id_procedimiento=p.idprocedimientos_tari and p.cod_cups=c.id_cups  and co.id_consulta = '"+codc+"' and (a.id_permiso='1' or a.id_permiso='2' or a.id_permiso='3');";
          String tit="";
+         String fechacon="";
+         String id_paciente="";
             ResultSet resu0=null;
            try{  resu0=ba.consultas(sqlt);}
            catch(Exception e){}
            try{
 	        while (resu0.next()&&resu0!=null) {   
                         tit=""+resu0.getString(2)+" ingresada "+resu0.getString(1);//mot consulta
+                        fechacon = resu0.getString(3);
+                        id_paciente = resu0.getString(4);
                           }
               }
               catch(SQLException ex){}
               catch(Exception exe){}
              ba.cierraResultado(resu0);
             out.print("<title>"+tit+"</title>");
+            
+////////////////////////////////
+  
+        
+         String sql="select p_nom,s_nom,p_ape,s_ape,id_person,fecha_naci,pa.cod_estado_civil,nivel_sisben,pe.genero,pe.id_rh,";
+            sql=sql+"mu.descripcion, de.descripcion,barrio,pe.direccion,pe.email,pe.telefono,ne.descripcion,eps.nombre,nu_carnet,";
+            sql=sql+"pa.cod_zona,pe.foto,pa.id_orientacion,pa.vih,tu.descripcion,tid.descripcion  from personas pe, pacientes pa,departamento de, municipio mu,tipo_usuario tu,";
+            sql=sql+"nivel_educativo ne,eps,tipo_id tid where pa.serial_persona=pe.serial and pa.id_tipo_usuario=tu.id_tipo_usuario and  pe.serial='"+id_paciente+"' ";
+            sql=sql+"and tid.idtipo_id=pe.tipo_id ";
+            sql=sql+"and mu.id_muni=pe.id_muni and de.id_departo=pe.id_depto and mu.id_depto=de.id_departo ";
+            sql=sql+"and ne.id_nivel=pa.id_nivel_educativo ";
+            sql=sql+"and eps.ideps=pe.id_eps;";
+        
+            ResultSet resu=null;
+          try{  resu=ba.consultas(sql);}
+          catch(Exception e){}
+           
+          
+            String datos[]=new String[25];
+            
+            for(int i=0;i<25;i++){
+                datos[i]="";
+            }
+            
+         
+	try{
+	    while (resu.next()&&resu!=null) {   
+                         if(resu.getString(1)!=null){datos[0]=resu.getString(1);}//primer nonbre
+                         if(resu.getString(2)!=null){datos[1]=resu.getString(2);}//segundo nombre
+                         if(resu.getString(3)!=null){datos[2]=resu.getString(3);}//primer apellido
+                         if(resu.getString(4)!=null){datos[3]=resu.getString(4);}//segundo apellido
+                         if(resu.getString(5)!=null){datos[4]=resu.getString(5);}//cedula
+                         if(resu.getString(6)!=null){datos[5]=resu.getString(6);}//fecha nacimiento
+                         if(resu.getString(7)!=null){datos[6]=resu.getString(7);}//estado civil
+                         if(resu.getString(8)!=null){datos[7]=resu.getString(8);}//nivel sisven
+                         if(resu.getString(9)!=null){datos[8]=resu.getString(9);}//genero
+                         if(resu.getString(10)!=null){datos[9]=resu.getString(10);}//rh
+                         if(resu.getString(11)!=null){datos[10]=resu.getString(11);}//municipio
+                         if(resu.getString(12)!=null){datos[11]=resu.getString(12);}//departamento
+                         if(resu.getString(13)!=null){datos[12]=resu.getString(13);}//barrio
+                         if(resu.getString(14)!=null){datos[13]=resu.getString(14);}//direccion
+                         if(resu.getString(15)!=null){datos[14]=resu.getString(15);}//email
+                         if(resu.getString(16)!=null){datos[15]=resu.getString(16);}//telefono
+                         if(resu.getString(17)!=null){datos[16]=resu.getString(17);}//nivel educativo
+                         if(resu.getString(18)!=null){datos[17]=resu.getString(18);}//eps
+                         if(resu.getString(19)!=null){datos[18]=resu.getString(19);}//numero carnet
+                         if(resu.getString(20)!=null){datos[19]=resu.getString(20);}//zona
+                         if(resu.getString(21)!=null){datos[20]=resu.getString(21);}//foto
+                         if(resu.getString(22)!=null){datos[21]=resu.getString(22);}//orientacion sexual
+                         if(resu.getString(23)!=null){datos[22]=resu.getString(23);}//vih
+                         if(resu.getString(24)!=null){datos[23]=resu.getString(24);}//tipo usuario
+                         if(resu.getString(25)!=null){datos[24]=resu.getString(25);}//tipo identificacion
+                     }
+        }
+        catch(SQLException ex){}
+	catch(Exception exe){}
+         
+        
+            
+        ba.cierraResultado(resu); 
+
+
+
+
        %>
         
     </head>
@@ -358,7 +428,7 @@
                   + "<b>Codigo:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resud.getString(1)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> Diagnóstico:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resud.getString(2)+" <br>"
                   + "<b>Causa externa:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+resud.getString(5)+"   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> Tipo de diagnostico:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resud.getString(4)+" <br>"
                   + "<b>Comentario:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resud.getString(3)+""
-                  + " </p><br>");
+                  + " </p>");
                 
                         c=c+1;                        
                                                }
@@ -535,6 +605,260 @@
          ba.cierraResultado(resuf);
          
         %>
+            <center><h3 style="border: 1px solid;width:100%">Plan</h3></center>
+           <p  style='text-align:justify'><% out.print(datos2[13]); %> </p> 
+           
+           
+           
+           
+                      
+            <center><h3 style="border: 1px solid;width:100%">Antecedentes personales</h3></center>
+            <table style="width: 90%;">
+            <tr>
+                <td><b>Tipo</b></td>
+                <td><b>Antecedente</b></td>
+                <td><b>Comentario</b></td>
+                <td><b>Edad</b></td>
+            </tr>
+           <%
+               
+         sqlf="select a.id_antecedentes_personales,t.descripcion as d1 ,d.descripcion as d2,a.descripcion as d3,a.edad,a.fecha,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_personales a,tipo_antecedente t,descripcion_antecedente d where a.id_descri_antecedente=d.id_descri_antecedente and (a.id_permiso='3' || a.id_permiso='2' || a.id_permiso='1') and d.id_tipo_antecedente=t.serial and  a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"';";
+         resuf=null; 
+         try{  resuf=ba.consultas(sqlf);
+             while (resuf.next()&&resuf!=null) {
+                out.print("<tr>");
+                out.print("  <td>"+resuf.getString(2)+"</td>");
+                out.print("  <td>"+resuf.getString(3)+"</td>");
+                out.print("  <td>"+resuf.getString(4)+"</td>");
+                out.print("   <td>"+resuf.getString(5)+"</td>");
+                out.print(" </tr>");                            
+             }
+         }                       
+         catch(SQLException ex){}
+         catch(Exception exe){}
+         ba.cierraResultado(resuf);
+         
+        %>
+           
+            
+        </table>
+        
+           
+           <center><h3 style="border: 1px solid;width:100%">Antecedentes familiares</h3></center>
+            <table style="width: 90%;">
+            <tr>
+                <td><b>Parentesco</b></td>
+                <td><b>Tipo</b></td>
+                <td><b>Antecedente</b></td>
+                <td><b>Comentario</b></td>
+                <td><b>Vivo</b></td>
+            </tr>
+           <%
+               
+         sqlf="select a.id_antecedentes_familiares,p.descripcion as d1,t.descripcion as d2,d.descripcion as d3,a.descripcion as d4, a.vivo,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_familiares a,parentesco p,descripcion_antecedente d, tipo_antecedente t where a.id_parentesco=p.id_parentesco and  a.id_descri_antecedente=d.id_descri_antecedente and d.id_tipo_antecedente=t.serial and a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"' ;";
+         resuf=null; 
+         try{  resuf=ba.consultas(sqlf);
+             while (resuf.next()&&resuf!=null) {
+                out.print("<tr>");
+                out.print("  <td>"+resuf.getString(2)+"</td>");
+                out.print("  <td>"+resuf.getString(3)+"</td>");
+                out.print("  <td>"+resuf.getString(4)+"</td>");
+                out.print("   <td>"+resuf.getString(5)+"</td>");
+                out.print("   <td>"+resuf.getString(6)+"</td>");
+                out.print(" </tr>");                            
+             }
+         }                       
+         catch(SQLException ex){}
+         catch(Exception exe){}
+         ba.cierraResultado(resuf);
+         
+        %>
+           
+            
+        </table>  
+           
+         
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+   <%  
+if(datos[8].compareTo("Femenino")==0){
+     %>  
+     
+<td>    
+<%
+ String dato="select gestaciones,partos,cesaria,vaginales,abortos,ectopico,mueren,menarquia,fum,fup,panifica,cual,ultima_citologia,resultado from ante_obstreticos where id_historia_clinica='"+id_paciente+"' and id_consulta='"+codc+"';";
+ /// System.out.println("dfd=>"+dato);
+  String datosobst[]=new String[14];
+ for(int i=0;i<14;i++){datosobst[i]="";}
+ int b=0;
+  ResultSet resudat=null; 
+  resudat=ba.consultas(dato);
+  
+ 
+%>
+
+
+           <center><h3 style="border: 1px solid;width:100%">Antecedentes Obstetricos</h3></center>
+<%
+   try{
+      while (resudat.next()&&resudat!=null) { b++;
+         if(resudat.getString(1)!=null && resudat.getString(1).compareTo("null")!=0){datosobst[0]=""+resudat.getString(1);}
+         if(resudat.getString(2)!=null && resudat.getString(2).compareTo("null")!=0){datosobst[1]=""+resudat.getString(2);}
+         if(resudat.getString(3)!=null && resudat.getString(3).compareTo("null")!=0){datosobst[2]=""+resudat.getString(3);}
+         if(resudat.getString(4)!=null && resudat.getString(4).compareTo("null")!=0){datosobst[3]=""+resudat.getString(4);}
+         if(resudat.getString(5)!=null && resudat.getString(5).compareTo("null")!=0){datosobst[4]=""+resudat.getString(5);}
+         if(resudat.getString(6)!=null && resudat.getString(6).compareTo("null")!=0){datosobst[5]=""+resudat.getString(6);}
+         if(resudat.getString(7)!=null && resudat.getString(7).compareTo("null")!=0){datosobst[6]=""+resudat.getString(7);}
+         if(resudat.getString(8)!=null && resudat.getString(8).compareTo("null")!=0){datosobst[7]=""+resudat.getString(8);}
+         if(resudat.getString(9)!=null && resudat.getString(9).compareTo("null")!=0){datosobst[8]=""+resudat.getString(9);}
+         if(resudat.getString(10)!=null && resudat.getString(10).compareTo("null")!=0){datosobst[9]=""+resudat.getString(10);}
+         if(resudat.getString(11)!=null && resudat.getString(11).compareTo("null")!=0){datosobst[10]=""+resudat.getString(11);}
+         if(resudat.getString(12)!=null && resudat.getString(12).compareTo("null")!=0){datosobst[11]=""+resudat.getString(12);}
+         if(resudat.getString(13)!=null && resudat.getString(13).compareTo("null")!=0){datosobst[12]=""+resudat.getString(13);}
+         if(resudat.getString(14)!=null && resudat.getString(14).compareTo("null")!=0){datosobst[13]=""+resudat.getString(14);}
+         
+         %>
+<table width="100%">
+    <tr>
+        <td>
+            <label for="gestaciones">Gestaciones:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[0]); %></label>
+        </td>
+        <td>
+            <label for="partos">Partos:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[1]); %></label>
+        </td>
+        <td>
+            <label for="cesareas">Cesareas:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[2]); %></label>
+        </td>
+        <td>
+            <label for="vaginales">Vaginales:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[3]); %></label>
+        </td>
+    </tr>
+
+<!--segunda fila-->
+
+    <tr>
+        <td>
+            <label for="m">Muertos:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[6]); %></label>
+        </td>
+        <td>
+            <label for="abortos">Abortos:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[4]); %></label>
+        </td>
+        <td>
+            <label for="e">Ectopicos:</label>
+        </td>
+        <td>
+            <label ><% out.print(datosobst[5]); %></label>
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+    </tr>
+
+</table>
+
+
+<table style="width:  100%;">
+
+    <tr>
+        <td width="10%">
+            <label for="menarquia">Menarquia:</label>
+        </td>
+        <td width="19%">
+            <label ><% out.print(datosobst[7]); %></label>
+        </td>
+        <td width="13%">
+            <label for="fum">FUM:</label>
+        </td>
+        <td width="19%">
+            <label ><% out.print(datosobst[8]); %></label>
+        </td>
+        <td width="6%">
+            <label for="fup">FUP:</label>
+        </td>
+        <td  width="19%">
+            <label ><% out.print(datosobst[9]); %></label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6" style="text-align:left;">
+            <label for="metodo">Metodo Planificacion:</label>
+            <label><%
+                                  sql="select * from metodos_anticonceptivos order by id_met_anticon;";    
+                                    ResultSet resumac=ba.consultas(sql);
+                                    try{
+                                        while (resumac.next()&&resumac!=null) {  
+                                                  if(datosobst[11].compareTo(""+resumac.getString(1)+"")==0){out.print(""+resumac.getString(2)+"");}                                
+
+                                        }}
+                                    catch(SQLException e){}
+                                    catch(Exception ex){}
+                                    ba.cierraResultado(resumac);
+
+            %></label>
+        </td>
+    </tr>
+</table>
+
+<p style="    text-align: left;"><label>Ultima Citologia: </label><% out.print(datosobst[12]); %> </p>
+
+<p style="    text-align: left;"><label>Resultado: </label><% out.print(datosobst[13]); %> </p>
+
+           
+           
+           <%
+         
+         
+      }     
+  }
+  catch(SQLException e){}
+  catch(Exception ex){}
+  
+  try{  ba.cierraResultado(resudat);}catch(Exception ex){}
+   b++; 
+
+%>
+
+
+
+
+<% } %>
+           
+           
+           
+           
+           
+           
+           
             <center><h3 style="border: 1px solid;width:100%">Datos Profesional</h3></center>
            <p  style='text-align:justify'><b>Nombre:&nbsp;</b><% out.print(nombreprof); %>  &nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-left: 50px">Registro medico:&nbsp;</b><% out.print(registro_prof); %> </p> 
     
