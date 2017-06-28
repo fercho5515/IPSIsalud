@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55fa91cb-f71f-4665-a642-4d96a7403cd2">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="medico" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="permiso" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="titulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+      concat(a.hora,':',a.min,' ',a.am_pm) as horaa,
+      a.am_pm,
+      a.id_agenda,
+      p.serial,
+      p.id_person,
+      p.p_nom,
+      p.s_nom,
+      p.p_ape,
+      p.s_ape,
+      e.descripcion,
+      a.id_consulta,
+      a.num_autorizacion,
+      a.id_contrato,
+      medico.p_nom as pnomed,
+      medico.s_nom as snommed,
+      medico.p_ape as papemed,
+      medico.s_ape as sapemed,
+      empleados.tarjeta_prof,
+      empleados.firma
+from
+      agenda a,personas p,estado_cita e,
+     personas as medico,
+     empleados
+where
+     a.id_paciente=p.serial and
+     a.id_medico=$P{medico} and
+     a.id_permiso = $P{permiso} and
+     a.fecha =  $P{fecha}  and
+     e.id_estado_cita=a.id_estado and
+     empleados.serial_empleado=a.id_medico and
+     medico.serial = empleados.serial_empleado
+order by
+     am_pm,hora,min]]>
+	</queryString>
+	<field name="horaa" class="java.lang.String"/>
+	<field name="am_pm" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_agenda" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serial" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_person" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="p_nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="s_nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="p_ape" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="s_ape" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_consulta" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_autorizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_contrato" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pnomed" class="java.lang.String"/>
+	<field name="snommed" class="java.lang.String"/>
+	<field name="papemed" class="java.lang.String"/>
+	<field name="sapemed" class="java.lang.String"/>
+	<field name="tarjeta_prof" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="firma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="12" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="96" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1a9bd46b-ce24-4630-ab7e-2918693c4634" x="340" y="4" width="209" height="50"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="25f2029b-7cee-4770-a9dd-45e99218541e" x="1" y="1" width="250" height="50"/>
+				<imageExpression><![CDATA["imgrep/baner.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="dc4d6873-3ede-4ee0-bd86-d92f3b3a215d" x="94" y="37" width="30" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nit:"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0937ae6a-9c69-4b1e-b495-4347577e2546" x="300" y="15" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement uuid="d4c3f319-9e0c-4e80-86b2-0cd03b17da27" x="116" y="37" width="119" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["900409913-1"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="51e972ca-edd0-450a-9438-63d651c05bec" x="244" y="37" width="96" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["7294106"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="86c6745c-f2d8-42ea-b89b-89566cd7a7c8" x="279" y="15" width="1" height="20"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement uuid="9556171a-6521-47b4-9fd7-4cbc7ec0173e" x="256" y="15" width="90" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="06506532-ec9e-4739-a6cf-3a0fe73acaab" x="190" y="37" width="54" height="18"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Telefono:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7ae4bea9-188f-4ee7-bab0-e30c298a1430" x="10" y="60" width="150" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  DATOS DEL PROFESIONAL"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c6b188e1-a2b3-45df-a6d8-7e6d78f4798a" x="234" y="75" width="169" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tarjeta_prof}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="6a230e0f-fe22-4c32-b0e6-45e6985cf969" x="445" y="72" width="1" height="21"/>
+			</line>
+			<image onErrorType="Blank">
+				<reportElement uuid="130b1dd8-8462-423b-97c7-f5cb436f2254" x="446" y="65" width="104" height="26"/>
+				<imageExpression><![CDATA["../../"+$F{firma}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement uuid="20833dba-ca9d-41f5-be12-f90c6b20dda8" x="338" y="72" width="1" height="21"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement uuid="7d18236e-e979-4663-a3b6-1e2983004d34" x="6" y="60" width="548" height="33"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="22d691ba-d2c4-4f60-ae0e-595b1db1fed5" x="447" y="60" width="76" height="8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Firma"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="098d97af-cbd3-4a94-a1c0-b508bd76d477" x="10" y="75" width="291" height="13"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "+$F{pnomed}+" "+$F{snommed}+" "+$F{papemed}+" "+$F{sapemed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="feb5b5fe-b175-423b-8ca6-e51fde8391b1" x="233" y="60" width="158" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Registro profesional"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dcb8b209-67ae-4765-9aa4-2265a7c9af1f" x="11" y="60" width="188" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nombres y Apellidos"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f9ee916a-a408-4e4d-b33e-523bd242be6a" x="231" y="72" width="1" height="21"/>
+			</line>
+			<textField>
+				<reportElement uuid="e27f107f-6215-4d6a-a5cb-f8d0dbb2563b" x="340" y="60" width="104" height="8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sello"]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement uuid="cef2cfab-a109-4a8c-8ebc-85a391dc6089" x="444" y="65" width="104" height="26"/>
+				<imageExpression><![CDATA["../../"+$F{firma}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="5dc94d5c-31a4-45cd-864f-9d8f9d42e7b3" x="256" y="15" width="88" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="db3473e4-0a18-4a9d-9e7e-cfa7f367c35b" x="60" y="2" width="66" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identificación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7bebc644-2d5e-460e-98fe-fa4740faa58b" x="136" y="2" width="319" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b92f1ed-fced-4dac-bf98-77ba39616f5b" x="0" y="2" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9344093d-cbe4-4cf6-817d-2a347b463dd8" x="455" y="2" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="13f48305-4753-4eb6-ad4a-33e127cbd5e6" x="0" y="0" width="60" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{horaa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6448c083-940d-4424-86ec-5098f45e2ed1" x="60" y="0" width="66" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id_person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6dfa1ab1-0714-49cc-b510-9c2171924452" x="136" y="0" width="319" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{p_ape}+" "+$F{s_ape}+" "+$F{p_nom}+" "+$F{s_nom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5cc6e0b6-f78d-41b4-adad-9a76ec4a73cd" x="455" y="0" width="100" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[____________________]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1ae445cf-44b3-4710-83cf-2105e74f9aaf" x="199" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="a5869de7-abfa-439e-bcb1-bf95649e96d7" x="279" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="1" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
