@@ -400,7 +400,7 @@
             </tr>
             </table>
         
-           <center><h3 style="border: 1px solid;width:100%">Datos de Consulta</h3></center>
+           
           
           <!--  <p style='text-align:justify'><b>Signos Fisicos de Desnutricion</b></p> -->
             <%
@@ -496,38 +496,18 @@
                     else if(imc >= 40){est="Obeso tipo III";}
                      
             %>
-        <h3 >Acompañante</h3>
-        <p style='text-align:justify'><b>Nombre: &nbsp;</b><% out.print(datos2[32]); %></p>
-        <p style='text-align:justify'><b>Telefono: &nbsp;</b><% out.print(datos2[33]); %></p>
+        <h3 style='text-align:justify'>Acompañante</h3>
+        <p style='text-align:justify;float: left'><b>Nombre: &nbsp;</b><% out.print(datos2[32]); %></p>
+        <p style='text-align:justify;float: left'><b>Telefono: &nbsp;</b><% out.print(datos2[33]); %></p><br>
         
-         <center><h3 style="border: 1px solid;width:100%">Antecedentes</h3></center>
-        <table style="width:90%">
-            <tr>
-                <td><label><b>Fecha diagnostico: &nbsp;</b><% out.print(datos2[19]); %></label></td>
-                <td><label><b>Estadio inicial: &nbsp;</b><% out.print(datos2[20]); %></label></td>
-                <td><label><b>Estadio Actual: &nbsp;</b><% out.print(datos2[21]); %> </label></td>
-            </tr>
-            <tr>
-                <td colspan="3"><label><b>Infecciones Oportunistas: &nbsp;</b><% out.print(datos2[22]); %></label></td>
-            </tr>
-        </table>
-        
-        
-           
-        <center><h3 style="border: 1px solid;width:100%">Sintomatico</h3></center>
-        
-        <table style="width:90%">
-            <tr>
-                <td><label><b>Sintomático de piel: &nbsp;</b><% if(datos2[34]!=null && datos2[34].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-                <td><label><b>Sintomático respiratorio: &nbsp;</b><% if(datos2[35]!=null && datos2[35].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-            </tr>
-        </table>
-        
-        
-        
+        <center><h3 style="border: 1px solid;width:100%">Datos de Consulta</h3></center>
+        <!--1.)Anamnesis-->
+                
         <center><h3 style="border: 1px solid;width:100%">Anamnesis</h3></center>
         <p style='text-align:justify'><b>Motivo de Consulta: &nbsp;</b><% out.print(datos2[0]); %></p>
         <p style='text-align:justify'><b>Enfermedad Actual: &nbsp;</b><% out.print(datos2[1]); %></p>
+        
+        <!--2.) Revision por sistemas-->
         
         <center><h3 style="border: 1px solid;width:100%">Revision Por Sistemas</h3></center>
         
@@ -545,28 +525,95 @@
             </tr>
         </table>
         
-        <center><h3 style="border: 1px solid;width:100%">RECOMENDACIONES</h3></center>
+        <!--3.) Antecedentes-->
+        <center><h3 style="border: 1px solid;width:100%">Antecedentes</h3></center>
+        <table style="width:90%">
+            <tr>
+                <td><label><b>Fecha diagnostico: &nbsp;</b><% out.print(datos2[19]); %></label></td>
+                <td><label><b>Estadio inicial: &nbsp;</b><% out.print(datos2[20]); %></label></td>
+                <td><label><b>Estadio Actual: &nbsp;</b><% out.print(datos2[21]); %> </label></td>
+            </tr>
+            <tr>
+                <td colspan="3"><label><b>Infecciones Oportunistas: &nbsp;</b><% out.print(datos2[22]); %></label></td>
+            </tr>
+        </table>
+        <!--4.)Antecendertes personales-->
+                    <center><h3 style="border: 1px solid;width:100%">Antecedentes personales</h3></center>
+            <table style="width: 90%;">
+            <tr>
+                <td><b>Tipo</b></td>
+                <td><b>Antecedente</b></td>
+                <td><b>Comentario</b></td>
+                <td><b>Edad</b></td>
+            </tr>
+           <%
+         ResultSet resuf=null; 
+         String sqlf="select a.id_antecedentes_personales,t.descripcion as d1 ,d.descripcion as d2,a.descripcion as d3,a.edad,a.fecha,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_personales a,tipo_antecedente t,descripcion_antecedente d where a.id_descri_antecedente=d.id_descri_antecedente and (a.id_permiso='3' || a.id_permiso='2' || a.id_permiso='1') and d.id_tipo_antecedente=t.serial and  a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"';";
+         resuf=null; 
+         try{  resuf=ba.consultas(sqlf);
+             while (resuf.next()&&resuf!=null) {
+                out.print("<tr>");
+                out.print("  <td>"+resuf.getString(2)+"</td>");
+                out.print("  <td>"+resuf.getString(3)+"</td>");
+                out.print("  <td>"+resuf.getString(4)+"</td>");
+                out.print("   <td>"+resuf.getString(5)+"</td>");
+                out.print(" </tr>");                            
+             }
+         }                       
+         catch(SQLException ex){}
+         catch(Exception exe){}
+         ba.cierraResultado(resuf);
+         
+        %>
+           
+            
+        </table>
+        
+           
+           <center><h3 style="border: 1px solid;width:100%">Antecedentes familiares</h3></center>
+            <table style="width: 90%;">
+            <tr>
+                <td><b>Parentesco</b></td>
+                <td><b>Tipo</b></td>
+                <td><b>Antecedente</b></td>
+                <td><b>Comentario</b></td>
+                <td><b>Vivo</b></td>
+            </tr>
+           <%
+               
+         sqlf="select a.id_antecedentes_familiares,p.descripcion as d1,t.descripcion as d2,d.descripcion as d3,a.descripcion as d4, a.vivo,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_familiares a,parentesco p,descripcion_antecedente d, tipo_antecedente t where a.id_parentesco=p.id_parentesco and  a.id_descri_antecedente=d.id_descri_antecedente and d.id_tipo_antecedente=t.serial and a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"' ;";
+         resuf=null; 
+         try{  resuf=ba.consultas(sqlf);
+             while (resuf.next()&&resuf!=null) {
+                out.print("<tr>");
+                out.print("  <td>"+resuf.getString(2)+"</td>");
+                out.print("  <td>"+resuf.getString(3)+"</td>");
+                out.print("  <td>"+resuf.getString(4)+"</td>");
+                out.print("   <td>"+resuf.getString(5)+"</td>");
+                out.print("   <td>"+resuf.getString(6)+"</td>");
+                out.print(" </tr>");                            
+             }
+         }                       
+         catch(SQLException ex){}
+         catch(Exception exe){}
+         ba.cierraResultado(resuf);
+         
+        %>
+           
+            
+        </table>  
+           
+
+        <!--6.)Sintomatico-->   
+        <center><h3 style="border: 1px solid;width:100%">Sintomatico</h3></center>
         
         <table style="width:90%">
             <tr>
-                <td><label><b>Auto cuidado: &nbsp;</b><% if(datos2[24]!=null && datos2[24].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-                <td><label><b>Alimentación: &nbsp;</b><% if(datos2[25]!=null && datos2[25].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-                <td><label><b>Signos de Alarma: &nbsp;</b><% if(datos2[26]!=null && datos2[26].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-            </tr>
-            <tr>
-                <td><label><b>Cuidados generales: &nbsp;</b><% if(datos2[27]!=null && datos2[27].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
-                <td><label><b>Adherencia: &nbsp;</b><% if(datos2[28]!=null && datos2[28].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Sintomático de piel: &nbsp;</b><% if(datos2[34]!=null && datos2[34].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Sintomático respiratorio: &nbsp;</b><% if(datos2[35]!=null && datos2[35].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
             </tr>
         </table>
-        
-        
-        
-        <center><h3 style="border: 1px solid;width:100%">Conducta</h3></center>
-        <p style='text-align:justify'><% out.print(datos2[36]); %></p>
-        
-        
-        
-        
+        <!--7.)Examen Fisico-->
         <center><h3 style="border: 1px solid;width:100%">Examen Fisico</h3></center>
         <table style="width:90%">
             <tr>
@@ -582,7 +629,7 @@
                 <td><label><b>Estado Nutricional: &nbsp;</b><% out.println(est); %> </label></td>
             </tr>
         </table>
-        
+        <!--8.)Examen Cefalocaudal-->
         <center><h3 style="border: 1px solid;width:100%">Examen Cefalocaudal</h3></center>
        
         <%  
@@ -616,8 +663,8 @@
                                                                                      }
          %>
          
-         
-         
+        <!--9.)Diagnosticos-->
+                 
         <center><h3 style="border: 1px solid;width:100%">Diagnósticos</h3></center>
         <center>
         <%
@@ -648,6 +695,26 @@
          ba.cierraResultado(resud);
         %>
         
+        <!--10.)Recomendaciones-->
+        <center><h3 style="border: 1px solid;width:100%">RECOMENDACIONES</h3></center>
+        
+        <table style="width:90%">
+            <tr>
+                <td><label><b>Auto cuidado: &nbsp;</b><% if(datos2[24]!=null && datos2[24].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Alimentación: &nbsp;</b><% if(datos2[25]!=null && datos2[25].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Signos de Alarma: &nbsp;</b><% if(datos2[26]!=null && datos2[26].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+            </tr>
+            <tr>
+                <td><label><b>Cuidados generales: &nbsp;</b><% if(datos2[27]!=null && datos2[27].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+                <td><label><b>Adherencia: &nbsp;</b><% if(datos2[28]!=null && datos2[28].equals("0")){out.print("NO");}else{out.print("SI");} %></label></td>
+            </tr>
+        </table>
+        
+        <!--11.)Conducta-->        
+        <center><h3 style="border: 1px solid;width:100%">Conducta</h3></center>
+        <p style='text-align:justify'><% out.print(datos2[36]); %></p>
+        
+        <!--12.)Incapacidad-->        
         <center><h3 style="border: 1px solid;width:100%">Incapacidad</h3></center>
         <p style='text-align:justify'><b><% if(datos2[29]!=null &&  datos2[29].equals("1")){out.print("SI");}else{out.print("NO");} %> &nbsp;</b><% out.print(datos2[31]); %></p>
         
@@ -658,12 +725,9 @@
                 out.print("<center><h3 style='border: 1px solid;width:100%'>Plan</h3></center>");  
                  out.print("<p  style='text-align:justify'>"+datos2[13]+"</p>");
                                                                                      }
-         
-         
-         
-         String sqlf="select m.atc as cod_atc,m.producto,m.via_adimin as via_ad,m.forma_farmaceutica as forma_f,concat(m.cantidad,' ',m.unidad_medida) as unioon,fo.cantidad,fo.tiempo_tratamiento,fo.posologia,fo.sub_cie10 from formula_medica fo, medicamentos m where fo.cod_medicamento=m.serial and fo.id_consulta='"+codc+"' ORDER BY fo.serial";
+         sqlf="select m.atc as cod_atc,m.producto,m.via_adimin as via_ad,m.forma_farmaceutica as forma_f,concat(m.cantidad,' ',m.unidad_medida) as unioon,fo.cantidad,fo.tiempo_tratamiento,fo.posologia,fo.sub_cie10 from formula_medica fo, medicamentos m where fo.cod_medicamento=m.serial and fo.id_consulta='"+codc+"' ORDER BY fo.serial";
          int ifo=0;
-         ResultSet resuf=null;
+         resuf=null;
          try{  resuf=ba.consultas(sqlf);
              while (resuf.next()&&resuf!=null) { 
                                              if(ifo==0){ifo=1;out.print("<center><h3 style='border: 1px solid;width:100%'>Formula Medica</h3></center>  <center>");}
@@ -817,83 +881,7 @@
             <center><h3 style="border: 1px solid;width:100%">Plan</h3></center>
            <p  style='text-align:justify'><% out.print(datos2[13]); %> </p> 
            
-            <center><h3 style="border: 1px solid;width:100%">Antecedentes personales</h3></center>
-            <table style="width: 90%;">
-            <tr>
-                <td><b>Tipo</b></td>
-                <td><b>Antecedente</b></td>
-                <td><b>Comentario</b></td>
-                <td><b>Edad</b></td>
-            </tr>
-           <%
-               
-         sqlf="select a.id_antecedentes_personales,t.descripcion as d1 ,d.descripcion as d2,a.descripcion as d3,a.edad,a.fecha,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_personales a,tipo_antecedente t,descripcion_antecedente d where a.id_descri_antecedente=d.id_descri_antecedente and (a.id_permiso='3' || a.id_permiso='2' || a.id_permiso='1') and d.id_tipo_antecedente=t.serial and  a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"';";
-         resuf=null; 
-         try{  resuf=ba.consultas(sqlf);
-             while (resuf.next()&&resuf!=null) {
-                out.print("<tr>");
-                out.print("  <td>"+resuf.getString(2)+"</td>");
-                out.print("  <td>"+resuf.getString(3)+"</td>");
-                out.print("  <td>"+resuf.getString(4)+"</td>");
-                out.print("   <td>"+resuf.getString(5)+"</td>");
-                out.print(" </tr>");                            
-             }
-         }                       
-         catch(SQLException ex){}
-         catch(Exception exe){}
-         ba.cierraResultado(resuf);
-         
-        %>
-           
-            
-        </table>
-        
-           
-           <center><h3 style="border: 1px solid;width:100%">Antecedentes familiares</h3></center>
-            <table style="width: 90%;">
-            <tr>
-                <td><b>Parentesco</b></td>
-                <td><b>Tipo</b></td>
-                <td><b>Antecedente</b></td>
-                <td><b>Comentario</b></td>
-                <td><b>Vivo</b></td>
-            </tr>
-           <%
-               
-         sqlf="select a.id_antecedentes_familiares,p.descripcion as d1,t.descripcion as d2,d.descripcion as d3,a.descripcion as d4, a.vivo,a.id_empleado,a.id_consulta,a.id_permiso from antecedentes_familiares a,parentesco p,descripcion_antecedente d, tipo_antecedente t where a.id_parentesco=p.id_parentesco and  a.id_descri_antecedente=d.id_descri_antecedente and d.id_tipo_antecedente=t.serial and a.id_consulta='"+codc+"' and a.id_historia_clinica='"+id_paciente+"' ;";
-         resuf=null; 
-         try{  resuf=ba.consultas(sqlf);
-             while (resuf.next()&&resuf!=null) {
-                out.print("<tr>");
-                out.print("  <td>"+resuf.getString(2)+"</td>");
-                out.print("  <td>"+resuf.getString(3)+"</td>");
-                out.print("  <td>"+resuf.getString(4)+"</td>");
-                out.print("   <td>"+resuf.getString(5)+"</td>");
-                out.print("   <td>"+resuf.getString(6)+"</td>");
-                out.print(" </tr>");                            
-             }
-         }                       
-         catch(SQLException ex){}
-         catch(Exception exe){}
-         ba.cierraResultado(resuf);
-         
-        %>
-           
-            
-        </table>  
-           
-         
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
+       
    <%  
 if(datos[8].compareTo("Femenino")==0){
      %>  
@@ -1058,23 +1046,7 @@ if(datos[8].compareTo("Femenino")==0){
 
 <% } %>
            
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-            <center><h3 style="border: 1px solid;width:100%">Datos Profesional</h3></center>
+           <center><h3 style="border: 1px solid;width:100%">Datos Profesional</h3></center>
            <p  style='text-align:justify'><b>Nombre:&nbsp;</b><% out.print(nombreprof); %>  &nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-left: 50px">Registro medico:&nbsp;</b><% out.print(registro_prof); %> </p> 
     
            
