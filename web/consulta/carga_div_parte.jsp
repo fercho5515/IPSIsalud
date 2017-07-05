@@ -22,7 +22,7 @@
          conecta_bd ba = new conecta_bd();
          ba.ConectaDb(); 
          
-         String sql="select id_parte,descripcion from partes_cuerpo where id_parte not in (select id_parte from ex_cefalocaudal where id_consulta='"+session.getAttribute("serial_consulta")+"' );";
+         String sql="select id_parte,descripcion from partes_cuerpo where id_parte not in (select id_parte from ex_cefalocaudal where id_consulta='"+session.getAttribute("serial_consulta")+"' )  order by orden asc;";
        
             ResultSet resu=null;
            // int bandera=0;
