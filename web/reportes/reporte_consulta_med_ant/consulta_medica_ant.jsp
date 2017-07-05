@@ -1,7 +1,7 @@
 <%-- 
     Document   : consulta_medica_ant
     Created on : 8/11/2013, 12:34:07 PM
-    Author     : Emmanuel
+    Author     : Fercho
 --%>
 
 
@@ -1050,7 +1050,7 @@ if(datos[8].compareTo("Femenino")==0){
            <p  style='text-align:justify'><b>Nombre:&nbsp;</b><% out.print(nombreprof); %>  &nbsp;&nbsp;&nbsp;&nbsp;<b style="padding-left: 50px">Registro medico:&nbsp;</b><% out.print(registro_prof); %> </p> 
     
            
-           <% ba.cerrar(); %>    
+           <% ba.cerrar(); %>     
     </body>
 </html>
 
