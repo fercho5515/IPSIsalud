@@ -710,12 +710,17 @@ color:#FFFFFF;
                   String  sqqllfin="select id_finalidad_consulta,descripcion from finalidad_consulta";
        
            ResultSet ressuu2fin=null;
+           int control=0;
+           
           try{  
            ressuu2fin=ba.consultas(sqqllfin);
           
            while (ressuu2fin.next()&&ressuu2fin!=null) { 
-                  if(ressuu2fin.getString(1).compareTo(datosc[14])==0){ out.println("<option value='"+ressuu2fin.getString(1)+"' SELECTED>"+ressuu2fin.getString(2)+"</option>");}
-                  else{ out.println("<option value='"+ressuu2fin.getString(1)+"'>"+ressuu2fin.getString(2)+"</option>");}
+               
+                  if(ressuu2fin.getString(1).compareTo(datosc[14])==0){ 
+                      out.println("<option value='"+ressuu2fin.getString(1)+"' SELECTED>"+ressuu2fin.getString(2)+"</option>");
+                      control=1;
+                  }else{ out.println("<option value='"+ressuu2fin.getString(1)+"'>"+ressuu2fin.getString(2)+"</option>");}
                                                          }
               }
         catch(SQLException ex){}
@@ -725,6 +730,11 @@ color:#FFFFFF;
                     
                  %>
              </select> 
+             <% if(control == 0){ %>
+             <script type="text/javascript">
+                 $("#finalidad_conculta_c_med").val(10);
+             </script>
+             <% } %>
 </fieldset>
 
 <fieldset>
@@ -913,8 +923,8 @@ color:#FFFFFF;
 </table>
 <br>
 <% if("3".compareTo(""+(String)session.getAttribute("permiso")+"")!=0){ 
-out.print("<label for='aspectogeneral'>Aspecto General:</label><br>");
-out.print("<textarea name='aspectogeneral' rows='3' style='width:99%'>"+datosc[10]+"</textarea>");
+//out.print("<label for='aspectogeneral'>Aspecto General:</label><br>");
+//out.print("<textarea name='aspectogeneral' rows='3' style='width:99%'>"+datosc[10]+"</textarea>");
  } %>
 
  
@@ -935,7 +945,7 @@ out.print("<textarea name='aspectogeneral' rows='3' style='width:99%'>"+datosc[1
         <%
         
               
-         String sql="select id_parte,descripcion from partes_cuerpo where id_parte not in (select id_parte from ex_cefalocaudal where id_consulta='"+session.getAttribute("serial_consulta")+"');";
+         String sql="select id_parte,descripcion from partes_cuerpo where id_parte not in (select id_parte from ex_cefalocaudal where id_consulta='"+session.getAttribute("serial_consulta")+"') order by orden asc;";
        
          ResultSet resu=null;
           try{  

@@ -114,7 +114,7 @@
       if(temperatura==null || temperatura.compareTo("null")==0 || temperatura.compareTo("")==0 ){mensaje=mensaje+"<label>Temperatura es obligatoria</label><br>";acepta=1;}      
       if(peso==null || peso.compareTo("null")==0 || peso.compareTo("")==0 ){mensaje=mensaje+"<label>Peso es obligatorio</label><br>";acepta=1;}      
       if(talla==null || talla.compareTo("null")==0 || talla.compareTo("")==0 ){mensaje=mensaje+"<label>Talla es obligatoria</label><br>";acepta=1;}      
-      if((conducta_recomen==null || conducta_recomen.compareTo("null")==0 || conducta_recomen.compareTo("")==0)&&(permiso==1 || permiso==2) ){mensaje=mensaje+"<label>Aspecto general es obligatorio</label><br>";acepta=1;}      
+     // if((conducta_recomen==null || conducta_recomen.compareTo("null")==0 || conducta_recomen.compareTo("")==0)&&(permiso==1 || permiso==2) ){mensaje=mensaje+"<label>Aspecto general es obligatorio</label><br>";acepta=1;}      
       if((paraclinicos==null || paraclinicos.compareTo("null")==0 || paraclinicos.compareTo("")==0)&& permiso==3 ){mensaje=mensaje+"<label>Paraclinicos es obligatorio</label><br>";acepta=1;}      
       if((subjetivo==null || subjetivo.compareTo("null")==0 || subjetivo.compareTo("")==0)&& permiso==3 ){mensaje=mensaje+"<label>Subjetivo es obligatorio</label><br>";acepta=1;}
       if((plan==null || plan.compareTo("null")==0 || plan.compareTo("")==0)&& permiso==3 ){mensaje=mensaje+"<label>Plan es obligatorio</label><br>";acepta=1;}
