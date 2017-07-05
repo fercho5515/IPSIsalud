@@ -2,7 +2,7 @@
 <%-- 
     Document   : contenedor_consulta
     Created on : 20/02/2013, 11:24:27 AM
-    Author     : EMMANUEL
+    Author     : FERCHO
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
