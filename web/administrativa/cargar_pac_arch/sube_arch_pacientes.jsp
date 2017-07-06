@@ -122,6 +122,8 @@
                       
                try{
                    ba.transaccion("SET SQL_SAFE_UPDATES=0;");
+                                     out.print("hola");      
+
                    ba.transaccion("UPDATE `ips_isalud`.`pacientes` SET `activo`='0' WHERE `serial_persona` in (select serial_paciente from afiliados_cont where id_cont="+id_contratacion+")");                     
                    ba.transaccion("UPDATE `ips_isalud`.`afiliados_cont` SET `activo`='0' WHERE `id_cont`="+id_contratacion+"");
                    }
@@ -162,10 +164,10 @@
                             else{genero="Femenino";}
                             if(datosli[0]==null || datosli[0].compareTo("")==0 || datosli[0].compareTo("null")==0  ){eps="'-1'";}
                             else{eps="'"+datosli[0]+"'";}
-                        
                 try{ ba.transaccion("INSERT INTO `ips_isalud`.`personas` (`id_person`, `tipo_id`, `p_nom`, `s_nom`, `p_ape`, `s_ape`, `email`, `telefono`, `id_muni`, `direccion`, `genero`, `fecha_naci`, `id_rh`, `foto`, `barrio`, `id_eps`, `id_depto`) VALUES ('"+datosli[2]+"','"+datosli[1]+"', '"+datosli[5]+"', '"+datosli[6]+"', '"+datosli[3]+"', '"+datosli[4]+"', '', '','"+datosli[10]+"', '"+datosli[16]+"', '"+genero+"', '"+fecha+"','1', '', '',"+id_eps+",'"+datosli[9]+"');");
                 out.print("INSERT INTO `ips_isalud`.`personas` (`id_person`, `tipo_id`, `p_nom`, `s_nom`, `p_ape`, `s_ape`, `email`, `telefono`, `id_muni`, `direccion`, `genero`, `fecha_naci`, `id_rh`, `foto`, `barrio`, `id_eps`, `id_depto`) VALUES ('"+datosli[2]+"','"+datosli[1]+"', '"+datosli[5]+"', '"+datosli[6]+"', '"+datosli[3]+"', '"+datosli[4]+"', '', '','"+datosli[10]+"', '"+datosli[16]+"', '"+genero+"', '"+fecha+"','1', '', '',"+id_eps+",'"+datosli[9]+"');");
                 }
+                
                 catch(Exception exe){	}    
 
                             ResultSet resu=null;   
