@@ -35,7 +35,9 @@
     
     <%
      String id_contratacion="";
-     String id_eps="";                       
+     String id_eps="";  
+     
+             String r=new ruta().dir(); 
                     
                 Calendar cal1 = Calendar.getInstance();
 	            String dia=""+cal1.get(Calendar.DATE)+"";
@@ -56,7 +58,8 @@
               
                 String ruta="";
                 String destination="archivos/pacientes/";
-                String destinationRealPath = application.getRealPath(destination);
+                //String destinationRealPath = application.getRealPath(destination);
+                String destinationRealPath = r+"/"+destination;
                 DiskFileItemFactory factory=new DiskFileItemFactory();
                 factory.setSizeThreshold (1024);
                 factory.setRepository (new File(destinationRealPath));
@@ -106,13 +109,14 @@
             }
             catch(FileUploadException e){ control=0;
                 out.write("<p>Error al cargar archivo "+e.getMessage()+"</p>");
+              //  System.out.println("error 1 "+e);
             }
     int sera=0;
 
     if(control==1){
         
        try{
-             String r=new ruta().dir(); 
+             //String r=new ruta().dir(); 
              String nom=""+r+"/archivos/pacientes/"+archivo1;
        
              BufferedReader x= new BufferedReader(new FileReader(nom));
@@ -125,12 +129,14 @@
                    ba.transaccion("UPDATE `ips_isalud`.`pacientes` SET `activo`='0' WHERE `serial_persona` in (select serial_paciente from afiliados_cont where id_cont="+id_contratacion+")");                     
                    ba.transaccion("UPDATE `ips_isalud`.`afiliados_cont` SET `activo`='0' WHERE `id_cont`="+id_contratacion+"");
                    }
-               catch(Exception ede){}
+               catch(Exception ede){
+               // System.out.println("error 2 "+ede);
+               }
              while(linea!=null){ 
                      try{
                     //Utilizamos el separador para los datos
                     String[] datosli=null;
-                    datosli = linea.split(",");
+                    datosli = linea.split(";");
                     //Presentamos los datos
                     
                   
@@ -164,22 +170,28 @@
                             else{eps="'"+datosli[0]+"'";}
                         
                 try{ ba.transaccion("INSERT INTO `ips_isalud`.`personas` (`id_person`, `tipo_id`, `p_nom`, `s_nom`, `p_ape`, `s_ape`, `email`, `telefono`, `id_muni`, `direccion`, `genero`, `fecha_naci`, `id_rh`, `foto`, `barrio`, `id_eps`, `id_depto`) VALUES ('"+datosli[2]+"','"+datosli[1]+"', '"+datosli[5]+"', '"+datosli[6]+"', '"+datosli[3]+"', '"+datosli[4]+"', '', '','"+datosli[10]+"', '"+datosli[16]+"', '"+genero+"', '"+fecha+"','1', '', '',"+id_eps+",'"+datosli[9]+"');");
-                out.print("INSERT INTO `ips_isalud`.`personas` (`id_person`, `tipo_id`, `p_nom`, `s_nom`, `p_ape`, `s_ape`, `email`, `telefono`, `id_muni`, `direccion`, `genero`, `fecha_naci`, `id_rh`, `foto`, `barrio`, `id_eps`, `id_depto`) VALUES ('"+datosli[2]+"','"+datosli[1]+"', '"+datosli[5]+"', '"+datosli[6]+"', '"+datosli[3]+"', '"+datosli[4]+"', '', '','"+datosli[10]+"', '"+datosli[16]+"', '"+genero+"', '"+fecha+"','1', '', '',"+id_eps+",'"+datosli[9]+"');");
+               // out.print("INSERT INTO `ips_isalud`.`personas` (`id_person`, `tipo_id`, `p_nom`, `s_nom`, `p_ape`, `s_ape`, `email`, `telefono`, `id_muni`, `direccion`, `genero`, `fecha_naci`, `id_rh`, `foto`, `barrio`, `id_eps`, `id_depto`) VALUES ('"+datosli[2]+"','"+datosli[1]+"', '"+datosli[5]+"', '"+datosli[6]+"', '"+datosli[3]+"', '"+datosli[4]+"', '', '','"+datosli[10]+"', '"+datosli[16]+"', '"+genero+"', '"+fecha+"','1', '', '',"+id_eps+",'"+datosli[9]+"');");
                 }
-                catch(Exception exe){	}    
+                catch(Exception exe){	
+               // System.out.println("error 3 "+exe);
+                }    
 
                             ResultSet resu=null;   
                 try{  resu=ba.consultas("select serial from personas where id_person='"+datosli[2]+"'  and tipo_id='"+datosli[1]+"'");
                      while (resu.next()&&resu!=null) { serial=resu.getString(1); }
                    }                      
-                catch(Exception exe){}	
+                catch(Exception exe){
+                //System.out.println("error 4 "+exe);
+                }	
                 ba.cierraResultado(resu);	 
 
                 try{ if(ba.transaccion("INSERT INTO `ips_isalud`.`pacientes` (`serial_persona`, `cod_estado_civil`, `id_nivel_educativo`, `fecha_afi`, `nivel_sisben`, `cod_modalidad`, `idtpob`, `nu_carnet`, `fosiga`, `estado_fosiga`, `cod_zona`, `embarazo_activo`, `id_orientacion`, `id_tipo_usuario`, `vih`, `nomips`, `activo`) VALUES ('"+serial+"','1','1', '"+fecha2+"','"+datosli[14]+"','"+datosli[15]+"','"+datosli[13]+"','"+datosli[17]+"','"+datosli[18]+"','"+datosli[19]+"',"+zona+",'0','1','2','Negativo','"+datosli[20]+"','1');")==false){
                         ba.transaccion("UPDATE `ips_isalud`.`pacientes` SET `activo`='1' WHERE `serial_persona`='"+serial+"';");
                                                         } 
                    }
-                catch(Exception exe){}  
+                catch(Exception exe){
+               // System.out.println("error 5 "+exe);
+                }  
                 
                 /////////////////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////
@@ -197,18 +209,25 @@
                               ba.transaccion(sqlll2);  }
                         
                     
-                } catch (Exception e) {}                
+                } catch (Exception e) {
+              //  System.out.println("error 6 "+e);
+                }                
                 
                 
                 
-              } catch(Exception exep){}
+              } catch(Exception exep){
+                 
+              //  System.out.println("error 7 "+exep);
+              }
                 
                 linea=x.readLine();                 
                 }  
             x.close();    
             }
             catch(Exception e){sera=1;
-                out.println("<br> ee: "+e);
+                //out.println("<br> ee: "+e);
+                
+               // System.out.println("error 8 "+e);
              }
     if(sera==0){     
      out.print("<center><h1 style='color:green'>Proceso Finalizado</h1></center>");
