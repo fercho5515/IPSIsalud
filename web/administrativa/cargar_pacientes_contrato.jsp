@@ -124,7 +124,7 @@
                                 start = 0;
                             }
 
-                            strQuery = "select serial,id_person,p_nom,s_nom,p_ape,s_ape from personas pe,pacientes pa,afiliados_cont ac where pe.serial=pa.serial_persona and ac.serial_paciente=pa.serial_persona and ac.id_cont='"+session.getAttribute("id_contratacion")+"' "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
+                            strQuery = "select serial,id_person,p_nom,s_nom,p_ape,s_ape,ac.activo from personas pe,pacientes pa,afiliados_cont ac where pe.serial=pa.serial_persona and ac.serial_paciente=pa.serial_persona and ac.id_cont='"+session.getAttribute("id_contratacion")+"' "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
                           //  System.out.println(strQuery);
                             
                             rs = conexiondb.Consulta(strQuery);
@@ -159,7 +159,8 @@
                                 json = json + ",\""+rs.getString("p_nom")+"\"";
                                 json = json + ",\""+rs.getString("s_nom")+"\"";
                                 json = json + ",\""+rs.getString("p_ape")+"\"";
-                                json = json + ",\""+rs.getString("s_ape")+"\"]";
+                                 json = json + ",\""+rs.getString("s_ape")+"\"";
+                                json = json + ",\""+rs.getString("ac.activo")+"\"]";
                                 json = json + "}";
                                 rc=true;
                             }

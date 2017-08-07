@@ -1,5 +1,3 @@
-<!--hola mundo citas1-->
-
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pac.conecta_bd"%>
@@ -38,18 +36,18 @@
             colModel:[
                 {name:'ida',index:'ida', width:(anchoPantalla*0.30*0.1),hidden:true,search:true,editable: true,editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'proc',index:'proc',width:180,hidden:true,editable: false,required : true,editoptions:{maxlength: 63}},
-                {name:'descr',index:'descr',width:(anchoPantalla*0.30*0.67),editable: false,required : true,editoptions:{maxlength: 63}},
+                {name:'descr',index:'descr',width:(anchoPantalla*0.30*0.67),search:true,editable: false,required : true,editoptions:{maxlength: 63}},
                 {name:'hora',index:'hora', width:(anchoPantalla*0.30*0.13),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'fecha',index:'fecha', width:(anchoPantalla*0.30*0.17),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'serial',index:'serial', width:(anchoPantalla*0.30*0.1),hidden:true,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:3,
-            rowList:[3,5],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pagercitaspaciente',
             sortname: 'proc',//OJO AQUI
             viewrecords: true,
             sortorder: "desc",
-            height: 300,
+            height: 330,
 //            autowidth: true,
             width:anchoPantalla*0.30,
             shrinkToFit: false,//columnas tamaÃ±o dato
@@ -66,7 +64,7 @@
                 $("#div_datos_medic").load("cargar_medic_farma.jsp?dato="+lineap2+"");
             }	
         });
-        jQuery("#listcitaspaciente").jqGrid('navGrid','#pagercitaspaciente',{add:true,edit:false,del:false,search:true,view: true},
+        jQuery("#listcitaspaciente").jqGrid('navGrid','#pagercitaspaciente',{add:false,edit:false,del:false,search:true,view: true},
         {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
         {closeAfterAdd: true, closeOnEscape: true,top:10,left:10},
         //opciones add
@@ -90,8 +88,8 @@
                 {name:'cup',index:'cup', width:(anchoPantalla*0.30*0.2),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'bande',index:'bande', width:40,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:10,
-            rowList:[15,5],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pagerseviciospaciente22',
             sortname: 'proce',//OJO AQUI
             viewrecords: true,
@@ -167,13 +165,13 @@
                 jQuery("#list_citas_medico").jqGrid('setCaption',"AGENDA DEL DIA ").trigger('reloadGrid');
             }	
         });
-        jQuery("#listseviciospaciente22").jqGrid('navGrid','#pagerseviciospaciente22',{add:true,edit:false,del:false,search:true,view: true},
+        jQuery("#listseviciospaciente22").jqGrid('navGrid','#pagerseviciospaciente22',{add:false,edit:false,del:false,search:true,view: true},
         {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
         {closeAfterAdd: true, closeOnEscape: true,top:10,left:10},
         //opciones add
         {}, //opciones del
         {multipleSearch:true,closeAfterSearch: true, closeOnEscape: true},
-        {width:(anchoPantalla*0.30)} //para el view
+        {width:(anchoPantalla*0.1)} //para el view
     );
         /**--------------------------------*/
 
@@ -204,8 +202,8 @@
                 {name:'minuto',index:'minuto', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 50},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'am_pm',index:'am_pm', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 50},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:10,
-            rowList:[15,30,45],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pager_citas_medico',
             sortname: 'am_pm',
             viewrecords: true,
@@ -270,7 +268,7 @@
                 var mostrar="";
                 var bandera="0";
                 
-                alert("paquete="+idpac+"Procedimiento="+proc+"idcontrato="+contrato+"prof="+prof+"paque="+paque+"cupv="+cupv);
+//                alert("paquete="+idpac+"Procedimiento="+proc+"idcontrato="+contrato+"prof="+prof+"paque="+paque+"cupv="+cupv);
                 if( idpac == null || idpac.length == 0 || /^\s+$/.test(idpac) ) {
                     mostrar=mostrar+"Cedula del Paciente ";
                     bandera="1";
@@ -300,7 +298,7 @@
                     type: "POST",
                     url: "validar_cita.jsp",
                     dataType: 'json',
-                    data: "id_paciente="+idpac+"&id_contrato="+contrato+"&id_paquete="+paque+"&id_procedimiento="+proc+"&fecha_cita="+fecha+"&cupv="+cupv,
+                    data: "id_paciente="+idpac+"&id_contrato="+contrato+"&id_paquete="+paque+"&id_procedimiento="+proc+"&fecha_cita="+fecha+"&cupv="+cupv+"&idmedic="+prof,
                     success: function(){
                         //alert(data.id_serial+"--"+data.num );
                         /* if(data.id_serial==null || data.id_serial==0){
@@ -311,6 +309,7 @@
                         else{
                             $( "#dialog_horario" ).dialog( "open" );
                         }*/
+                        $("#idmedic").val(prof);
                         $( "#dialog_horario" ).dialog( "open" );
                     },
                     error: function(){
@@ -362,7 +361,7 @@
             jQuery("#listseviciospaciente22").jqGrid('setGridParam',{url:"cargar_serviciospaciente.jsp?contra="+contra+"&ide="+ide}).trigger("reloadGrid");
        }
         function cambia_contratos(){
-            var id_persona=document.getElementById("id_citas").value;
+            var id_persona=document.getElementById("id_citas").value.trim();
             $("#id_pac").val(id_persona)
             $("#div_contra").load("carga_contrato.jsp?dato="+id_persona+"")
             

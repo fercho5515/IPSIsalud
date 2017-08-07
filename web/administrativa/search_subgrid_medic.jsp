@@ -154,7 +154,7 @@
     /*-----------------------------------------------------------------------------------------------------------*/
     
     String cont=""+request.getParameter("id");
-    total = conexiondb.countRec("id_salidas_farmacia", "salidas_farmacia sf, inventario_farmacia ifa, medicamentos m,lab_farmaceutico as lb,unidad_medida um where sf.id_medicamento_inventario=ifa.serial_inven and ifa.cod_medicamento=m.serial and lb.idlab_farmaceutico=ifa.laboratorio and m.unidad_medida=um.id_unidad_medida and serial_formula_media='"+ cont + "' "+ where + "");
+    total = conexiondb.countRec("id_salidas_farmacia", "salidas_farmacia sf, inventario_farmacia ifa, medicamentos m where sf.id_medicamento_inventario=ifa.serial_inven and ifa.cod_medicamento=m.serial and serial_formula_media='"+ cont + "' "+ where + "");
     //System.out.println(total);
     //     out.print("1");
     if (total > 0) {
@@ -173,8 +173,8 @@
     if (start < 0) {
     }
 
-    strQuery = "select sf.id_salidas_farmacia as id_salida,sf.cantidad as canti,sf.id_medicamento_inventario as id_inven,lb.nombre as lab,CONCAT(COALESCE(m.producto,''),'-', COALESCE(m.presentacion,''),'-', COALESCE(m.concentracion,''), '-', COALESCE(um.descripcion, '')) as m1,sf.fecha from salidas_farmacia sf, inventario_farmacia ifa, medicamentos m,lab_farmaceutico as lb,unidad_medida um where sf.id_medicamento_inventario=ifa.serial_inven and ifa.cod_medicamento=m.serial and lb.idlab_farmaceutico=ifa.laboratorio and m.unidad_medida=um.id_unidad_medida and serial_formula_media='"+ cont + "' " + where + " ORDER BY " + sidx + " " + sord + " LIMIT " + start + " , " + limit;
-  //  System.out.print("ss " + strQuery);
+    strQuery = "select sf.id_salidas_farmacia as id_salida,sf.cantidad as canti,sf.id_medicamento_inventario as id_inven,m.titular as lab, CONCAT(COALESCE(m.producto,''),'-', COALESCE(m.unidad_referencia,''),'-', COALESCE(m.descripcion_comercial,''), '-', COALESCE(m.unidad_medida, '')) as m1,sf.fecha from salidas_farmacia sf, inventario_farmacia ifa, medicamentos m where sf.id_medicamento_inventario=ifa.serial_inven and ifa.cod_medicamento=m.serial and serial_formula_media='"+ cont + "' " + where + " ORDER BY " + sidx + " " + sord + " LIMIT " + start + " , " + limit;
+    System.out.print("ss " + strQuery);
 
     rs = conexiondb.Consulta(strQuery);
     //System.out.print("ac");

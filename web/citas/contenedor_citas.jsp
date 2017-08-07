@@ -31,21 +31,63 @@
             var proced =document.getElementById("proced").value;
             alert(hora+"-"+minuto+"-"+ampm+"-"+proced)
             */
-           
-           alert("asf");
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
-                data: $(this).serialize(),                
+                data: $(this).serialize(),  
+                dataType: 'json',
                 //dataType: "json",
                               
                 success: function(data) {
-                    alert(data.resp);
+                    if(data.res==1){
+                            alert(data.msj);
+                    }else if(data.res==2){
+                            alert(data.msj);
+                    }else if(data.res==3){
+                            alert(data.msj);
+                    }else if(data.res==4){
+                            alert(data.msj);
+                    }
+                },error:function(data){
+                  alert('error');  
                 }                             
             });
             
             return false;
         });
+        
+        $('#form_dialog_horario_paquete').submit(function(event) {
+            //var hor = document.getElementById("horacita").value;
+            /*var minuto=document.getElementById("minuto").value;
+            var ampm =document.getElementById("ampm").value;
+            var proced =document.getElementById("proced").value;
+            alert(hora+"-"+minuto+"-"+ampm+"-"+proced)
+            */
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),  
+                dataType: 'json',
+                //dataType: "json",
+                              
+                success: function(data) {
+                    if(data.res==1){
+                            alert(data.msj);
+                    }else if(data.res==2){
+                            alert(data.msj);
+                    }else if(data.res==3){
+                            alert(data.msj);
+                    }else if(data.res==4){
+                            alert(data.msj);
+                    }
+                },error:function(data){
+                  alert('error');  
+                }                             
+            });
+            
+            return false;
+        });
+        
       });
       //-----------------------------------------------
                $(function(){
@@ -76,7 +118,6 @@
                 modal:true,
                 buttons: {
                     Ok: function() {
-                        alert("a");
                         //$("#div_sesiones").load("cerrar_sesiones.jsp");
                         $( this ).dialog( "close" );
                     }
@@ -91,6 +132,27 @@
                 },
                 width:'300px'
             }); 
+            
+            $('#dialog_horario_paquete').dialog({
+                autoOpen: false,
+                modal:true,
+                buttons: {
+                    Ok: function() {
+                        //$("#div_sesiones").load("cerrar_sesiones.jsp");
+                        $( this ).dialog( "close" );
+                    }
+                },
+                show:{
+                    effect: "blind",
+                    duration: 500
+                },
+                hide:{
+                    effect: "explode",
+                    duration: 500
+                },
+                width:'300px'
+            });
+            
         });
 //***********************************************
     
@@ -216,6 +278,8 @@ function cambiaPestana(pstana){
                            if(pstana==1){$("#tabs-citas").load("citas.jsp");}
 //                           if(pstana==1){$("#tabs-citas").load("programacion_dia.jsp");}
                            else if(pstana==2){$("#tabs-citas").load("citaspaquete.jsp");}
+                           else if(pstana==3){$("#tabs-citas").load("gestion_citas.jsp");}
+                           else if(pstana==4){$("#tabs-citas").load("impresion_citas.jsp");}
                            else{$("#tabs-citas").load("reportes_imagenes.jsp");}
                           }    
 
@@ -321,6 +385,8 @@ function cambiaPestana(pstana){
     <ul>    
         <li><a href="#tabs-citas" onclick="cambiaPestana(1)">Evento</a></li>
         <li><a href="#tabs-citas" onclick="cambiaPestana(2)">Paquete</a></li>
+        <li><a href="#tabs-citas" onclick="cambiaPestana(3)">Gestion</a></li>
+        <li><a href="#tabs-citas" onclick="cambiaPestana(4)">Impresión Agenda</a></li>
         
     </ul>
     <div id="tabs-citas" style="height:400px;width:1012%;overflow:auto;">
@@ -347,35 +413,51 @@ var hoja = document.createElement('style');
 
 <div id="dialog_horario">        
             <form id="form_dialog_horario" name="form_dialog_horario" action="insert_cita.jsp">
-                <label>Hora: </label>
-                <select id="horacita" name="horacita" >
-                    <option value='escoger'>- Seleccione Hora -</option>  
-                    <option value='1'> 1 </option>  
-                    <option value='2'> 2 </option>  
-                    <option value='3'> 3 </option>  
-                    <option value='4'> 4 </option>  
-                    <option value='5'> 5 </option>  
-                    <option value='6'> 6 </option>  
-                    <option value='7'> 7 </option>  
-                    <option value='8'> 8 </option>  
-                    <option value='9'> 9 </option>  
-                    <option value='10'> 10 </option>  
-                    <option value='11'> 11 </option>  
-                    <option value='12'> 12 </option>  
-                </select></br>
-                <label>Minuto: </label>
-                <select id="minutocita" name="minutocita">
-                    <option value='escoger'>- Seleccione Hora -</option>
-                    <option value='0'> 00 </option>
-                    <option value='20'> 20 </option>
-                    <option value='40'> 40 </option>
-                </select></br>
-                <label>Am-Pm: </label>
-                <select name="ampmcitas" id="ampmcitas">
-                    <option value='escoger'>- Am/Pm -</option>
-                    <option value='am'> am </option>
-                    <option value='pm'> pm </option>
-                </select></br>
+                <div>
+                    <div style="float:left">
+                        <div style="margin-top:5px"><label>Hora: </label></div>
+                        <div style="margin-top:5px"><label>Minuto: </label></div>
+                        <div style="margin-top:5px"><label>Am-Pm: </label></div>
+                    </div>
+                    <div style="float:left">
+                        <div style="margin-top:5px">
+                            <select id="horacita" name="horacita" >
+                            <option value='escoger'>- Seleccione Hora -</option>  
+                            <option value='1'> 1 </option>  
+                            <option value='2'> 2 </option>  
+                            <option value='3'> 3 </option>  
+                            <option value='4'> 4 </option>  
+                            <option value='5'> 5 </option>  
+                            <option value='6'> 6 </option>  
+                            <option value='7'> 7 </option>  
+                            <option value='8'> 8 </option>  
+                            <option value='9'> 9 </option>  
+                            <option value='10'> 10 </option>  
+                            <option value='11'> 11 </option>  
+                            <option value='12'> 12 </option>  
+                            </select>
+                        </div>
+                        <div style="margin-top:5px">
+                            <select id="minutocita" name="minutocita">
+                            <option value='escoger'>- Seleccione Hora -</option>
+                            <option value='0'> 00 </option>
+                            <option value='20'> 20 </option>
+                            <option value='40'> 40 </option>
+                            </select>
+                        </div>
+                                           
+                        <div style="margin-top:5px">
+                            <select name="ampmcitas" id="ampmcitas">
+                            <option value='escoger'>- Am/Pm -</option>
+                            <option value='am'> am </option>
+                            <option value='pm'> pm </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="float:left;margin: 10px 5px 0 5px">
+                        <input type="submit" value="Guardar">
+                    </div>
+                </div>
                 
                 <input type="hidden" id="id_tarifario" name="id_tarifario">
                 <input type="hidden" id="proced" name="proced">
@@ -384,12 +466,70 @@ var hoja = document.createElement('style');
                 <input type="hidden" id="paque" name="paque">
                 <input type="hidden" id="id_pac" name="id_pac">
                 <input type="hidden" id="fecha" name="fecha">
-                <input type="submit" value="Guardar">
-                
-                
-                
+                <input type="hidden" id="idmedic" name="idmedic">
             </form>
 
- 
+</div>
+
+<div id="dialog_horario_paquete">        
+            <form id="form_dialog_horario_paquete" name="form_dialog_horario_paquete" action="insert_cita_paquete.jsp">
+                <div>
+                    <div style="float:left">
+                        <div style="margin-top:5px"><label>Hora: </label></div>
+                        <div style="margin-top:5px"><label>Minuto: </label></div>
+                        <div style="margin-top:5px"><label>Am-Pm: </label></div>
+                    </div>
+                    <div style="float:left">
+                        <div style="margin-top:5px">
+                            <select id="horacita" name="horacita" >
+                            <option value='escoger'>- Seleccione Hora -</option>  
+                            <option value='1'> 1 </option>  
+                            <option value='2'> 2 </option>  
+                            <option value='3'> 3 </option>  
+                            <option value='4'> 4 </option>  
+                            <option value='5'> 5 </option>  
+                            <option value='6'> 6 </option>  
+                            <option value='7'> 7 </option>  
+                            <option value='8'> 8 </option>  
+                            <option value='9'> 9 </option>  
+                            <option value='10'> 10 </option>  
+                            <option value='11'> 11 </option>  
+                            <option value='12'> 12 </option>  
+                            </select>
+                        </div>
+                        <div style="margin-top:5px">
+                            <select id="minutocita" name="minutocita">
+                            <option value='escoger'>- Seleccione Hora -</option>
+                            <option value='0'> 00 </option>
+                            <option value='20'> 20 </option>
+                            <option value='40'> 40 </option>
+                            </select>
+                        </div>
+                                           
+                        <div style="margin-top:5px">
+                            <select name="ampmcitas" id="ampmcitas">
+                            <option value='escoger'>- Am/Pm -</option>
+                            <option value='am'> am </option>
+                            <option value='pm'> pm </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="float:left;margin: 10px 5px 0 5px">
+                        <input type="submit" value="Guardar">
+                    </div>
+                </div>
+                
+                <input type="hidden" id="id_tarifario_paquete" name="id_tarifario_paquete">
+                <input type="hidden" id="proced_paquete" name="proced_paquete">
+                <input type="hidden" id="cupv_paquete" name="cupv_paquete">
+                <input type="hidden" id="cont_paquete" name="cont_paquete">
+                <input type="hidden" id="paque_paquete" name="paque_paquete">
+                <input type="hidden" id="id_pac_paquete" name="id_pac_paquete">
+                <input type="hidden" id="fecha_paquete" name="fecha_paquete">
+                <input type="hidden" id="idmedic_paquete" name="idmedic_paquete">
+            </form>
+
+</div>
+
 </body>
 </html>

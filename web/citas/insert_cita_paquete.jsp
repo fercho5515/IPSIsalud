@@ -32,7 +32,7 @@
             
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaInicial=null;
-            String fecha= request.getParameter("fecha");
+            String fecha= request.getParameter("fecha_paquete");
             
             try {fechaInicial= formato.parse(fecha);} 
             catch(ParseException ex){} 
@@ -46,19 +46,19 @@
             dia= fechaR.get(Calendar.DATE);
             System.out.print("mes: "+mes+"año: "+anio+"dia: "+dia+":-");
             
-            int id_paciente = Integer.parseInt(request.getParameter("id_pac"));
+            int id_paciente = Integer.parseInt(request.getParameter("id_pac_paquete"));
             System.out.print(id_paciente);
-            int id_tarifario = Integer.parseInt(request.getParameter("id_tarifario"));
+            int id_tarifario = Integer.parseInt(request.getParameter("id_tarifario_paquete"));
             System.out.print(id_tarifario);
-            int proced = Integer.parseInt(request.getParameter("proced"));
+            int proced = Integer.parseInt(request.getParameter("proced_paquete"));
             System.out.print(proced);
-            int cont = Integer.parseInt(request.getParameter("cont"));
+            int cont = Integer.parseInt(request.getParameter("cont_paquete"));
             System.out.print(cont);
-            int paque = Integer.parseInt(request.getParameter("paque"));
+            int paque = Integer.parseInt(request.getParameter("paque_paquete"));
             System.out.print("paquete: "+paque);
             // mes = fechaInicial.get(Calendar.YEAR);
-            String cupv = request.getParameter("cupv");
-            int idmedic=Integer.parseInt(request.getParameter("idmedic"));
+            String cupv = request.getParameter("cupv_paquete");
+            int idmedic=Integer.parseInt(request.getParameter("idmedic_paquete"));
             
             //-----------Obtener id paciente
             String sql_paciente = "select serial from personas where id_person='" + id_paciente + "';";
@@ -130,7 +130,6 @@
             //-----------Fin obtener id paciente
             if(dia_s==0){
             }
-            //Verificar si el medico tiene ageda en ese turno
             int medico_ag=0;
             String sql_ag_medico="SELECT count(*) FROM agenda where fecha='"+fecha+"' and hora='"+request.getParameter("horacita")+"' and min='"+request.getParameter("minutocita")+"' and am_pm='" + request.getParameter("ampmcitas") + "' and id_medico='"+idmedic+"'";
             String medico_agenda[] = new String[1];
@@ -170,9 +169,8 @@
                 obj.put("res", "4");
                 obj.put("msj", "Paciente tiene cita agendada"); 
             }else {
-                
-            String sql = "INSERT INTO `ips_isalud`.`agenda`(id_quien_programo,id_paciente,id_medico,hora,min,am_pm,fecha,id_permiso,id_contrato,id_estado,id_tarifario,id_procedimiento) VALUES ('" + sesion.getAttribute("id") + "','"+ serial_pac +"','" +idmedic+ "','" + request.getParameter("horacita") + "','" + request.getParameter("minutocita") + "','" + request.getParameter("ampmcitas") + "','"+fecha+"','"+serial_per+"','" + request.getParameter("cont") + "','1','"+request.getParameter("id_tarifario")+"','"+request.getParameter("proced")+"');";
-//                    out.print(sql);
+            String sql = "INSERT INTO `ips_isalud`.`agenda`(id_quien_programo,id_paciente,id_medico,hora,min,am_pm,fecha,id_permiso,id_contrato,id_estado,id_tarifario,id_procedimiento,id_paquete) VALUES ('" + sesion.getAttribute("id") + "','"+ serial_pac +"','" +idmedic+ "','" + request.getParameter("horacita") + "','" + request.getParameter("minutocita") + "','" + request.getParameter("ampmcitas") + "','"+fecha+"','"+serial_per+"','" + request.getParameter("cont_paquete") + "','1','"+request.getParameter("id_tarifario_paquete")+"','"+request.getParameter("proced_paquete")+"','"+request.getParameter("paque_paquete")+"');";
+                    System.out.print(sql);
                     if (ba.transaccion(sql)) {
                         obj.put("res", "1");
                         obj.put("msj", "Cita agendada exitosamente"); 

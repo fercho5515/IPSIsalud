@@ -43,8 +43,8 @@
                 {name:'fecha',index:'fecha', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'serial',index:'serial', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:3,
-            rowList:[3,5],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pagercitaspaciente',
             sortname: 'proc',//OJO AQUI
             viewrecords: true,
@@ -66,7 +66,7 @@
                 $("#div_datos_medic").load("cargar_medic_farma.jsp?dato="+lineap2+"");
             }	
         });
-        jQuery("#listcitaspaciente").jqGrid('navGrid','#pagercitaspaciente',{add:true,edit:false,del:false,search:true,view: true},
+        jQuery("#listcitaspaciente").jqGrid('navGrid','#pagercitaspaciente',{add:false,edit:false,del:false,search:true,view: true},
         {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
         {closeAfterAdd: true, closeOnEscape: true,top:10,left:10},
         //opciones add
@@ -90,8 +90,8 @@
                 {name:'cup',index:'cup', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'bande',index:'bande', width:40,search:true, editable: true,required : true,editoptions: {maxlength: 43},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:10,
-            rowList:[15,5],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pagerseviciospaquete22',
             sortname: 'proce',//OJO AQUI
             viewrecords: true,
@@ -114,7 +114,7 @@
                 var lineap2=""+lineap.conta;
                 var cup=""+lineap.cup;
                 var contrap=""+lineap.cont;
-                var idpac=jQuery("#id_pac").val();
+                var idpac=jQuery("#id_pac_paquete").val();
                 //alert(idpac);
                 var fecha=jQuery("#2cambia_dia").val();
                 //var fecha = jQuery("#2cambia_dia").val();
@@ -155,18 +155,18 @@
                         //alert("---"+data.msg)
                     }
                 });
-                $("#id_tarifario").val(id_tarifario);
-                $("#proced").val(proced);
-                $("#cupv").val(cupv);
-                $("#cont").val(cont);
-                $("#paque").val(paque);
+                $("#id_tarifario_paquete").val(id_tarifario);
+                $("#proced_paquete").val(proced);
+                $("#cupv_paquete").val(cupv);
+                $("#cont_paquete").val(cont);
+                $("#paque_paquete").val(paque);
                         
                 lineap2=lineap2.replace(/ /gi,'*');
                 $("#div_profesionales").load("cargar_prof.jsp?dato="+cup+"&datot="+id_tarifario+"&datop="+proced+"");   
                 jQuery("#list_citas_medico").jqGrid('setCaption',"AGENDA DEL DIA ").trigger('reloadGrid');
             }	
         });
-        jQuery("#listseviciospaquete22").jqGrid('navGrid','#pagerseviciospaquete22',{add:true,edit:false,del:false,search:true,view: true},
+        jQuery("#listseviciospaquete22").jqGrid('navGrid','#pagerseviciospaquete22',{add:false,edit:false,del:false,search:true,view: true},
         {closeAfterEdit: true,reloadAfterSubmit:true,reloadAfterEdit:true},//opciones edit
         {closeAfterAdd: true, closeOnEscape: true,top:10,left:10},
         //opciones add
@@ -203,8 +203,8 @@
                 {name:'minuto',index:'minuto', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 50},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                 {name:'am_pm',index:'am_pm', width:(anchoPantalla*0.30*0.1),search:true, editable: true,required : true,editoptions: {maxlength: 50},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
             ],
-            rowNum:10,
-            rowList:[15,30,45],
+            rowNum:15,
+            rowList:[15,20],
             pager: '#pager_citas_medico',
             sortname: 'am_pm',
             viewrecords: true,
@@ -242,19 +242,19 @@
             caption:"",
             buttonicon:"ui-icon-circle-plus",
             onClickButton:function(){ 
-                alert("a");
+//                alert("a");
                 var fecha=jQuery("#2cambia_dia").val();
-                $("#fecha").val(fecha);
-                var idpac=jQuery("#id_pac").val();
-                var proc=jQuery("#proced").val();
-                var contrato=jQuery("#cont").val();
+                $("#fecha_paquete").val(fecha);
+                var idpac=jQuery("#id_pac_paquete").val();
+                var proc=jQuery("#proced_paquete").val();
+                var contrato=jQuery("#cont_paquete").val();
                 var prof=jQuery("#profesionales").val();
-                var paque=jQuery("#paque").val();
-                var cupv=jQuery("#cupv").val();
+                var paque=jQuery("#paque_paquete").val();
+                var cupv=jQuery("#cupv_paquete").val();
                 var mostrar="";
                 var bandera="0";
                 
-                alert("paquete="+idpac+"Procedimiento="+proc+"idcontrato="+contrato+"prof="+prof+"paque="+paque+"cupv="+cupv);
+//                alert("paquete="+idpac+"Procedimiento="+proc+"idcontrato="+contrato+"prof="+prof+"paque="+paque+"cupv="+cupv);
                 if( idpac == null || idpac.length == 0 || /^\s+$/.test(idpac) ) {
                     mostrar=mostrar+"Cedula del Paciente ";
                     bandera="1";
@@ -284,9 +284,9 @@
                     type: "POST",
                     url: "validar_cita.jsp",
                     dataType: 'json',
-                    data: "id_paciente="+idpac+"&id_contrato="+contrato+"&id_paquete="+paque+"&id_procedimiento="+proc+"&fecha_cita="+fecha+"&cupv="+cupv,
+                    data: "id_paciente="+idpac+"&id_contrato="+contrato+"&id_paquete="+paque+"&id_procedimiento="+proc+"&fecha_cita="+fecha+"&cupv="+cupv+"&idmedic="+prof,
                     success: function(){
-                        //alert(data.id_serial+"--"+data.num );
+//                        alert(data.id_serial+"--"+data.num );
                         /* if(data.id_serial==null || data.id_serial==0){
                             alert("Datos Incorrectos");
                         }else if(data.num>0){
@@ -295,7 +295,9 @@
                         else{
                             $( "#dialog_horario" ).dialog( "open" );
                         }*/
-                        $( "#dialog_horario" ).dialog( "open" );
+//            alert("hola");
+                        $("#idmedic_paquete").val(prof);
+                        $( "#dialog_horario_paquete" ).dialog( "open" );
                     },
                     error: function(){
                         alert("---");
@@ -347,7 +349,7 @@
        }
         function cambia_paquetes(){
             var id_persona=document.getElementById("id_citas").value;
-            $("#id_pac").val(id_persona)
+            $("#id_pac_paquete").val(id_persona)
             $("#div_contra").load("carga_paquete.jsp?dato="+id_persona+"")
             
         }

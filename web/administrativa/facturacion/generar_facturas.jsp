@@ -100,11 +100,174 @@
                    });
             return false;
     }
+    
+            var anchoPan=$("#div_facturacion").width();
+
+            jQuery("#list_pacientes_factura").jqGrid({
+                url:'facturacion/busca_pacientes_facturar.jsp?q=2&id=0',
+                datatype: "json",
+                colNames:['Documeto','Primer Nombre','Segundo Nombre','Primer Apellido','Segundo Apellido'],
+                colModel:[
+                    {name:'id_paciente',index:'id_paciente',width:(anchoPan * 0.177),hidden:false,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'p_nom',index:'p_nom', width:(anchoPan * 0.2),hidden:false,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'s_nom',index:'s_nom', width:(anchoPan * 0.2),search:true,searchoptions:{sopt:['cn','eq']},align:"right"},
+                    {name:'p_ape',index:'p_ape', width:(anchoPan * 0.2),search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'s_ape',index:'s_ape', width:(anchoPan * 0.2),search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                ],
+                rowNum:5,
+                rowList:[5,10,20,30,100],
+                pager: '#pager_pacientes_factura',
+                sortname: 'p_ape',
+                viewrecords: true,
+                sortorder: "asc",
+                height: 100,
+                shrinkToFit: false,
+                width:anchoPan,
+                rownumbers: false,
+                editurl: 'editaCli.php',
+                caption: "Pacientes para Facturar",
+                onSelectRow: function (){	
+                    
+                }
+                
+            });
+            jQuery("#list_pacientes_factura").jqGrid('navGrid','#pager_pacientes_factura',{add:false,edit:false,del:false,search:false,view:true},
+            {},//opciones edit
+            { }, //opciones add
+            {}, //opciones del
+            {/* multipleSearch:true,closeAfterSearch: true, closeOnEscape: true */},
+            {width:920} //para el view
+            );
+            jQuery('#list_pacientes_factura').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+           
+ 
+            jQuery("#list_procedimientos_factura").jqGrid({
+                url:'facturacion/busca_procedimientos_facturar.jsp?q=2&id=0',
+                datatype: "json",
+                colNames:['Agenda','CUM','Procedimiento','id_proced','id_contrato','id_paquete','Precio'],
+                colModel:[
+                    {name:'id_agenda',index:'id_agenda',width:(anchoPan * 0.05),hidden:true,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'codigo_maipos',index:'codigo_maipos', width:(anchoPan * 0.05),hidden:false,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'descripcion',index:'descripcion', width:(anchoPan * 0.3),search:true,searchoptions:{sopt:['cn','eq']},align:"left"},
+                    {name:'id_procedimiento',index:'id_procedimiento', width:(anchoPan * 0.05),hidden:true,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'id_contrato',index:'id_contrato', width:(anchoPan * 0.05),hidden:true,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'id_paquete',index:'id_paquete', width:(anchoPan * 0.05),hidden:true,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'precio',index:'precio', width:(anchoPan * 0.05),hidden:false,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                ],
+                rowNum:5,
+                rowList:[5,10,20,30,100],
+                pager: '#pager_procedimientos_factura',
+                sortname: 'id_agenda',
+                viewrecords: true,
+                sortorder: "asc",
+                height: 200,
+                shrinkToFit: false,
+                width:anchoPan/2.03,
+                rownumbers: false,
+                editurl: 'editaCli.php',
+                caption: "Procedimientos para Facturar",
+                onSelectRow: function (){	
+                    
+                }
+                
+            });
+            jQuery("#list_procedimientos_factura").jqGrid('navGrid','#pager_procedimientos_factura',{add:false,edit:false,del:false,search:false,view:true},
+            {},//opciones edit
+            { }, //opciones add
+            {}, //opciones del
+            {/* multipleSearch:true,closeAfterSearch: true, closeOnEscape: true */},
+            {width:920} //para el view
+            );
+            jQuery('#list_procedimientos_factura').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+           
+
+            jQuery("#list_medicamentos_factura").jqGrid({
+                url:'facturacion/busca_pacientes_facturar.jsp?q=2&id=0',
+                datatype: "json",
+                colNames:['Documeto','Primer Nombre','Segundo Nombre','Primer Apellido','Segundo Apellido'],
+                colModel:[
+                    {name:'id_paciente',index:'id_paciente',width:(anchoPan * 0.177),hidden:false,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'p_nom',index:'p_nom', width:(anchoPan * 0.2),hidden:false,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'s_nom',index:'s_nom', width:(anchoPan * 0.2),search:true,searchoptions:{sopt:['cn','eq']},align:"right"},
+                    {name:'p_ape',index:'p_ape', width:(anchoPan * 0.2),search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'s_ape',index:'s_ape', width:(anchoPan * 0.2),search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                ],
+                rowNum:5,
+                rowList:[5,10,20,30,100],
+                pager: '#pager_medicamentos_factura',
+                sortname: 'p_ape',
+                viewrecords: true,
+                sortorder: "asc",
+                height: 200,
+                shrinkToFit: false,
+                width:anchoPan/2.03,
+                rownumbers: false,
+                editurl: 'editaCli.php',
+                caption: "Medicamentos para Facturar",
+                onSelectRow: function (){	
+                    
+                }
+                
+            });
+            jQuery("#list_medicamentos_factura").jqGrid('navGrid','#pager_medicamentos_factura',{add:false,edit:false,del:false,search:false,view:true},
+            {},//opciones edit
+            { }, //opciones add
+            {}, //opciones del
+            {/* multipleSearch:true,closeAfterSearch: true, closeOnEscape: true */},
+            {width:920} //para el view
+            );
+            jQuery('#list_medicamentos_factura').jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+                      
+   
+             $(function(){
+             $("#dia_facturacion").datepicker({
+                //inline:true
+                showOn:'both',
+                buttonImageOnly:true,
+                buttonImage:'../imagenes/fotos/calendar.gif',
+                firstDay:1,
+                changeMonth:true,
+                changeYear:true,
+                yearRange: "1900:2040"
+            });	
+            $('#dia_facturacion').datepicker($.datepicker.regional['es']);
+            $('#dia_facturacion').datepicker("option","showAnim","slideDown");
+            $('#dia_facturacion').datepicker("option","dateFormat","yy-mm-dd");
+        });
    
         </script>
     </head>
     <body>
-       <center>
+        
+        <div style="margin-bottom: 10px">
+            <label>Cambiar dia de Facturación: </label>
+            <input type="text" name="dia_facturacion" id="dia_facturacion" placeholder="aaaa-mm-dd" onchange="cargar_servicios()">
+        </div>
+        
+        <div style="width: 100%" id="div_facturacion">
+            <div>
+                <table id="list_pacientes_factura" ></table>
+                <div id="pager_pacientes_factura"></div>
+            
+            </div>
+        </div>
+        <div>
+            <center> <h2>Facturar</h2> </center>
+        </div>
+        <div style="width: 100%">
+            <div style="float: left;width: 49%">
+                <table id="list_procedimientos_factura" ></table>
+                <div id="pager_procedimientos_factura"></div>
+            </div>
+            
+            <div style="float: left;margin-left: 20px;width: 49%">
+                <table id="list_medicamentos_factura" ></table>
+                <div id="pager_medicamentos_factura"></div>
+            </div>
+        </div>
+        
+                
+<!--       <center>
            <h1 style="color:#2779aa;">Facturación automática</h1>
     
         <label>Fecha Inicial:</label>&nbsp;
@@ -134,5 +297,7 @@
         <br><br>
         <input type="button" id="aceptarfactu" name="aceptarfactu" value="Aceptar" onclick="facturar();">
        </center>
-    </body>
+    -->
+
+</body>
 </html>

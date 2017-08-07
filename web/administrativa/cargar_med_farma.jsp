@@ -157,7 +157,7 @@
     /*-----------------------------------------------------------------------------------------------------------*/
     
     String cont=""+request.getParameter("id");
-    total = conexiondb.countRec("id_consulta", "formula_medica fm, medicamentos m,forma_farmaceutica ff,via_admin v,unidad_medida um where fm.cod_medicamento=m.serial and ff.id_forma_farmaceutica=m.forma_farmaceutica and v.id_via_admin=m.via_administracion and um.id_unidad_medida=m.unidad_medida and id_consulta='"+ cont + "' " + where );
+    total = conexiondb.countRec("id_consulta", "formula_medica fm, medicamentos m  where fm.cod_medicamento=m.serial and id_consulta='"+ cont + "' " + where );
     //     out.print("1");
     if (total > 0) {
         double d = Math.ceil((double) (total) / (double) (limit));
@@ -175,8 +175,8 @@
     if (start < 0) {
     }
 
-    strQuery = "select fm.id_consulta,fm.cod_medicamento,fm.serial as idform,m.cod_atc,m.cum,CONCAT(COALESCE(producto, ''), ' - ', COALESCE(presentacion, '')) as m1 ,ff.descripcion as f1,v.descripcion as v1,fm.cantidad,m.concentracion,um.descripcion as u1,m.presentacion from formula_medica fm, medicamentos m,forma_farmaceutica ff,via_admin v,unidad_medida um where fm.cod_medicamento=m.serial and ff.id_forma_farmaceutica=m.forma_farmaceutica and v.id_via_admin=m.via_administracion and um.id_unidad_medida=m.unidad_medida and id_consulta='"+ cont + "' " + where + " ORDER BY " + sidx + " " + sord + " LIMIT " + start + " , " + limit;
- //out.print("CONSULTA MED_FORMULA " + strQuery+"   /n <br> ");
+    strQuery = "select fm.id_consulta,fm.cod_medicamento,fm.serial as idform,m.atc as cod_atc,m.cum, CONCAT(COALESCE(producto, ''), ' - ', COALESCE(descripcion_comercial, '')) as m1 ,m.forma_farmaceutica as f1,m.via_adimin as v1,fm.cantidad, m.unidad_referencia as concentracion,m.unidad_medida as u1,m.descripcion_comercial as presentacion  from formula_medica fm, medicamentos m  where fm.cod_medicamento=m.serial and id_consulta='"+ cont + "' " + where + " ORDER BY " + sidx + " " + sord + " LIMIT " + start + " , " + limit;
+    System.out.print("CONSULTA MED_FORMULA " + strQuery+"   /n <br> ");
 
     rs = conexiondb.Consulta(strQuery);
     

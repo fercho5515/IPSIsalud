@@ -96,7 +96,7 @@
                             conexion  conexiondb = new conexion();
                             conexiondb.Conectar();
                             /*-----------------------------------------------------------------------------------------------------------*/
-                            total = conexiondb.countRec("ag.id_agenda", "agenda ag,personas pe,pacientes pa, tari_proced tp,procedimientos_tari pt where ag.id_paciente=pe.serial and pa.serial_persona=pe.serial and pe.id_person='"+cod+"' and ag.id_tarifario=tp.id_tarifario and ag.id_procedimiento=tp.id_proced and pt.idprocedimientos_tari=tp.id_proced and "+mes+"=MONTH (ag.fecha) and "+año+"=year(ag.fecha)"+where+"");
+                            total = conexiondb.countRec("ag.id_agenda", "agenda ag,personas pe,pacientes pa, tari_proced tp,procedimientos_tari pt where ag.id_paciente=pe.serial and pa.serial_persona=pe.serial and pe.id_person='"+cod+"' and ag.id_tarifario=tp.id_tarifario and ag.id_procedimiento=tp.id_proced and (ag.id_estado=1 or ag.id_estado=2 or ag.id_estado=3) and pt.idprocedimientos_tari=tp.id_proced and "+mes+"=MONTH (ag.fecha) and "+año+"=year(ag.fecha)"+where+"");
                             
                             
                            // total = conexiondb.countRec("ag.id_agenda", "agenda ag,personas pe where ag.id_paciente=pe.serial and pe.id_person=1088798141"+where+"");
@@ -122,6 +122,7 @@
                             + " from agenda ag,personas pe,pacientes pa, tari_proced tp,procedimientos_tari pt"
                             + " where ag.id_paciente=pe.serial and pa.serial_persona=pe.serial and pe.id_person='"+cod+"' "
                             + "and ag.id_tarifario=tp.id_tarifario and ag.id_procedimiento=tp.id_proced "
+                            + "and (ag.id_estado=1 or ag.id_estado=2 or ag.id_estado=3)"
                             + "and pt.idprocedimientos_tari=tp.id_proced and "+mes+"=MONTH (ag.fecha) and "+año+"=year(ag.fecha)";
                            
                             rs = conexiondb.Consulta(strQuery);

@@ -123,12 +123,12 @@
     
     
     //************************  VALIDACIONES PARA DAR LA CITA *******************
-    
+    id_paquete=0;
     if (serial_paciente != 0) {
         if (id_paquete == 0) {//si viene por contrato
              if(tiene_paquete==0){//***********si no tiene paquete
                 //***********Verifico si ya tiene una cita asiganada,cumplida o en espera
-                String sql_agenda = "select id_agenda from agenda where id_paciente='"+serial_paciente+"' and id_contrato='"+id_contrato+"' and (id_paquete =0 or id_paquete is null) and (id_estado=1 or id_estado=3 or id_estado=2) and month(fecha)='" + mes + "' and year(fecha)='" + anio + "';";
+                String sql_agenda = "select id_agenda from agenda where id_paciente='"+serial_paciente+"' and id_contrato='"+id_contrato+"' and (id_estado=1 or id_estado=3 or id_estado=2) and id_permiso= '"+serial_per+"'and month(fecha)='" + mes + "' and year(fecha)='" + anio + "';";
                 System.out.print("agenda:"+sql_agenda);
                 String id_agenda[] = new String[1];
                 id_agenda[0] = "";
@@ -145,16 +145,16 @@
                 }
                 if(cita_asiganada!=0){
                     obj.put("res", "1");
-                    obj.put("msj", "Ya tiene una cita asignada1"); 
+                    obj.put("msj", "Ya tiene una cita asignada en esta area"); 
                 }else if(cita_asiganada==0){
                     obj.put("res", "2");
-                    obj.put("msj", "Continua1");
+                    obj.put("msj", "Aun no hay cita asiganada para esta area");
                 }
             }
         } else if (id_paquete != 0) {//si viene por paquete
             //**********************Verifico si tiene cita*************
-            obj.put("res", "1");
-            obj.put("msj", "Ya tiene una cita asignada"); 
+            obj.put("res", "3");
+            obj.put("msj", "No se ha verificado"); 
             
         }
     } else {

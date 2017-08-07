@@ -642,7 +642,7 @@
         
         
          out.print("<center>");
-         String sqlex="(select p.descripcion as parte,e.dolencia as dolecia from ex_cefalocaudal e,partes_cuerpo p where e.id_parte=p.id_parte and e.id_consulta='"+codc+"') union (select descripcion as parte,'Normal' as dolecia from partes_cuerpo where id_parte not in (select e.id_parte from ex_cefalocaudal e where e.id_consulta='"+codc+"')) order by parte";
+         String sqlex="(select p.descripcion as parte,e.dolencia as dolecia,p.orden as ordenar from ex_cefalocaudal e,partes_cuerpo p where e.id_parte=p.id_parte and e.id_consulta='"+codc+"') union (select descripcion as parte,'Normal' as dolecia,orden as ordenar from partes_cuerpo where id_parte not in (select e.id_parte from ex_cefalocaudal e where e.id_consulta='"+codc+"')) order by ordenar";
          ResultSet resuex=null;
          try{  resuex=ba.consultas(sqlex);
              while (resuex.next()&&resuex!=null) {  

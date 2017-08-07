@@ -120,7 +120,7 @@
                             conexiondb.Conectar();
                             /*-----------------------------------------------------------------------------------------------------------*/
 
-                            total = conexiondb.countRec("ifa.serial_inven", "medicamentos m,unidad_medida um,forma_farmaceutica ff,inventario_farmacia ifa,lab_farmaceutico lfar where um.id_unidad_medida=m.unidad_medida and ff.id_forma_farmaceutica=m.forma_farmaceutica and ifa.cod_medicamento=m.serial and ifa.laboratorio=lfar.idlab_farmaceutico and ifa.existencias>0 "+where+"");
+                            total = conexiondb.countRec("ifa.serial_inven", "medicamentos m,inventario_farmacia ifa where ifa.cod_medicamento=m.serial and ifa.existencias>0 "+where+"");
                  //      System.out.println("total : "+total);
                             if( total>0 ) {
                                 double d = Math.ceil( (double)(total) / (double)(limit) );
@@ -139,11 +139,12 @@
                                 start = 0;
                             }
 
-                            strQuery = "select ifa.serial_inven,m.serial,m.cum,m.cod_atc,m.producto,m.concentracion,um.descripcion as d1,ff.descripcion as d2,m.presentacion,ifa.existencias,ifa.fecha_fab,ifa.fecha_ven,ifa.cod_barras,ifa.ubicacion,ifa.invima,lfar.nombre from medicamentos m,unidad_medida um,forma_farmaceutica ff,inventario_farmacia ifa,lab_farmaceutico lfar where um.id_unidad_medida=m.unidad_medida and ff.id_forma_farmaceutica=m.forma_farmaceutica and ifa.cod_medicamento=m.serial and ifa.laboratorio=lfar.idlab_farmaceutico and ifa.existencias>0 "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
+                            strQuery = "select ifa.serial_inven,m.serial,m.cum,m.atc as cod_atc,m.producto,m.concentracion_letra as concentracion,m.unidad_medida as d1,m.forma_farmaceutica as d2,m.titular as presentacion, ifa.existencias, ifa.fecha_fab,ifa.fecha_ven,ifa.cod_barras,ifa.ubicacion,ifa.invima, m.titular as nombre from medicamentos m,inventario_farmacia ifa where ifa.cod_medicamento=m.serial and ifa.existencias>0 "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
                             
                             rs = conexiondb.Consulta(strQuery);
                             
-                          //  System.out.println(strQuery);
+                          //  
+                            System.out.println(strQuery);
                             response.setContentType("text/x-json");
                             response.setCharacterEncoding("utf-8");
                             response.setHeader("Pragma", "no-cache");

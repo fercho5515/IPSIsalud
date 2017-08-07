@@ -40,9 +40,31 @@
                     } 
                     catch (SQLException e) { }
                     catch (Exception ex) { }
+                    
+                    //*************Consulta cantidad**************
+                    String cantidad ="0";
+                    String sqlc = "select sum(cantidad) from salidas_farmacia where serial_formula_media=3;";
+                    //out.print(sql2);
+                    ResultSet resuc = ba.consultas(sqlc);
+                    try {
+                        while (resuc.next() && resuc != null) {
+                            if (resuc.getString(1) != null) {  cantidad = resuc.getString(1); }
+                         }
+                    } 
+                    catch (SQLException e) { }
+                    catch (Exception ex) { }
+                    int cantidadentregada=Integer.parseInt(cantidad);
+                    int cantidadtotalentregar=Integer.parseInt(request.getParameter("can_formula"));
+                    int cantidadentregar=Integer.parseInt(request.getParameter("cantidad"));
+                    //*************Fin Cantidad
+                    if(cantidadtotalentregar<cantidadentregada+cantidadentregar){
+                        obj.put("res","5");
+                        obj.put("res2","Muchos medicamentos");
+                        obj.put("res3","0");
+                    }else{
 
                     String sql = "INSERT INTO `ips_isalud`.`salidas_farmacia`(`id_medicamento_inventario`,`serial_formula_media`,`cantidad`,`fecha`,`id_profesional`,`id_recibe`,`valor`) VALUES ('" + request.getParameter("serial_inven") + "','" + request.getParameter("fid_formula") + "','" + request.getParameter("cantidad") + "', now(),'" + sesion.getAttribute("id") + "','" + serialhistoria+ "','0');";
-                    //out.print(sql);
+                    System.out.print(sql);
                     if (ba.transaccion(sql)) {
                          obj.put("res","1");
                          obj.put("res3",""+request.getParameter("fid_formula")+"");
@@ -55,7 +77,7 @@
                         obj.put("res3","0");
                     }
                     
-               
+                                  }
                     
                     ba.cerrar();
                     

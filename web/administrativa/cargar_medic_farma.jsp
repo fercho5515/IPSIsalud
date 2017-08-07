@@ -71,7 +71,7 @@
                 var vatc=document.getElementById("atc").value;
                 if(vatc == null ||vatc.length == 0 || /^\s+$/.test(vatc)){
                     alert('Codigo ATC es obligatorio ');
-                    return false; 
+                    
                 }
                 var vconcentracion=document.getElementById("concentracion").value;
                 if(vconcentracion == null ||vconcentracion.length == 0 || /^\s+$/.test(vconcentracion)){
@@ -362,7 +362,7 @@
                                         <input type="text" name="cum" size="15" id="cum" maxlength="30" value="<%out.print(datos[1]);%>" readonly>
                                     </td>
                                     <td>
-                                        <input type="text" name="atc" size="15" id="consecutivo" maxlength="30" value="<%out.print(datos[8]);%>" readonly> 
+                                        <input type="text" name="consecutivo" size="15" id="consecutivo" maxlength="30" value="<%out.print(datos[8]);%>" readonly> 
                                     </td>
                                     <td>
                                         <!--<div id="divia" name="divia">-->

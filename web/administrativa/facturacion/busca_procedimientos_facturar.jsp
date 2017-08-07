@@ -1,4 +1,3 @@
-
 <%@page import="org.json.simple.parser.ParseException"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
 <%@page import="org.json.simple.JSONArray"%>
@@ -9,9 +8,7 @@
 <%@page import="pac.conexion" %>
 
 
-  <%
-  request.setCharacterEncoding("UTF-8");         
-         
+  <%                        request.setCharacterEncoding("UTF-8");
                             int start=0;
                             int total=0;
                             int total_pages =0;
@@ -59,9 +56,6 @@
                                                 JSONObject jsonObject2 = (JSONObject) obj2;
 
                                                 String campo = (String) jsonObject2.get("field");
-                                                if(campo.compareTo("atc")==0){campo="m.cod_atc";}
-                                                else{campo=campo.replace("_",".");}
-                                                       
                                                 String ope = (String) jsonObject2.get("op");
                                                 String dato = (String) jsonObject2.get("data");
                                                 
@@ -74,7 +68,7 @@
                                                   else if(ope.compareTo("le")==0){ where=where+" "+campo+" <= '"+dato+"'"; }  // menor igula
                                                   else if(ope.compareTo("gt")==0){ where=where+" "+campo+" > '"+dato+"'"; }   // mayor que
                                                   else if(ope.compareTo("ge")==0){ where=where+" "+campo+" >= '"+dato+"'"; }  // mayor igual
-                                                  else if(ope.compareTo("bw")==0){ where=where+" "+campo+" like '"+dato+"%'"; }  // comienza con
+                                                  else if(ope.compareTo("bw")==0){ where=where+" "+campo+" like '%"+dato+"%'"; }  // comienza con
                                                   else if(ope.compareTo("bn")==0){ where=where+" "+campo+" not like '"+dato+"%'";} //  no comienza por
                                                   else if(ope.compareTo("in")==0){ where=where+" "+campo+" like '%"+dato+"%'";} //se encuentra en
                                                   else if(ope.compareTo("ni")==0){ where=where+" "+campo+" not like '%"+dato+"%'";} //no esta en 
@@ -110,22 +104,9 @@
                             conexion  conexiondb = new conexion();
                             conexiondb.Conectar();
                             /*-----------------------------------------------------------------------------------------------------------*/
-                            String id = request.getParameter("id");
-                            total = conexiondb.countRec("i.serial", " inventario_farmacia i, medicamentos m,forma_farmaceutica ff,via_admin v,lab_farmaceutico lf, unidad_medida um  where "
-                                                                    + "i.laboratorio= lf.idlab_farmaceutico and i.cod_medicamento=m.serial and ff.id_forma_farmaceutica=m.forma_farmaceutica and m.unidad_medida =um.id_unidad_medida "
-                                                                    + "and v.id_via_admin=m.via_administracion and "
-                                                                    + "(i.serial_inven in (select i.serial_inven from inventario_farmacia i,medica_cont mc where "
-                                                                    + "i.laboratorio=mc.id_lab and i.cod_medicamento=mc.cod_med  and "
-                                                                    + "i.fecha_fab<=curdate() and i.fecha_ven>=curdate() and i.existencias>0 and " 
-                                                                    + "mc.cod_contra = (select a.id_contrato from agenda a, consulta_medica c where (a.id_consulta=c.id_consulta or c.id_agenda=a.id_agenda) and c.id_consulta="+id+" limit 1) "
-                                                                    + ") or "
-                                                                    + "i.serial_inven in (select i.serial_inven from inventario_farmacia i,med_paq_int mp where "
-                                                                    + "i.laboratorio=mp.id_lab and i.cod_medicamento=mp.cod_med   and "
-                                                                    + "i.fecha_fab<=curdate() and i.fecha_ven>=curdate() and i.existencias>0  and " 
-                                                                    + "mp.cod_paq_int =(select a.id_paquete from agenda a, consulta_medica c where (a.id_consulta=c.id_consulta or c.id_agenda=a.id_agenda) and c.id_consulta="+id+" limit 1)) "
-                                                                    + ") "
-                                                                    + " "+where);
-                            
+                 //System.out.println("total ==>       personas pe,pacientes pa,afiliados_cont ac where pe.serial=pa.serial_persona and ac.serial_paciente=pa.serial_persona and ac.id_cont='"+session.getAttribute("tarifario")+"' "+where+"");
+                            total = conexiondb.countRec("id_agenda", "FROM agenda ag, tari_proced as tp, procedimientos_tari as pt where fecha='2017-07-03' and (ag.id_tarifario=tp.id_tarifario and ag.id_procedimiento=tp.id_proced) and tp.id_proced=pt.idprocedimientos_tari and ag.id_estado=3 and id_paciente=61 "+where);
+                               System.out.println("total "+total);
                             if( total>0 ) {
                                 double d = Math.ceil( (double)(total) / (double)(limit) );
                                 total_pages = (int)(d);
@@ -142,30 +123,15 @@
                             if(start < 0 ){
                                 start = 0;
                             }
-                            
-                            
-                            strQuery = "select i.serial_inven,m.serial,i.cod_barras,m.producto, m.cod_atc, m.cum,ff.descripcion as f1,v.descripcion as v1,m.concentracion,m.presentacion,i.valor_compra,i.existencias,lf.nombre as lab,i.fecha_fab,i.fecha_ven,i.ubicacion,i.lote,um.descripcion as unidadmedida "
-                                     + "from inventario_farmacia i, medicamentos m,forma_farmaceutica ff,via_admin v,lab_farmaceutico lf, unidad_medida um  where "
-                                     + "i.laboratorio= lf.idlab_farmaceutico and i.cod_medicamento=m.serial and ff.id_forma_farmaceutica=m.forma_farmaceutica and m.unidad_medida =um.id_unidad_medida "
-                                     + "and v.id_via_admin=m.via_administracion and "
-                                     + "(i.serial_inven in (select i.serial_inven from inventario_farmacia i,medica_cont mc where "
-                                     + "i.laboratorio=mc.id_lab and i.cod_medicamento=mc.cod_med  and "
-                                     + "i.fecha_fab<=curdate() and i.fecha_ven>=curdate() and i.existencias>0 and " 
-                                     + "mc.cod_contra = (select a.id_contrato from agenda a, consulta_medica c where (a.id_consulta=c.id_consulta or c.id_agenda=a.id_agenda) and c.id_consulta="+id+" limit 1) "
-                                     + ") or "
-                                     + "i.serial_inven in (select i.serial_inven from inventario_farmacia i,med_paq_int mp where "
-                                     + "i.laboratorio=mp.id_lab and i.cod_medicamento=mp.cod_med   and "
-                                     + "i.fecha_fab<=curdate() and i.fecha_ven>=curdate() and i.existencias>0  and " 
-                                     + "mp.cod_paq_int =(select a.id_paquete from agenda a, consulta_medica c where (a.id_consulta=c.id_consulta or c.id_agenda=a.id_agenda) and c.id_consulta="+id+" limit 1)) "
-                                     + ") "
-                                     + " "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
-                            System.out.println("Consulta Inventario:"+strQuery+"\n");
+
+                            strQuery = "SELECT id_agenda,id_paciente,id_medico,fecha, id_permiso,id_contrato, tp.id_tarifario, id_procedimiento, id_paquete, precio, codigo_maipos, descripcion FROM agenda ag, tari_proced as tp, procedimientos_tari as pt where fecha='2017-07-03' and (ag.id_tarifario=tp.id_tarifario and ag.id_procedimiento=tp.id_proced) and tp.id_proced=pt.idprocedimientos_tari and ag.id_estado=3 and id_paciente=61 "+where+" ORDER BY "+sidx + " " +sord +" LIMIT "+start+" , "+limit;
+                            System.out.println(strQuery);
                             
                             rs = conexiondb.Consulta(strQuery);
+
                             
-                            
-                            //System.out.println(total);
-                            //System.out.print("af");
+                           //    System.out.println("total2 "+total);
+                             
                             response.setContentType("text/x-json");
                             response.setCharacterEncoding("utf-8");
                             response.setHeader("Pragma", "no-cache");
@@ -186,29 +152,16 @@
                                 if(rc){
                                     json = json + ",";
                                 }
-                            
                                 json = json + "\n{";
-                                json = json + "\"id\":\""+rs.getInt("serial_inven")+"\",";
-                                json = json + "\"cell\":["+rs.getInt("serial_inven")+"";
-                                json = json + ",\""+rs.getString("serial")+"\"";  
-                                json = json + ",\""+rs.getString("cod_barras")+"\"";  
-                                json = json + ",\""+rs.getString("cod_atc")+"\"";                                
-                                json = json + ",\""+rs.getString("cum")+"\"";                            
-                                json = json + ",\""+rs.getString("producto")+"\"";  //nombre
-                                json = json + ",\""+rs.getString("f1")+"\"";//forma
-                                json = json + ",\""+rs.getString("concentracion")+"\""; //concentracion
-                                json = json + ",\""+rs.getString("unidadmedida")+"\""; //unidad de medida
-                                json = json + ",\""+rs.getString("v1")+"\"";//via administracion
-                                json = json + ",\""+rs.getString("presentacion")+"\"";
-                                json = json + ",\""+rs.getString("valor_compra")+"\"";
-                                json = json + ",\""+rs.getString("existencias")+"\"";
-                                json = json + ",\""+rs.getString("lab")+"\"";
-                                json = json + ",\""+rs.getString("fecha_fab")+"\"";
-                                json = json + ",\""+rs.getString("fecha_ven")+"\"";
-                                json = json + ",\""+rs.getString("ubicacion")+"\"";
-                                json = json + ",\""+rs.getString("lote")+"\"]";
+                                json = json + "\"id\":\""+rs.getInt("id_agenda")+"\",";
+                                json = json + "\"cell\":["+rs.getInt("id_agenda")+"";
+                                json = json + ",\""+rs.getString("codigo_maipos")+"\"";
+                                json = json + ",\""+rs.getString("descripcion")+"\"";
+                                json = json + ",\""+rs.getString("id_procedimiento")+"\"";
+                                json = json + ",\""+rs.getString("id_contrato")+"\"";
+                                json = json + ",\""+rs.getString("id_paquete")+"\"";
+                                json = json + ",\""+rs.getString("precio")+"\"]";
                                 json = json + "}";
-
                                 rc=true;
                             }
                             
@@ -218,9 +171,12 @@
                             
                             
                             json = json +"]\n";
+
                             json = json +"}";
+
                             out.print(json);
                             out.close();
 
 conexiondb.Close();
         %>
+

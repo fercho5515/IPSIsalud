@@ -686,8 +686,25 @@
                         {name:'s_nom',index:'s_nom', width:150,search:true, editable: true,editoptions: {readonly:true,maxlength: 50},searchoptions:{sopt:['cn','eq']}},
                         {name:'p_ape',index:'p_ape', width:150,search:true, editable: true,required : true,editoptions: {readonly:true,maxlength: 50},editrules: { required: true },searchoptions:{sopt:['cn','eq']}},
                         {name:'s_ape',index:'s_ape', width:150,search:true, editable: true,editoptions: {readonly:true,maxlength: 50},searchoptions:{sopt:['cn','eq']}},
-                        {name:'activo',index:'activo', width:150,editrules:{edithidden:true},hidden:true,align:'left',search:false,sortable:true,editable:true,edittype:"select",editoptions:{value:"1:Activo;0:Inactivo"},searchoptions:{sopt:['cn','eq']}},
+                        {name:'activo',index:'activo', width:150,editrules:{edithidden:true},hidden:false,align:'left',search:false,sortable:true,editable:true,edittype:"select",editoptions:{value:"1:Activo;0:Inactivo"},searchoptions:{sopt:['cn','eq']}},
                     ],
+                    gridComplete: function ()
+                        {
+                            var ids = jQuery("#listPacicont").jqGrid('getDataIDs');
+                            for (var i = 0; i < ids.length; i++)
+                            {
+                                var cl = ids[i];
+                                var ret = jQuery("#listPacicont").jqGrid('getRowData',ids[i]);
+                                if(ret.activo==1){
+                                               be = "<label>Activo </label>";
+                                }
+                                else if(ret.activo==0){
+                                               be = "<label>Inactivo </label>";
+                                }
+                            //  disabled='true'   be = "<input style='height:22px;width:68px;'  id='aceptar' type='button' value='Atender' onclick=\"atiende('" + cl + "','"+ret.descripcion+"','"+ret.serial+"');\"  />";
+                                jQuery("#listPacicont").jqGrid('setRowData', ids[i], { activo: be });
+                            }
+                        },
                     rowNum:15,
                     rowList:[15,30,45],
 

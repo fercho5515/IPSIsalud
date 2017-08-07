@@ -22,7 +22,7 @@
             } else {
                 //System.out.print(request.getParameter("id_citas"));
                 String id = request.getParameter("id_citas");
-                System.out.print("este es el id=====>"+id);
+//                System.out.print("este es el id=====>"+id);
                 conecta_bd ba = new conecta_bd();
                 ba.ConectaDb();
                 String sql = "select p_nom,s_nom,p_ape,s_ape,id_person,fecha_naci,es.descripcion,nivel_sisben,pe.genero,rh.descripcion,";

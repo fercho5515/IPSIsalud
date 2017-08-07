@@ -51,6 +51,8 @@
                                       $("#dialog_insert_medic").dialog("close");
                                       alert("Entrega realizada satisfactoriamente ");
                                       jQuery("#listmedicformula_"+data.res3+"").trigger('reloadGrid');                                       
+                                  }else if(data.res==5){
+                                      alert("Sobrepasa la cantidad a entregar");
                                   }
                                   else{
                                   alert("Falla al realizar entrega ");
@@ -151,8 +153,8 @@
                     
                     $("#fid_consulta").val(lineap.id_consulta);
                     $("#fid_formula").val(lineap.id_formula);
-                    
-                    jQuery("#list_farmacia").jqGrid('setGridParam',{url:"search_inventario.jsp?q=1&id="+lineap.id_consulta,page:1});
+                    $("#can_formula").val(lineap.cantidad);
+                    jQuery("#list_farmacia").jqGrid('setGridParam',{url:"farmacia/cargainventariofarmacia.jsp?q=1&id="+lineap.id_consulta,page:1});
                     jQuery("#list_farmacia").jqGrid('setCaption',"Medicamentos ").trigger('reloadGrid');
                     $("#dialog_medicamentos").dialog("open");
                     
@@ -225,33 +227,33 @@
         var anchoPan=document.body.offsetWidth-100;
 
             jQuery("#list_farmacia").jqGrid({
-                url:'search_inventario.jsp?q=2&id=0',
+                url:'farmacia/cargainventariofarmacia.jsp?q=2&id=0',
                 datatype: "json",
-                colNames:['inven','cod_medicamento','Cod Barras','ATC','CUM','Producto','Forma','Concentracion','Unidad','V de Admin','Presentacion','Valor','Existencias','Lab','Fab','Ven','Ubicacion','Lote'],
+                colNames:['inven','cod_medicamento','CUM','ATC','Producto','Concentracion','UM','FF','Presentacion','Existencias','Fecha Fab','Fecha Ven','Cod Barras','Ubicacion','Invima','Nombre'],
                 colModel:[
-                    {name:'serial_inven',index:'serial_inven',hidden:true,width:80,search:true,searchoptions:{sopt:['cn','eq']}},
-                    {name:'serial',index:'serial',hidden:true,width:160,search:true,searchoptions:{sopt:['cn','eq']}},
-                    {name:'cod barras',index:'cod barras', width:((anchoPan-30)*6)/100,search:true,searchoptions:{sopt:['cn','eq']},align:"right"},
-                    {name:'atc',index:'atc', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
-                    {name:'cum',index:'m_cum', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
-                    {name:'producto',index:'producto',width:((anchoPan-30)*26)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'f1',index:'f1', width:((anchoPan-30)*8)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"lefth"},
-                    {name:'concentracion',index:'concentracion', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"right"},
-                    {name:'unidadmedida',index:'unidadmedida', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"lefth"},
-                    {name:'v1',index:'v1', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'presentacion',index:'presentacion', width:((anchoPan-30)*8)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'valor_compra',index:'valor_compra',hidden:true, width:((anchoPan-30)*7)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'existencias',index:'existencias', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
-                    {name:'lab',index:'lab', width:((anchoPan-30)*7)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'fecha_fab',index:'fecha_fab',hidden:true, width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'fecha_ven',index:'fecha_ven', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'ubicacion',index:'ubicacion',hidden:true, width:((anchoPan-30)*4)/100,search:true, searchoptions:{sopt:['cn','eq']}},
-                    {name:'lote',index:'lote',hidden:true, width:((anchoPan-30)*4)/100,search:true, searchoptions:{sopt:['cn','eq']}}
+                    {name:'serial_inven',index:'serial_inven',hidden:false,width:80,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'serial',index:'serial',hidden:false,width:160,search:true,searchoptions:{sopt:['cn','eq']}},
+                    {name:'cum',index:'cum', width:((anchoPan-30)*6)/100,search:true,searchoptions:{sopt:['cn','eq']},align:"right"},
+                    {name:'cod_atc',index:'cod_atc', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'producto',index:'producto', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'concentracion',index:'concentracion',width:((anchoPan-30)*2)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'d1',index:'d1', width:((anchoPan-30)*8)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"lefth"},
+                    {name:'d2',index:'d2', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"right"},
+                    {name:'presentacion',index:'presentacion', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"lefth"},
+                    {name:'existencias',index:'existencias', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'fecha_fab',index:'fecha_fab', width:((anchoPan-30)*8)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'fecha_ven',index:'fecha_ven',hidden:false, width:((anchoPan-30)*7)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'cod_barras',index:'cod_barras', width:((anchoPan-30)*5)/100,search:true, searchoptions:{sopt:['cn','eq']},align:"center"},
+                    {name:'ubicacion',index:'ubicacion', width:((anchoPan-30)*7)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'invima',index:'invima',hidden:false, width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+                    {name:'nombre',index:'nombre', width:((anchoPan-30)*6)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+//                    {name:'ubicacion',index:'ubicacion',hidden:false, width:((anchoPan-30)*4)/100,search:true, searchoptions:{sopt:['cn','eq']}},
+//                    {name:'lote',index:'lote',hidden:false, width:((anchoPan-30)*4)/100,search:true, searchoptions:{sopt:['cn','eq']}}
                 ],
                 rowNum:5,
                 rowList:[5,10,20,30,100],
                 pager: '#pager_farmacia',
-                sortname: 'm.producto,i.fecha_ven',
+                sortname: 'm.producto,ifa.fecha_ven',
                 viewrecords: true,
                 sortorder: "asc",
                 height: 200,
@@ -268,18 +270,18 @@
                     
                     $("#producto").val(med.producto);
                     $("#serial_inven").val(med.serial_inven);
-                    $("#atc").val(med.atc);
+                    $("#atc").val(med.cod_atc);
                     $("#cum").val(med.cum);
-                    $("#f1").val(med.f1);
-                    $("#v1").val(med.v1);
+                    $("#f1").val(med.d2);
+                    $("#v1").val(med.d1);
                     $("#presentacion").val(med.presentacion);
                     $("#existencias").val(med.existencias);
-                    $("#lab").val(med.lab);
+                    $("#lab").val(med.nombre);
                     $("#fecha_fab").val(med.fecha_fab);
                     $("#fecha_ven").val(med.fecha_ven);
                     $("#ubicacion").val(med.ubicacion);
                     $("#lote").val(med.lote);
-                    $("#concentracion").val(med.concentracion+" "+med.unidadmedida);
+                    $("#concentracion").val(med.concentracion+" "+med.d1);
                 }
                 
             });
@@ -437,7 +439,7 @@
         <table id="listmedicformula" ></table>
         <div id="pagermedicformula"></div>  
 
-        <div id="dialog_medicamentos" name="dialog_medicamentos" title="Nuevo Procedimiento">
+        <div id="dialog_medicamentos" name="dialog_medicamentos" title="Inventario de Farmacia">
             <div>
                 <table id="list_farmacia" ></table>
                 <div id="pager_farmacia"></div>
@@ -457,6 +459,7 @@
                                 <input type="hidden" id="serial_inven" name="serial_inven" readonly>
                                 <input type="hidden" id="fid_formula" name="fid_formula" readonly>
                                 <input type="hidden" id="fid_consulta" name="fid_consulta" readonly>
+                                <input type="hidden" id="can_formula" name="can_formula" readonly>
                             </td>
                         </tr>
                         <tr>

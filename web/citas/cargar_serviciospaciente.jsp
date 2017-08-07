@@ -15,7 +15,7 @@
                             int intpage = new Integer(request.getParameter("page"));
                             int limit = new Integer(request.getParameter("rows"));
                             int contra = new Integer(request.getParameter("contra"));
-                            int ide = new Integer(request.getParameter("ide"));
+                            long ide = Long.valueOf(request.getParameter("ide"));
                             System.out.println("contra==>"+contra);
                             System.out.println("ide==>"+ide);
                             
