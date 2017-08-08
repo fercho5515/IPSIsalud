@@ -720,7 +720,13 @@ color:#FFFFFF;
                   if(ressuu2fin.getString(1).compareTo(datosc[14])==0){ 
                       out.println("<option value='"+ressuu2fin.getString(1)+"' SELECTED>"+ressuu2fin.getString(2)+"</option>");
                       control=1;
-                  }else{ out.println("<option value='"+ressuu2fin.getString(1)+"'>"+ressuu2fin.getString(2)+"</option>");}
+                  }else{ 
+                      String selected2="";
+                      if(ressuu2fin.getString(1).equals("10") && control==0){
+                        selected2="selected";
+                      }
+                      
+                      out.println("<option value='"+ressuu2fin.getString(1)+"' "+selected2+">"+ressuu2fin.getString(2)+"</option>");}
                                                          }
               }
         catch(SQLException ex){}

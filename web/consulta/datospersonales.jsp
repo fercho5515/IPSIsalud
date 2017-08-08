@@ -1285,7 +1285,7 @@ if(datos[8].compareTo("Femenino")==0){
              </div>  <br> 
             
             <label for="id_perentesco">Parentesco</label><br>
-                   <select name="id_perentesco" id="id_perentesco" onchange="cambiaAnt2()">
+                   <select name="id_perentesco" id="id_perentesco"><!--  onchange="cambiaAnt2()" -->
                             
                         <%
                        sql="select * from parentesco;";    

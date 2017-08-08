@@ -10,14 +10,6 @@
 <%@page import="java.util.*" session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-         
-    </head>
-    <body>
        <select name="antecedentee2" id="antecedentee2">
                         <option value='2212aei'>Seleccione tipo de antecedente</option>   
          <% 
@@ -32,7 +24,7 @@
                         String sexoo="1' or sexo='2";
                         if(generoo.compareTo("Masculino")==0){sexoo="1";}
                         else if(generoo.compareTo("Femenino")==0){sexoo="2";}
-                        String sql=" select id_descri_antecedente,descripcion from descripcion_antecedente where id_tipo_antecedente='"+dato+"' and (sexo='"+sexoo+"' or sexo='3') and id_descri_antecedente not in (select id_descri_antecedente from antecedentes_familiares where id_historia_clinica='"+(String)session.getAttribute("serial_pacinete")+"' and id_parentesco='"+dato2+"');";
+                        String sql=" select id_descri_antecedente,descripcion from descripcion_antecedente where id_tipo_antecedente='"+dato+"' and (sexo='"+sexoo+"' or sexo='3');";// and id_descri_antecedente not in (select id_descri_antecedente from antecedentes_familiares where id_historia_clinica='"+(String)session.getAttribute("serial_pacinete")+"' and id_parentesco='"+dato2+"')
                    //   System.out.println("ee "+sql);
                         ResultSet resu2=ba.consultas(sql);
                         try{
@@ -49,7 +41,4 @@
          %>           
             
                 </select>   
-    </body>
-</html>
-
 
